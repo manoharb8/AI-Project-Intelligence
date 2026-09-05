@@ -249,4 +249,4 @@ for the full list. In short:
 
 ## Author
 
-Manohar B - Final-year ECE, ATME College of Engineering (VTU)
+Manohar B
