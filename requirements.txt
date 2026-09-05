@@ -1,0 +1,32 @@
+# Core RAG pipeline
+# Version ranges (rather than exact pins) so pip can pick a build
+# compatible with your installed Python version, instead of demanding
+# one specific version that may require a newer Python than you have.
+pypdf>=4.0.0
+python-docx>=1.1.0
+pandas>=2.0.0,<3.0.0
+chromadb>=0.5.0
+
+# Embedding model: WordLlama ships pretrained weights bundled directly
+# in the wheel (no PyTorch, no runtime download from a model hub).
+# Pinned exactly (rather than a range) because rag_pipeline/embeddings.py
+# reads specific bundled file paths inside the package to prime a fully
+# offline cache - a future release could restructure that packaging.
+# See embeddings.py's module docstring for the full rationale.
+wordllama==0.4.0.post1
+
+# User interface
+# >=1.31.0 because the UI renders custom CSS/HTML (design system, cards,
+# badges) via st.html(), which was introduced in Streamlit 1.31.0 and
+# renders raw HTML directly instead of routing it through the markdown
+# parser (st.markdown(..., unsafe_allow_html=True) can misinterpret
+# indented HTML/CSS as literal text - st.html avoids that entirely).
+streamlit>=1.31.0
+plotly>=5.20.0
+
+# Sample data generation (used once by scripts/generate_sample_data.py;
+# not required to run the application itself)
+fpdf2>=2.7.0
+
+# Testing
+pytest>=7.0.0

@@ -1,0 +1,31 @@
+Sprint 3 Update - AI-Driven Enterprise Project Intelligence Platform
+
+Sprint Goal: Deliver a working RAG pipeline (ingestion through retrieval)
+and begin the Streamlit user interface.
+
+Completed this sprint:
+- Document ingestion module supporting PDF, DOCX, CSV and TXT files.
+- Text normalization step to clean extracted content before chunking.
+- Chunking module with configurable chunk size and overlap.
+- Local embedding generation, verified to run without any external
+  network dependency.
+- Chroma vector store integration for persistent chunk indexing.
+
+In progress:
+- Streamlit interface for document upload and processing status.
+- Streamlit interface for querying the knowledge base and displaying
+  retrieved chunks with source and relevance information.
+
+Blockers:
+- No active blockers this sprint.
+
+Risks carried into next sprint:
+- The relevance threshold used to detect insufficient-information
+  queries needs tuning against real sample documents before the
+  Milestone 1 demo, to avoid either hallucinated confidence or overly
+  cautious "no answer" responses.
+
+Next sprint plan:
+- Finish the Streamlit upload, processing and query pages.
+- Write the Milestone 1 unit test suite covering every pipeline stage.
+- Prepare the Milestone 1 demonstration and documentation.
