@@ -1,0 +1,4 @@
+import type {KnowledgeBase as KB} from '../types';
+import {DocumentTable,PageHeading} from '../components/UI';
+import {Stats} from './Overview';
+export default function KnowledgeBase({kb}:{kb:KB}){return <><PageHeading eyebrow="UNIFIED PROJECT KNOWLEDGE" title="Knowledge Base" description="See what is indexed and where your evidence comes from."/><Stats kb={kb}/><section className="panel"><div className="section-heading"><h2>Indexed source documents</h2><span className={`badge ${kb.retrieval_ready?'indexed':'neutral'}`}>{kb.retrieval_ready?'Retrieval available':'Awaiting documents'}</span></div><DocumentTable documents={kb.documents.filter(d=>d.indexed)}/></section><div className="kb-note"><h3>Every passage has a source</h3><p>Search results include the filename, source location, and a unique chunk reference so you can review the original evidence.</p><p>Supported formats: <strong>{kb.supported_formats.map(s=>s.toUpperCase()).join(' · ')}</strong></p></div></>}

@@ -1,261 +1,170 @@
-# Architecture - Milestone 1
+# Milestones 1 and 2 architecture
 
-## 1. Overview
+## Requirements mapping
 
-The platform ingests a project's own documents and builds a queryable
-knowledge base using Retrieval-Augmented Generation (RAG). Milestone 1
-covers everything from document upload through to retrieval: it does
-**not** include answer generation by a language model, automated risk
-scoring, forecasting, or a conversational assistant - those are explicitly
-out of scope and deferred to later milestones (see Section 6).
+The milestone-specific sections of the two supplied requirement documents are authoritative. Their broader project vision describes later milestones, not the current implementation scope.
 
-## 2. High-level architecture
+| Milestone 1 requirement | Implementation | Verification |
+| --- | --- | --- |
+| Architecture and data models | This document, API Pydantic models | API schema and request tests |
+| PDF/DOCX/CSV/TXT ingestion | `app/services/text.py`, upload route | All four fixtures via extraction, API, and live proxy |
+| Normalization | Unicode NFKC, control-null removal, whitespace collapse | Normalization and empty-text tests |
+| Chunking | Fixed word windows, preserving source-unit location | Boundary, overlap, full coverage, Unicode tests |
+| Embeddings | `WordLlamaEmbeddings` adapter | Real vector shape, normalization, consistency, semantic ordering |
+| Vector indexing | Chroma PersistentClient, cosine collection | Indexing, rollback, restart, separate-process persistence |
+| Semantic retrieval | Top-k vector retrieval with cutoff | Positive queries, unrelated queries, sources, ordered scores |
+| Knowledge base and frontend | Shared FastAPI service, four React routes | Component tests, build, live HTTP smoke |
 
-```
-┌─────────────────────────┐       ┌──────────────────────────────────┐
-│   Streamlit UI (app/)   │──────▶│   rag_pipeline/ (framework-free)  │
-│                          │       │                                    │
-│  - Upload & Process      │       │  ingestion.py     -> extract text │
-│  - Knowledge Base         │      │  normalization.py -> clean text   │
-│  - Query & Retrieve        │     │  chunking.py       -> split chunks│
-└─────────────────────────┘       │  embeddings.py     -> WordLlama   │
-                                    │                       static vecs │
-                                    │  vector_store.py   -> Chroma      │
-                                    │  retrieval.py       -> search     │
-                                    │  pipeline.py         -> orchestrate│
-                                    └──────────────────────────────────┘
-```
+## Processing flow
 
-The `rag_pipeline` package has no Streamlit (or any other UI framework)
-imports. Every stage is a plain Python function or class, tested in
-isolation in `tests/`. This means the same pipeline could be reused
-behind a different interface later (e.g. a FastAPI service) without
-touching the pipeline code - only the UI layer would change.
-
-## 3. Data flow (per processing run)
-
-```
-Uploaded files (PDF / DOCX / CSV / TXT)
-        │
-        ▼
-extract_text()            - pypdf / python-docx / pandas / plain read
-        │
-        ▼
-normalize_text()          - unify line endings, collapse whitespace,
-        │                    drop blank lines
-        ▼
-chunk_text()               - overlapping word-bounded windows
-        │
-        ▼
-EmbeddingGenerator.embed()  - WordLlama static embeddings (see 5.2)
-        │
-        ▼
-ChromaVectorStore.add_chunks()        - persisted to chroma_db/
-        │
-        ▼
-   (later) retrieve()      - embed query with the same (fixed, pretrained)
-                              model, cosine-search Chroma, apply relevance
-                              threshold, return ranked chunks
+```mermaid
+flowchart TD
+    A["PDF / DOCX / CSV / TXT"] --> B["Upload API"]
+    B --> C["Extract source units"]
+    C --> D["Normalize and chunk"]
+    D --> E["WordLlama embeddings"]
+    E --> F["Persistent ChromaDB"]
+    G["Natural-language query"] --> H["WordLlama query embedding"]
+    H --> F
+    F --> I["Top-k passages and relevance cutoff"]
+    I --> J["Evidence with source references"]
+    I --> K["Insufficient information"]
 ```
 
-## 4. Document model / metadata
+Milestone 1 supplies the retrieval foundation of RAG. The implemented Milestone 2 extension adds the extraction/provider path described below. An embedding model represents text as vectors; it is not a conversational LLM.
 
-Every chunk stored in Chroma carries this metadata, which is what lets
-the UI show source and relevance information rather than just raw text:
+## Source tree
 
-| Field         | Meaning                                      |
-|---------------|-----------------------------------------------|
-| `doc_id`      | UUID of the source document                   |
-| `filename`    | Original uploaded filename                    |
-| `file_type`   | `pdf` / `docx` / `csv` / `txt`                |
-| `chunk_index` | Position of this chunk within its document    |
+- `backend/app/core/config.py`: fixed settings and persistent-data path.
+- `backend/app/api/schemas.py`: structured document, upload, summary, retrieval, and health models.
+- `backend/app/api/router.py`: REST endpoints.
+- `backend/app/services/text.py`: independent extraction, normalization, and chunking.
+- `backend/app/services/embeddings.py`: replaceable embedding protocol and WordLlama implementation.
+- `backend/app/services/knowledge_base.py`: indexing, metadata manifest, rollback/recovery, and retrieval.
+- `backend/app/main.py`: startup wiring and safe API error handler.
+- `frontend/src/api.ts`: typed API boundary.
+- `frontend/src/components/UI.tsx`: reusable headings, statuses, source tables, and empty/error states.
+- `frontend/src/pages/`: Overview, Documents, Knowledge Base, Retrieval, ScopeDeliverables, RiskDelivery, BlockersActions, and shared AgentAnalysis.
+- `backend/tests/`, `frontend/src/App.test.tsx`, `frontend/src/Agents.test.tsx`: regression and agent validation.
+- `tests/test_live_application.py`: real-server checks through the Vite proxy.
+- `samples/`: four controlled project documents.
+- `scripts/`: fixture creation and actual-server smoke test.
 
-See `rag_pipeline/models.py` for the `Document`, `Chunk` and
-`RetrievalResult` dataclasses used throughout the pipeline.
+## Data models and provenance
 
-## 5. Key design decisions
+A document manifest record contains UUID, filename, extension, upload byte count, timestamp, processing state, indexed flag, chunk count, and optional readable error. It is stored atomically in `documents.json` under the data directory. This manifest is operational metadata, not a second vector database.
 
-### 5.1 Chunking strategy
+Every Chroma record stores a unique `<document-uuid>:chunk-<number>` ID, chunk text, 256-dimensional vector, original filename, document type, document UUID, chunk number, chunk ID, and source location. PDF locations are pages; DOCX locations are body-block/row references; CSV locations are end-line numbers; TXT locations are sections. These are extraction locators, not interactive original-file downloads.
 
-`chunk_text()` splits normalized text into overlapping windows of whole
-words (default: 220 words, 40-word overlap). Overlap means a sentence
-that would otherwise be cut in half at a chunk boundary still appears in
-full in at least one chunk - this matters for project documents, where a
-risk description and its mitigation, or a task and its deadline, can sit
-right next to each other.
+Filenames are sanitized to basenames and are never used as disk paths. Same-name uploads receive separate UUIDs. Original uploaded bytes are processed in memory; normalized evidence persists in Chroma.
 
-### 5.2 Embedding approach: what happened, and what's used now
+## Fixed configuration
 
-**Milestone 1 originally used TF-IDF** (`sklearn.feature_extraction.text.
-TfidfVectorizer`), chosen because it needed no model download and could
-be fully verified end-to-end in a network-restricted build environment.
-This was documented at the time as an explicit trade-off: TF-IDF is a
-purely lexical (exact-token-overlap) technique with no ability to
-recognize that two different words describe the same thing.
+| Setting | Value | Reason |
+| --- | --- | --- |
+| Chunk words | 180 | Bounded passages for document retrieval |
+| Word overlap | 30 | Retain context across window boundaries |
+| Source boundaries | Never cross page/block/row/section | Keep source location precise |
+| Embedding | WordLlama `l2_supercat`, dimension 256 | Required model family; isolated adapter |
+| Similarity | Cosine; vectors normalized | Comparable query/document representations |
+| Minimum similarity | 0.16 | Calibrated on the provided controlled fixtures |
+| Retrieval count | 5 in UI; API 1–10 | Keep review focused |
+| File limit | 10 MB each, 20 per batch | Bound demo workload |
+| Expanded DOCX limit | 50 MB | Reject oversized expanded archives |
+| Embedding/index batch | 64 chunks | Bound peak vector allocation |
 
-**That trade-off caused a real bug**, found during manual testing: the
-query "Which tasks are incomplete?" returned `distance=1.0` (0% match)
-against every indexed chunk, including `task_list.csv` - which does
-describe incomplete tasks, just using the words "Not Started" / "In
-Progress" rather than "incomplete". Because TF-IDF only measures exact
-token overlap, a query sharing zero words with a document is
-mathematically identical to a genuinely out-of-scope query: both score a
-perfect `distance=1.0`. That is the actual defect - not a bug in how the
-vectorizer was fit, stored, or restored between sessions. This was
-confirmed by direct reproduction: indexing the sample documents and
-querying with the *same in-memory vectorizer instance* (no Streamlit,
-no session state, no persistence layer involved at all) reproduced the
-identical `distance=1.0` pattern, which rules out a fit/lifecycle bug
-and confirms the limitation is inherent to TF-IDF itself.
+Short source units form short chunks. The configuration lives in code and is not exposed as sliders. Changing the embedding model/dimension requires a new collection name and re-ingestion; do not mix incompatible vector spaces.
 
-**The fix: embeddings now use [WordLlama](https://github.com/dleemiller/WordLlama)**
-(`rag_pipeline/embeddings.py`), specifically its bundled 256-dimension
-"l2_supercat" static embedding model. WordLlama produces small, static
-sentence embeddings distilled from a larger language model - this gives
-genuine (if limited) semantic similarity: e.g. "incomplete" and "not
-started" score roughly 0.22 cosine similarity in isolation, and higher
-once embedded as part of a full sentence, instead of TF-IDF's hard zero.
-Re-running the exact failing query after the fix now correctly ranks
-`task_list.csv` as the top match (see the CHANGELOG-style note at the
-end of this section for the actual before/after numbers).
+## Status, atomicity, and errors
 
-**Why WordLlama and not a full transformer model (e.g.
-sentence-transformers)?** A transformer-based sentence encoder would
-likely give stronger semantic separation than WordLlama's static
-embeddings. The trade-off is a PyTorch install: several hundred MB at
-minimum, and by default `pip install torch` on Windows resolves a
-CUDA-enabled build (pulling in dozens of NVIDIA packages, multiple GB)
-unless you explicitly request the CPU-only wheel via PyTorch's own
-package index - an easy thing to get wrong, and this project's
-dependency install had already been a source of real friction (32-bit
-vs. 64-bit Python, a pandas build failure, etc.) before this fix was
-made. WordLlama was chosen instead because:
+Uploads are processed independently and sequentially within a batch. The manifest records processing status before extraction. The interface polls the summary while an upload runs. It shows each failure and allows uploading a corrected file. A bad file does not prevent later files from being processed.
 
-- Its wheel bundles the pretrained weights directly - no PyTorch, no
-  runtime download from a model hub, and (see the offline-cache note
-  below) no network call at all, on any machine, from the very first
-  run.
-- It resolves to a small, plain dependency tree (`numpy`, `safetensors`,
-  `tokenizers`, `pydantic`, `requests`) with no GPU/CUDA packages.
-- Its semantic separation, while more limited than a transformer model,
-  was empirically sufficient to fix the reported bug and to keep a
-  clear gap between in-scope and out-of-scope queries (see 5.5).
+A process-wide lock serializes ingestion and retrieval to avoid retrieving partially added documents. A separate lock protects the manifest. Failed ingestion removes that document's Chroma records. On startup, interrupted processing records are marked failed and their partial vectors are removed. This is a single-process design; multiple worker processes are not supported.
 
-This is a real trade-off, not a free upgrade: WordLlama's static
-embeddings are weaker than a transformer-based encoder at genuinely
-novel paraphrases. Section 6 keeps sentence-transformers documented as
-a future upgrade path for exactly that reason.
+Malformed requests return validation errors. Unexpected API failures return a generic message, with details only in backend logs. Model-load failures fail startup. No TF-IDF or alternate embedding fallback is implemented.
 
-**Offline cache priming.** As installed, WordLlama has a minor path
-mismatch in its own packaging: it ships its tokenizer config under a
-`tokenizers/` folder inside the wheel but looks for it under
-`tokenizer/` (singular) before falling back to a network download. On a
-machine with normal internet access this is invisible (the download
-just succeeds and gets cached for next time) - but to guarantee this
-project never depends on that download succeeding, `embeddings.py`
-proactively copies the already-bundled weights and tokenizer config into
-WordLlama's expected cache directory the first time `EmbeddingGenerator`
-is constructed, then loads with `disable_download=True`. This was
-verified by deleting the cache directory entirely and confirming the
-model still loads and embeds correctly with zero network access.
+## Retrieval and insufficient information
 
-**No more "fit" step.** Because WordLlama's embedding space is fixed and
-pretrained, embedding no longer depends on the corpus being indexed.
-This removes an entire class of limitations that applied under TF-IDF:
-no per-batch fitting, no re-fitting when new documents are added, and -
-importantly - a freshly restarted Streamlit session produces identical
-embeddings to any previous session for the same text, so querying a
-knowledge base indexed in an earlier session works correctly with no
-re-processing step. `EmbeddingGenerator.fit()` / `.fit_transform()` are
-kept as no-op / pass-through methods purely for interface compatibility
-with existing pipeline code, not because fitting still happens.
+An empty collection returns insufficient information immediately. Otherwise Chroma retrieves top-k nearest vectors. Results below 0.16 cosine similarity are omitted. If no passage remains, the response status is `insufficient_information`. Otherwise `ok` means candidate passages were retrieved, not that an answer has been proven.
 
-The embedding stage is isolated behind `EmbeddingGenerator`
-(`rag_pipeline/embeddings.py`), so it can still be swapped for a
-transformer-based model later without changing any other pipeline
-stage - see Section 6.
+Calibration run: the best milestone score was about 0.175, versus unrelated-query maxima around 0.112–0.143. A 0.32 cutoff rejected valid evidence; 0.16 retained the expected passages while rejecting the three controlled unrelated queries. This narrow calibration margin is documented rather than presented as general accuracy. Queries asking for an unstated detail in the same topic can retrieve related evidence; user review remains necessary. The retrieval page returns source passages; the separate agent pages return validated source statements.
 
-### 5.3 Batch processing (no longer required for correctness, kept for UX)
+## API
 
-`pipeline.py` still processes an upload as a batch: every file is
-extracted and chunked, then everything is embedded and indexed together.
-Under TF-IDF this was required for embedding correctness (IDF weights
-depend on the whole corpus). That requirement no longer applies - see
-5.2 - but batching is kept because it matches the Upload & Process
-page's actual workflow (upload several files, then process them
-together) and because clearing and rebuilding the store per batch keeps
-the knowledge base's contents predictable.
+| Method | Path | Result |
+| --- | --- | --- |
+| GET | `/api/health` | Loaded backend/model status |
+| POST | `/api/documents/upload` | Per-file indexed/error records |
+| GET | `/api/documents` | All document statuses |
+| GET | `/api/knowledge-base` | Counts, formats, sources, readiness |
+| POST | `/api/retrieval/query` | Evidence or insufficient-information result |
 
-### 5.4 Vector store
+## Milestone 2 integration
 
-`ChromaVectorStore` (`rag_pipeline/vector_store.py`) wraps a persistent
-Chroma collection configured for cosine distance. Embeddings are computed
-upstream and passed in explicitly (rather than letting Chroma compute
-them internally), which keeps "embedding generation" a distinct,
-independently testable stage that matches the pipeline diagram above.
+The three agents share the approved Milestone 1 retrieval service. Provider and grounding modules are separate from ingestion and storage. Existing REST paths and persisted collection settings remain compatible. Milestone 2 is implemented and awaits user approval.
 
-### 5.5 Retrieval threshold
+## Reference implementation documentation
 
-`retrieve()` (`rag_pipeline/retrieval.py`) returns every requested
-top-K chunk, but flags each one `is_relevant` based on a distance
-threshold (default **`0.85`**, re-tuned for the WordLlama embedding
-space described in 5.2 - the previous TF-IDF-era value of `0.90` used a
-completely different distance distribution and does not carry over).
-This is what lets the platform say "the uploaded documents do not
-contain enough information" instead of returning a weakly related
-chunk and implying it is an answer.
+- [WordLlama official repository](https://github.com/dleemiller/WordLlama)
+- [Chroma official repository](https://github.com/chroma-core/chroma)
 
-The threshold was tuned empirically against nine test queries run
-against the bundled sample documents: the worst genuinely-relevant top
-match scored 0.75-0.82, and the best match for any out-of-scope query
-(a cake recipe, the weather, "who is the Prime Minister of India", a
-joke about cats) scored 0.87 or higher - a consistent gap, with `0.85`
-sitting in the middle of it. Re-tune this by re-running the
-reproduction in `tests/test_retrieval.py` if the sample documents,
-chunking parameters, or embedding model change again.
+The tested installed package APIs were also inspected during implementation.
 
-**Before/after this fix, for the record:**
+## Milestone 2 implementation update — 12 September 2026
 
-| Query | Before (TF-IDF) | After (WordLlama) |
-|---|---|---|
-| "Which tasks are incomplete?" | distance=1.000 for every chunk (bug) | distance=0.754, top match `task_list.csv` |
-| "What are the current project risks?" | distance=0.872, top match `project_risk_report.pdf` | distance=0.633, top match `project_proposal.pdf` |
-| "What are the major project blockers?" | distance=0.838, top match `meeting_notes.docx` | distance=0.647, top match `project_proposal.pdf` |
-| "Who is the Prime Minister of India?" (out-of-scope) | distance=1.000 (correctly rejected) | distance=0.927 (correctly rejected) |
+The three agents are implemented within this same application. No second ingestion pipeline or vector database is introduced.
 
-## 6. Future improvements (explicitly out of scope for Milestone 1)
+### Agent separation
 
-- **Transformer-based embeddings**: swap `EmbeddingGenerator`'s
-  WordLlama model for a pretrained sentence-transformers model, for
-  stronger semantic separation on novel paraphrases than WordLlama's
-  static embeddings can offer. Requires a PyTorch install (use the
-  CPU-only wheel deliberately - see 5.2 for why the default install can
-  otherwise pull in a multi-GB CUDA stack) and a one-time model download
-  from a model hub. Because `EmbeddingGenerator`'s public interface
-  (`embed` / `embed_one`) doesn't leak the implementation, this is a
-  change to one file.
-- **Answer generation**: add an LLM call over the retrieved chunks to
-  produce a synthesized natural-language answer, instead of showing raw
-  chunks. This is a self-contained addition on top of the existing
-  retrieval step.
-- **Risk scoring, delivery forecasting, project health dashboard,
-  conversational assistant**: planned for Milestone 2 and Milestone 3
-  per the project proposal.
+| Agent | Module | Structured categories |
+| --- | --- | --- |
+| Scope and Deliverable Extraction | `app/agents/scope_deliverables.py` | goals, milestones, timelines, responsibilities, deliverables |
+| Risk Detection and Delivery Forecasting | `app/agents/risk_forecast.py` | schedule risks, dependency gaps, delivery challenges, stated delivery outlook |
+| Blocker and Action Item Identification | `app/agents/blockers_actions.py` | pending decisions, unresolved issues, action items |
 
-## 7. Known limitations (Milestone 1)
+Each independent agent uses the shared `GroundedAgent` pipeline and the `AnalysisProvider` protocol. Blocker retrieval explicitly targets meeting notes and progress/sprint updates. Existing ingestion and vector storage are reused unchanged.
 
-- WordLlama's static embeddings are a real but limited form of semantic
-  matching - distilled, non-contextual sentence vectors, not a full
-  transformer encoder. They closed the specific gap found in manual
-  testing ("incomplete" vs. "Not Started"/"In Progress") and a range of
-  other paraphrases tested during that fix, but a sufficiently unusual
-  rephrasing could still under-match. Section 6 describes the upgrade
-  path if stronger semantic separation is needed later.
-- No answer-generation step: the platform returns retrieved chunks, not
-  a synthesized answer. This was an explicit scope decision, not a
-  missing feature - see Section 6.
-- `wordllama` is pinned to an exact version in `requirements.txt`
-  (rather than a range) because `embeddings.py` reads specific bundled
-  file paths inside the installed package to prime a fully offline
-  cache (see 5.2). Upgrading that dependency should be paired with
-  re-verifying those paths still exist.
+### Retrieval and processing
+
+The user's focus and complementary facet queries call Milestone 1 semantic retrieval, each with top-k=5. Scope uses four facet queries; the other agents use three. An unrelated focus with no initial evidence returns insufficient information. The generic command to review project documents is treated as an operation, so its facet queries still run when the wording of that command does not semantically match document content.
+
+Results are deduplicated and selected round-robin across retrieval facets, with a maximum of 12 unique passages and 14,000 characters. Source text is not truncated again to fit the agent budget. No agent reads or sends the entire Chroma collection. A small knowledge base can naturally fit within the selected evidence, but large stores remain bounded.
+
+The provider selects exact statement segments and category labels. The server then validates the schema, checks each evidence ID against the actual retrieved set, verifies each quote against the segmented retrieved text, validates that the category is supported by the conservative extraction rules, and derives optional fields only from that quote. Provider output cannot add a free-form owner/date/forecast field. An invalid finding rejects the entire response rather than returning a mixture of verified and unverified findings.
+
+### Provider architecture
+
+- `app/llm/base.py`: interface, provider status, safe provider errors.
+- `app/llm/provider.py`: local extraction, configurable HTTP chat-completions provider, and explicit unavailable state.
+- `app/agents/prompts.py`: bounded JSON evidence, schema instructions, and separation of untrusted source data from system instructions.
+- `app/agents/grounding.py`: output validation.
+- `app/agents/extraction.py`: transparent local rules and source-derived fields.
+
+Default `extractive` mode combines real WordLlama retrieval with deterministic statement selection. It is not an LLM. `openai_compatible` mode uses backend environment configuration for base URL, model, and optional API key. Requests require JSON-object responses. Remote URLs require HTTPS; local loopback can use HTTP. Calls time out, do not follow redirects, and bound model response bytes to 1 MiB. The provider does not silently switch modes after failure.
+
+[Chat-completions protocol reference](https://developers.openai.com/api/reference/resources/chat). The configured endpoint must support the required JSON behavior; protocol tests use mocked HTTP, not a live external model.
+
+### Structured fields and uncertainty
+
+The response contains agent, status, provider, focus, timestamp, findings, used evidence, category coverage, retrieved count, budget-limited flag, and warnings. A finding contains category, exact quote, retrieved evidence ID, known/unclear state, optional owner, optional due date, literal dates, source status, explicitly stated severity, and the nonnumeric provenance label `explicit_source_statement`.
+
+Dates remain source strings; no relative date is converted into a guessed calendar date. Responsibility and owner are extracted only from recognized explicit assignments. An action with an unrecognized or absent owner/date is unclear with null fields. Category coverage is known, unclear, or missing. Overall status is `ok`, `partial`, or `insufficient_information`.
+
+The delivery agent quotes explicitly stated delay consequences, forecasts, or uncertainty. Reasons and affected milestones remain in their exact quoted context. It does not estimate probabilities, select severity without evidence, or manufacture a revised delivery date. Conflicting source statements remain visible as separate findings; automatic conflict resolution is not implemented.
+
+### Additional API and interface
+
+| Method | Path | Purpose |
+| --- | --- | --- |
+| GET | `/api/agents/status` | Report runtime mode and configuration readiness |
+| POST | `/api/agents/scope` | Scope extraction |
+| POST | `/api/agents/risk` | Risk and stated delivery outlook |
+| POST | `/api/agents/blockers` | Blockers, decisions, and actions |
+
+Agent requests accept a bounded query; top-k remains fixed at 5. Pydantic rejects extra fields and malformed requests. Grounding rejection returns HTTP 502, provider/configuration failure returns HTTP 503, and unexpected failures retain the existing sanitized error handler. Insufficient information is a successful HTTP 200 domain result.
+
+Dedicated `ScopeDeliverables.tsx`, `RiskDelivery.tsx`, and `BlockersActions.tsx` pages map to `/scope`, `/risks`, and `/blockers`. Each uses `AgentAnalysis.tsx` for consistent evidence rendering, with distinct task descriptions and analysis focus. Sidebar groups are WORKSPACE, MILESTONE 1, and MILESTONE 2. It displays runtime mode, loading/error/empty/insufficient states, known/unclear/missing coverage, source quotations, null values as "Not stated", and expandable evidence metadata. Changing pages clears prior agent results. Overview links to the three agents without health scores or a future aggregate dashboard.
+
+## Project layout choices
+
+The project root is `AI-Project-Intelligence/`. Existing Milestone 1 routes stay in `app/api/router.py`; new routes stay in `app/api/agents.py`. Retrieval stays in `KnowledgeBaseService`. These intentionally preserve the existing architecture instead of duplicating route and retrieval modules to match an illustrative tree. Agent names describe their actual responsibilities. See `PROJECT_FILES.md` for the complete directory tree and every deliverable file.

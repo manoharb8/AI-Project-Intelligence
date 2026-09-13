@@ -1,0 +1,7 @@
+Atlas Portal - Sprint update (controlled demo)
+
+Schedule risks: API development is three days behind plan because the database schema has not been approved. This delay threatens the integration testing milestone on 27 September 2026. No revised delivery date is confirmed.
+
+Dependency gap: frontend integration depends on the ticket API contract. The contract is still pending review by Priya. The missing contract creates a delivery challenge for Arjun.
+
+Completed progress: the login screen and the requirements review are finished. Incomplete tasks include the ticket API and ticket form. The staging server remains unavailable.

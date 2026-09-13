@@ -1,40 +1,12 @@
-# Python
-__pycache__/
-*.pyc
-*.pyo
-*.egg-info/
-.eggs/
-build/
-dist/
-
-# Virtual environments
-venv/
-.venv/
-env/
-ENV/
-
-# Environment / secrets
 .env
-*.env.local
-
-# Testing / caching
+.venv/
+venv/
+__pycache__/
+*.py[cod]
 .pytest_cache/
-.coverage
-htmlcov/
-.mypy_cache/
-.ruff_cache/
-
-# Chroma vector database - generated at runtime, should not be versioned.
-# The directory itself is kept (via chroma_db/.gitkeep) so the app has
-# somewhere to write to on first run.
-chroma_db/*
-!chroma_db/.gitkeep
-
-# Editor / OS
-.vscode/
-.idea/
+node_modules/
+dist/
+backend/data/
+*.log
 .DS_Store
-Thumbs.db
-
-# Streamlit local runtime state
-.streamlit/secrets.toml
+*.tsbuildinfo

@@ -1,104 +1,97 @@
-# Setup Guide
+# Setup and operation
 
-## Prerequisites
+Use the Windows or macOS/Linux commands in the root README. Use 64-bit Python 3.11 with `backend/requirements-windows-py311.txt` on Windows, or Python 3.12 with `backend/requirements-dev.txt` on Linux/macOS, and Node.js 22. Start one FastAPI process; do not add `--workers`.
 
-- Python 3.10+ (developed and tested on Python 3.12)
-- pip
-- No external services, API keys, or GPU required for Milestone 1.
+## Initial installation
 
-## 1. Get the code into VS Code
+Install Python requirements and run `npm ci` in `frontend/`. `requirements-dev.txt` includes the sample-generation and test dependencies. `requirements-lock.txt` records the exact Linux/Python 3.12 packages used in runtime verification; it is not a Windows installer. `requirements-windows-py311.txt` is a separate Windows/Python 3.11 binary-package resolution, not a Windows runtime-test claim; the frontend lockfile is used by `npm ci`.
 
-Extract the project ZIP and open the resulting `AI-Project-Intelligence/`
-folder in VS Code (`File > Open Folder...`).
+WordLlama downloads its tokenizer and embedding weights on first use into its normal user cache. Initial startup can therefore take longer. Wait for Uvicorn to report `Application startup complete` before starting the walkthrough. Subsequent runs reuse cached model assets. This project does not ship an external-model API credential.
 
-## 2. Create and activate a virtual environment
+## Data persistence
 
-macOS / Linux:
+By default, data is stored at `backend/data/` regardless of the caller's working directory. Chroma stores vectors and extracted text in `backend/data/chroma/`; document statuses live in `backend/data/documents.json`. These paths are ignored by Git.
 
-```bash
-python3 -m venv venv
-source venv/bin/activate
-```
-
-Windows (PowerShell):
+An optional `DATA_DIR` environment variable changes the data directory. `.env.example` documents it; the application does not automatically load `.env` files. For example, in PowerShell before launching the backend:
 
 ```powershell
-python -m venv venv
-venv\Scripts\Activate.ps1
+$env:DATA_DIR = 'C:\project-intelligence-data'
 ```
 
-VS Code should detect the new `venv` and offer to select it as the
-workspace Python interpreter - accept that prompt (or select it manually
-via `Ctrl+Shift+P` / `Cmd+Shift+P` -> "Python: Select Interpreter").
-
-## 3. Install dependencies
+Or on macOS/Linux:
 
 ```bash
-pip install -r requirements.txt
+export DATA_DIR=/absolute/path/project-intelligence-data
 ```
 
-## 4. (Optional) Environment configuration
+Restarting the backend retains indexed documents. Restarting with a different empty data directory creates a separate empty knowledge base. Stop the backend before making manual backups; copy the entire data directory consistently.
 
-Milestone 1 does not require any environment variables to run. If you
-want a `.env` file for local overrides anyway (e.g. for a future
-milestone), copy the template:
+## URLs
+
+- Frontend: http://127.0.0.1:5173
+- Backend health: http://127.0.0.1:8000/api/health
+- Interactive API docs: http://127.0.0.1:8000/docs
+
+The frontend's development proxy forwards `/api` to port 8000. Direct frontend fetches remain same-origin. These are local URLs, usable after starting the application on your computer. No public demo was deployed.
+
+`npm run build` produces frontend assets, but it does not host the Python service. Use `npm run dev` for this milestone demo. A production hosting design is deferred.
+
+## Actual-server smoke test
+
+Stop any servers on ports 8000 and 5173 first. The script starts both servers together, uses a temporary knowledge base, uploads all four samples, checks routes and queries, records `docs/milestone2-live-verification.json`, then stops its processes.
+
+Windows, from the project root:
+
+```powershell
+.\.venv\Scripts\python.exe scripts\smoke_demo.py
+```
+
+macOS/Linux:
 
 ```bash
-cp .env.example .env
+.venv/bin/python scripts/smoke_demo.py
 ```
 
-## 5. Run the test suite
-
-```bash
-pytest
-```
-
-You should see all tests pass, covering ingestion (PDF/DOCX/CSV/TXT),
-normalization, chunking, embeddings, Chroma indexing, and retrieval
-(including multi-document retrieval, source metadata, and the
-insufficient-information case) against the bundled sample project
-documents.
-
-## 6. Run the application
-
-```bash
-streamlit run app/main.py
-```
-
-This opens the app in your browser (typically `http://localhost:8501`).
-Use the sidebar to navigate:
-
-1. **Upload & Process** - upload your own PDF/DOCX/CSV/TXT files, or
-   check "Use bundled sample documents" to try the pipeline immediately
-   without preparing your own files. Click **Process documents**.
-2. **Knowledge Base** - see what got indexed: sources, chunk counts, and
-   the actual chunk text.
-3. **Query & Retrieve** - ask a question (or click one of the example
-   queries) and see the retrieved chunks with source, chunk position and
-   relevance score.
-
-## 7. Regenerating the sample documents (optional)
-
-The sample documents in `data/sample_documents/` were generated once by
-`scripts/generate_sample_data.py` and are already included in this
-project - you do not need to run this again. If you want to regenerate
-or modify them:
-
-```bash
-python scripts/generate_sample_data.py
-```
-
-This requires `fpdf2`, which is already in `requirements.txt`.
+The smoke test was executed on Linux. It invokes Node directly, avoiding Windows npm.cmd process-launch issues, and fails before starting when either port is occupied. Windows process execution has not been tested here. Run `.\.venv\Scripts\python.exe -m pytest -q tests` from the root for the same live smoke plus evidence/unknown-field assertions. The test uses a temporary store and explicitly selects local extraction.
 
 ## Troubleshooting
 
-- **"No module named 'rag_pipeline'"** when running `pytest` or the app
-  directly: make sure you're running commands from the project root
-  (the folder containing `requirements.txt`), not from inside `app/` or
-  `tests/`.
-- **Query page says the embedding model "has not been fit yet"**: this
-  happens after restarting the Streamlit app - the knowledge base on
-  disk is still there, but the in-memory TF-IDF model needs to be
-  re-fit for this session. Go to Upload & Process and click
-  **Process documents** again (checking "Use bundled sample documents"
-  if you don't have the original files handy).
+- Model download failure: check internet access to the WordLlama Hugging Face repository; do not replace the required model with synthetic embeddings.
+- Connection unavailable: check that the backend is ready on port 8000, then select Retry connection.
+- Scanned PDF: perform OCR externally and upload a text-containing PDF. There is no OCR dependency in this milestone.
+- CSV parse error: ensure UTF-8 encoding, unique nonempty headers, and matching column counts. Quoted commas are supported.
+- Port already in use: stop your previous demo process. Avoid running two copies against the same data directory.
+- Environment mismatch: on Windows use a fresh 64-bit Python 3.11 environment with `requirements-windows-py311.txt`; elsewhere follow the README platform commands. Use `npm ci` with the supplied frontend lockfile.
+- Same-topic but unanswerable question: inspect the returned source passages. Retrieval does not establish that an unstated detail is known.
+
+## Milestone 2 provider setup
+
+Milestone 1 data and collection names are preserved. The new agent pages work with your already indexed documents. Run only one backend against a data directory. To reuse a previous local installation's knowledge base, set `DATA_DIR` to that installation's absolute `backend/data` path before starting the new backend.
+
+The default provider is `extractive`: a working local, rule-based analysis mode. It is explicitly labeled and needs no model API key. WordLlama still performs real semantic retrieval.
+
+For an actual configurable LLM, set these in the backend terminal before startup. In PowerShell:
+
+```powershell
+$env:LLM_PROVIDER = 'openai_compatible'
+$env:LLM_BASE_URL = 'https://your-provider.example/v1'
+$env:LLM_MODEL = 'your-model-name'
+$env:LLM_API_KEY = 'your-private-api-key'
+```
+
+In bash:
+
+```bash
+export LLM_PROVIDER=openai_compatible
+export LLM_BASE_URL=https://your-provider.example/v1
+export LLM_MODEL=your-model-name
+export LLM_API_KEY=your-private-api-key
+```
+
+These are placeholders, not a preconfigured service. Select a model/service you have access to. An HTTP loopback URL such as your local model server's `/v1` endpoint is also supported; no model is bundled or hard-coded. Restart the backend after changing these variables. The application does not automatically load a `.env` file.
+
+Visit `/api/agents/status` to check the selected mode. "Configured LLM" reports configuration readiness, not a verified live connection; the connection is exercised when you run analysis. Only retrieved evidence is sent. A service unable to return valid JSON or evidence-grounded statements produces an explicit failure. There is no silent switch to the extractive mode.
+
+The adapter was exercised with mocked HTTP responses. A live external LLM was not configured or tested. Local extraction, API analysis, and real WordLlama/Chroma retrieval were tested end to end over HTTP.
+
+The updated smoke script records `docs/milestone2-live-verification.json` and now verifies all seven UI routes plus all three agent endpoints. The previous `docs/live-verification.json` remains the Milestone 1 record.
