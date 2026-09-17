@@ -1,0 +1,14 @@
+{
+  "date": "2026-09-12",
+  "check": "dependency resolution with binary distributions only",
+  "target_python": "3.11",
+  "target_platform": "x86_64-pc-windows-msvc",
+  "command": "uv pip compile backend/requirements-dev.txt --python <existing-interpreter> --python-version 3.11 --python-platform x86_64-pc-windows-msvc --no-python-downloads --only-binary :all:",
+  "result": "passed",
+  "resolved_file": "backend/requirements-windows-py311.txt",
+  "runtime_execution": "not performed on Windows or Python 3.11",
+  "numpy": "2.4.6",
+  "wordllama": "0.4.0.post1",
+  "chromadb": "1.5.9",
+  "notes": "pip cross-platform dry run evaluated a Linux uvloop marker and could not resolve; uv with an explicit Windows target resolved successfully. No dependency was removed to force success."
+}

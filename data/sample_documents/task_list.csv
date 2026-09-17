@@ -1,0 +1,12 @@
+Task ID,Task Name,Owner,Status,Priority,Due Date
+T-01,Build PDF/DOCX/CSV/TXT ingestion module,Manohar,Done,High,2026-01-16
+T-02,Implement text normalization,Manohar,Done,High,2026-01-18
+T-03,Implement chunking module,Manohar,Done,High,2026-01-20
+T-04,Implement local embedding generation,Manohar,Done,High,2026-01-23
+T-05,Implement Chroma vector store indexing,Manohar,Done,High,2026-01-25
+T-06,Implement retrieval with relevance threshold,Manohar,In Progress,High,2026-01-30
+T-07,Build Streamlit upload and processing pages,Manohar,In Progress,Medium,2026-02-02
+T-08,Build Streamlit query and retrieval results page,Manohar,Not Started,Medium,2026-02-05
+T-09,Write Milestone 1 unit tests,Manohar,Not Started,High,2026-02-07
+T-10,Write README and architecture documentation,Manohar,Not Started,Medium,2026-02-08
+T-11,Prepare Milestone 1 mentor demonstration,Manohar,Not Started,High,2026-02-10

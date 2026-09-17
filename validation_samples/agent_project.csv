@@ -1,0 +1,15 @@
+Statement
+Goal: build a web portal for customer support tickets.
+Milestone: the API prototype is scheduled for 20 September 2026.
+Timeline: integration testing is due 27 September 2026.
+Responsibility: Priya owns backend API development.
+"Deliverables: a ticket API, a React frontend, and an integration test report."
+Schedule risk: API implementation is delayed because the database schema has not been approved. Severity: high.
+Dependency gap: frontend integration depends on the API contract that is pending review.
+Delivery challenge: integration testing cannot start until staging server access is restored.
+Delivery forecast: the pilot date is unconfirmed; no revised delivery date is confirmed.
+Pending decision: the product owner must approve the ticket retention period.
+Unresolved issue: the staging server is unavailable.
+Action item: Ravi will restore staging server access by 18 September 2026. Status: pending.
+Action item: arrange the retention-policy review. Owner: unknown. Due date: unknown.
+Action item: test the webhook retry path. Owner: Meera; Due date: 2026-09-23; Status: pending.
