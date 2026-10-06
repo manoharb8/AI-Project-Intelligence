@@ -1,4 +1,5 @@
 import {createContext, useContext, useEffect, useRef, useState, type ReactNode} from 'react';
+import {useOperationNotice} from '../experience/useNotifications';
 import {useSession} from '../SessionContext';
 import {intelligenceApi as legacyIntelligenceApi} from './api';
 import {useWorkspace} from '../workspaces/WorkspaceContext';
@@ -12,10 +13,10 @@ function useIntelligenceState() {
   const workspace=useWorkspace();
   const intelligenceApi=workspace?.intelligenceApi??legacyIntelligenceApi;
   const saved=workspace?.snapshot;
-  const {revision, kb, provider, providerError, checkingProvider, uploading, uploadStage, refreshing, connectionError} = useSession();
+  const {analysisReady, agents, notify, revision, kb, provider, providerError, checkingProvider, uploading, uploadStage, refreshing, connectionError} = useSession();
   const {pathname} = useLocation();
   const sourcesChanging = uploadStage === 'indexing' || Boolean(kb?.documents.some(document => document.status === 'processing'));
-  const ready = Boolean((!workspace||workspace.active) && kb?.retrieval_ready && provider?.ready && !providerError && !checkingProvider && !uploading && !sourcesChanging && !refreshing && !connectionError);
+  const ready = Boolean(analysisReady && (!workspace||workspace.active) && kb?.retrieval_ready && provider?.ready && !providerError && !checkingProvider && !uploading && !sourcesChanging && !refreshing && !connectionError);
   const environment = useRef({revision, ready, sourcesChanging});
   environment.current = {revision, ready, sourcesChanging};
   const [resources] = useState(() => {
@@ -43,9 +44,19 @@ function useIntelligenceState() {
     }
     sourceVersion.current = {revision, sourcesChanging};
   }, [revision, sourcesChanging, resources]);
+  // A manual M2 refresh can change results without changing sources. Refresh the
+  // existing intelligence resources after that completed result set changes.
+  const analysisStamp=Object.values(agents).map(w=>w.result?.generated_at??'').join('|');
+  const completedAnalysis=useRef(analysisStamp);
+  useEffect(()=>{
+    if(analysisReady&&completedAnalysis.current!==analysisStamp){
+      Object.values(resources).forEach(resource=>resource.invalidate());
+      completedAnalysis.current=analysisStamp;
+    }
+  },[analysisReady,analysisStamp,resources]);
   const documentation = useAutomaticWork(resources.documentation, DEFAULT_FOCUS, pathname === '/documentation', ready, revision,saved?{query:saved.view.documentation_query,focus:saved.view.documentation_focus}:undefined);
   const health = useAutomaticWork(resources.health, DEFAULT_FOCUS, pathname === '/project-health', ready, revision,saved?{query:saved.view.health_query,focus:saved.view.health_focus}:undefined);
-  const briefingActive = pathname === '/assistant' || pathname === '/dashboard';
+  const briefingActive = !workspace || workspace.active;
   // Broad briefing results reuse the same cache as default Studio/Health views.
   // Custom review focuses remain separate, so a narrow view cannot hide evidence.
   const briefingDocumentation = useAutomaticWork(resources.documentation, DEFAULT_FOCUS, briefingActive, ready, revision);
@@ -54,6 +65,7 @@ function useIntelligenceState() {
   const blockers = useAutomaticWork(resources.blockers, 'What is blocking the project?', briefingActive, ready, revision);
   const staleDuringIndexing = <T extends {stale: boolean; result: unknown}>(work: T): T => ({...work, stale: work.stale || Boolean(work.result && sourcesChanging)});
   const briefing = {documentation: staleDuringIndexing(briefingDocumentation), health: staleDuringIndexing(briefingHealth), outlook: staleDuringIndexing(outlook), blockers: staleDuringIndexing(blockers)};
+  useOperationNotice([briefingDocumentation,briefingHealth,outlook,blockers],revision,notify,'intelligence');
   const [docTab, setDocTab] = useState<DocumentationTab>(saved?.view.doc_tab??'user_stories');
   const [docFilter, setDocFilter] = useState(saved?.view.doc_filter??'');
   const [actionFilter, setActionFilter] = useState(saved?.view.action_filter??'all');

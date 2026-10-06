@@ -1,10 +1,8 @@
 import {useEffect, useRef, useState} from 'react';
 import {NavLink, Navigate, Route, Routes, useLocation} from 'react-router-dom';
-import {LayoutDashboard, Files, Database, Search, Menu, X, Target, TriangleAlert, ListChecks, CircleCheck, CircleAlert, LoaderCircle, BookOpen, Activity, MessageSquare} from 'lucide-react';
+import {LayoutDashboard, Files, Database, Menu, X, Target, TriangleAlert, ListChecks, CircleCheck, CircleAlert, LoaderCircle, BookOpen, Activity, MessageSquare} from 'lucide-react';
 import Overview from './pages/Overview';
 import Documents from './pages/Documents';
-import KnowledgeBase from './pages/KnowledgeBase';
-import Retrieval from './pages/Retrieval';
 import ScopeDeliverables from './pages/ScopeDeliverables';
 import RiskDelivery from './pages/RiskDelivery';
 import BlockersActions from './pages/BlockersActions';
@@ -19,10 +17,12 @@ import SidebarBrand from './presentation/SidebarBrand';
 import {ThemeProvider, ThemeToggle} from './presentation/Theme';
 import {WorkspaceBinding,useWorkspaceManager} from './workspaces/WorkspaceContext';
 import WorkspaceSwitcher from './workspaces/WorkspaceSwitcher';
+import ProjectFlow from './experience/ProjectFlow';
+import Notifications from './experience/Notifications';
 
 const navigation = [
   {label: 'Workspace', links: [{to: '/dashboard', label: 'Overview', icon: LayoutDashboard}]},
-  {label: 'Sources & Search', links: [{to: '/documents', label: 'Documents', icon: Files}, {to: '/knowledge-base', label: 'Knowledge Base', icon: Database}, {to: '/retrieval', label: 'Evidence Search', icon: Search}]},
+  {label: 'Sources & Search', links: [{to: '/documents', label: 'Documents', icon: Files}]},
   {label: 'Project Analysis', links: [{to: '/scope', label: 'Scope & Deliverables', icon: Target}, {to: '/risks', label: 'Risk & Delivery', icon: TriangleAlert}, {to: '/blockers', label: 'Blockers & Actions', icon: ListChecks}]},
   {label: 'Project Intelligence', links: [{to: '/documentation', label: 'Documentation Studio', icon: BookOpen}, {to: '/project-health', label: 'Project Health', icon: Activity}, {to: '/assistant', label: 'Project Assistant', icon: MessageSquare}]},
 ];
@@ -87,11 +87,10 @@ function AppShell() {
         {connectionError && <div className="connection-error"><ErrorNotice>{connectionError}{kb && ' Previously loaded content is still shown.'}</ErrorNotice><button className="button secondary" disabled={refreshing} onClick={() => void refresh()}>{refreshing ? 'Retrying…' : 'Retry connection'}</button></div>}
         {!kb && !connectionError && <Busy>Connecting to your knowledge base…</Busy>}
         {uploading && location.pathname !== '/documents' && <Busy>Documents are uploading and indexing. You can continue browsing.</Busy>}
+        {kb && <ProjectFlow/>}
         {kb && <div className="page-stage" key={location.pathname}><Routes>
           <Route path="/dashboard" element={<Overview kb={kb}/>}/>
           <Route path="/documents" element={<Documents kb={kb} refresh={refresh}/>}/>
-          <Route path="/knowledge-base" element={<KnowledgeBase kb={kb}/>}/>
-          <Route path="/retrieval" element={<Retrieval kb={kb}/>}/>
           <Route path="/scope" element={<ScopeDeliverables kb={kb}/>}/>
           <Route path="/risks" element={<RiskDelivery kb={kb}/>}/>
           <Route path="/blockers" element={<BlockersActions kb={kb}/>}/>
@@ -102,6 +101,7 @@ function AppShell() {
         </Routes></div>}
         <footer className="main-footer"><span>Insights with source evidence</span></footer>
       </main>
+      <Notifications/>
     </div>
   </div>;
 }

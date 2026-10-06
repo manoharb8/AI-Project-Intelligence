@@ -7,3 +7,6 @@ numpy>=1.26,<3
 pypdf>=5,<7
 python-docx>=1.1.2,<2
 httpx>=0.28,<1
+
+# PDF report export (Word export uses the existing python-docx dependency).
+reportlab>=4,<6

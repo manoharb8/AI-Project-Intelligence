@@ -42,8 +42,8 @@ export default function ProjectInsights() {
     <div className="insights-heading"><div><span className="product-kicker"><span/>CONNECTED TO YOUR SOURCES</span><h2 id="insights-title">Project Insights & Risk Summary</h2><p>One view of what your evidence establishes—and what needs a closer look.</p></div><button className="button secondary" disabled={Boolean(unavailable) || busy} onClick={() => jobs.forEach(job => void job.work.refresh())}><RefreshCw size={16}/>Refresh insights</button></div>
     {kb && <div className="insights-source-strip" aria-label="Current indexed evidence">
       <Link to="/documents"><FileSearch size={18}/><span><strong>{kb.document_count}</strong>Source documents</span><ArrowUpRight size={14}/></Link>
-      <Link to="/knowledge-base"><ShieldCheck size={18}/><span><strong>{kb.indexed_documents}</strong>Indexed sources</span><ArrowUpRight size={14}/></Link>
-      <Link to="/retrieval"><ListChecks size={18}/><span><strong>{kb.chunk_count}</strong>Traceable passages</span><ArrowUpRight size={14}/></Link>
+      <Link to="/documents"><ShieldCheck size={18}/><span><strong>{kb.indexed_documents}</strong>Indexed sources</span><ArrowUpRight size={14}/></Link>
+      <Link to="/scope"><ListChecks size={18}/><span><strong>{kb.chunk_count}</strong>Traceable passages</span><ArrowUpRight size={14}/></Link>
     </div>}
     <AvailabilityNotice/>
     {busy && <Busy>{docs || health ? 'Refreshing project insights. Previous results remain visible.' : 'Preparing your dashboard from indexed project evidence…'}</Busy>}

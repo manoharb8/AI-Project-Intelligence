@@ -122,11 +122,11 @@ test('theme still works in memory when session storage is unavailable', () => {
 test('sidebar removes auxiliary branding, preserves every navigation URL/order, and theme changes preserve drafts', async () => {
   vi.mocked(api.summary).mockResolvedValue({document_count: 0, indexed_documents: 0, chunk_count: 0, documents: [], supported_formats: ['pdf','docx','txt','csv'], retrieval_ready: false});
   vi.mocked(api.agentStatus).mockResolvedValue({ready: true, mode: 'extractive', provider: 'Extractive', message: 'Ready', agents: ['scope','risk','blockers']});
-  const {container} = render(<MemoryRouter initialEntries={['/retrieval']}><App/></MemoryRouter>);
-  const input = await screen.findByLabelText('What would you like to find?');
+  const {container} = render(<MemoryRouter initialEntries={['/scope']}><App/></MemoryRouter>);
+  const input = await screen.findByLabelText('Analysis focus');
   fireEvent.change(input, {target: {value: 'Keep this focus'}});
   const nav = screen.getByRole('navigation', {name: 'Main navigation'});
-  expect(within(nav).getAllByRole('link').map(link => link.getAttribute('href'))).toEqual(['/dashboard','/documents','/knowledge-base','/retrieval','/scope','/risks','/blockers','/documentation','/project-health','/assistant']);
+  expect(within(nav).getAllByRole('link').map(link => link.getAttribute('href'))).toEqual(['/dashboard','/documents','/scope','/risks','/blockers','/documentation','/project-health','/assistant']);
   expect(container.querySelector('.workspace')).toBeNull();
   expect(container.querySelector('.sidebar-bottom')).toBeNull();
   expect(screen.queryByText('PI')).not.toBeInTheDocument();

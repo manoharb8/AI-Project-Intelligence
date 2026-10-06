@@ -1,10 +1,11 @@
 import {createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode} from 'react';
 import {api as legacyApi} from './api';
 import {useWorkspace} from './workspaces/WorkspaceContext';
-import {agentSpecs} from './agentSpecs';
+import {useAutomaticAnalysis} from './experience/useAutomaticAnalysis';
+import {useNotifications, useOperationNotice} from './experience/useNotifications';
 import {appendFiles, fileKey} from './fileQueue';
 import {uploadIdentity} from './uploadIdentity';
-import type {AgentAvailability, AgentResult, KnowledgeBase, ProjectDocument, QueryResult} from './types';
+import type {AgentAvailability, KnowledgeBase, ProjectDocument, QueryResult} from './types';
 
 const errorMessage = (error: unknown, fallback: string) => error instanceof Error ? error.message : fallback;
 
@@ -42,7 +43,7 @@ function useSessionState() {
   const api=workspace?.api??legacyApi;
   const restored=workspace?.snapshot;
   const last=(kind:string)=>restored?.results.filter(item=>item.kind===kind).at(-1);
-  const retrievalSaved=last('retrieval'),scopeSaved=last('scope'),riskSaved=last('risk'),blockersSaved=last('blockers');
+  const retrievalSaved=last('retrieval');
   const restore=<T,>(entry:{result:T;source_version:string}|undefined)=>entry?{result:entry.result,resultRevision:entry.source_version===restored?.source_version?0:-1}:undefined;
   const [kb, setKb] = useState<KnowledgeBase | null>(null);
   const [connectionError, setConnectionError] = useState('');
@@ -57,10 +58,6 @@ function useSessionState() {
   const [revision, setRevision] = useState(0);
   const indexedSnapshot = useRef<Map<string, number> | null>(restored?new Map(Object.entries(restored.indexed_sources)):null);
   const retrieval = useWork<QueryResult>(restored?.view.retrieval_query??'', api.query,restore(retrievalSaved?.kind==='retrieval'?retrievalSaved:undefined));
-  const scope = useWork<AgentResult>(restored?.view.scope_query||agentSpecs.scope.query, query => api.analyze('scope', query),restore(scopeSaved?.kind==='scope'?scopeSaved:undefined));
-  const risk = useWork<AgentResult>(restored?.view.risk_query||agentSpecs.risk.query, query => api.analyze('risk', query),restore(riskSaved?.kind==='risk'?riskSaved:undefined));
-  const blockers = useWork<AgentResult>(restored?.view.blockers_query||agentSpecs.blockers.query, query => api.analyze('blockers', query),restore(blockersSaved?.kind==='blockers'?blockersSaved:undefined));
-  useEffect(()=>workspace?.persistence.update({retrieval_query:retrieval.query,scope_query:scope.query,risk_query:risk.query,blockers_query:blockers.query}),[workspace?.persistence,retrieval.query,scope.query,risk.query,blockers.query]);
   const [files, setFiles] = useState<File[]>([]);
   const filesRef = useRef<File[]>([]);
   const [queueMessages, setQueueMessages] = useState<string[]>([]);
@@ -75,6 +72,15 @@ function useSessionState() {
   const [documentSearch, setDocumentSearch] = useState('');
   const [documentStatus, setDocumentStatus] = useState('all');
   const [documentSort, setDocumentSort] = useState('newest');
+
+  const notices=useNotifications();
+  const sourcesChanging=uploadStage==='indexing'||Boolean(kb?.documents.some(d=>d.status==='processing'));
+  const analysisAvailable=Boolean((!workspace||workspace.active)&&kb?.retrieval_ready&&provider?.ready&&!providerError&&!checkingProvider&&!uploading&&!sourcesChanging&&!refreshing&&!connectionError);
+  const agents=useAutomaticAnalysis(api,restored,revision,analysisAvailable,sourcesChanging,!workspace||workspace.active);
+  const {scope,risk,blockers}=agents;
+  const analysisReady=Object.values(agents).every(w=>w.result&&w.resultRevision===revision&&!w.busy&&!w.waiting&&!w.error&&!w.stale&&!w.previousFocus);
+  useOperationNotice(Object.values(agents),revision,notices.notify,'analysis');
+  useEffect(()=>workspace?.persistence.update({retrieval_query:retrieval.query,scope_query:scope.query,risk_query:risk.query,blockers_query:blockers.query}),[workspace?.persistence,retrieval.query,scope.query,risk.query,blockers.query]);
 
   const observeIndexedSources = useCallback((documents: ProjectDocument[], fullSnapshot: boolean) => {
     const previous = indexedSnapshot.current;
@@ -188,13 +194,15 @@ function useSessionState() {
       const failed = result.documents.some(doc => doc.status === 'error');
       setUploadHasFailures(failed);
       setUploadResults(result.documents);
-      setUploadMessage(`${indexed} of ${result.documents.length} documents indexed. ${failed ? 'Review failed files below, correct the source, then choose the file again.' : indexed ? 'Ready for evidence search.' : 'Check the document statuses below.'}`);
+      setUploadMessage(`${indexed} of ${result.documents.length} documents indexed. ${failed ? 'Review failed files below, correct the source, then choose the file again.' : indexed ? 'Project analysis will start automatically when processing finishes.' : 'Check the document statuses below.'}`);
+      if(indexed)notices.notify(failed?'Some documents need review':'Documents uploaded successfully',`${indexed} indexed sources from ${result.documents.length} received files. Analysis will prepare from the available evidence.`,failed?'warning':'success');
+      else if(failed)notices.notify('Documents could not be indexed','Review the failed files in Documents before trying again.','error');
       observeIndexedSources(result.documents, false);
       filesRef.current = [];
       setFiles([]);
       await refresh();
     } catch (error) {
-      if (active.current) setUploadError(`${errorMessage(error, 'Upload failed.')} Your queue is kept. Refresh the document list before retrying to check whether any files were received.`);
+      if (active.current) {setUploadError(`${errorMessage(error, 'Upload failed.')} Your queue is kept. Refresh the document list before retrying to check whether any files were received.`); notices.notify('Upload could not be confirmed','Your queue is kept. Refresh the source list before retrying.','error');}
     } finally {
       if (polling !== undefined) clearInterval(polling);
       uploadLock.current = false;
@@ -202,7 +210,7 @@ function useSessionState() {
     }
   }
   return {kb, connectionError, refreshing, refresh, provider, providerError, checkingProvider, checkProvider, revision,
-    retrieval, agents: {scope, risk, blockers}, files, queueMessages, uploading, uploadStage, uploadError, uploadMessage, uploadHasFailures, uploadResults, selectFiles, removeFile, upload,
+    ...notices, analysisReady, analysisAvailable, retrieval, agents, files, queueMessages, uploading, uploadStage, uploadError, uploadMessage, uploadHasFailures, uploadResults, selectFiles, removeFile, upload,
     documentSearch, setDocumentSearch, documentStatus, setDocumentStatus, documentSort, setDocumentSort};
 }
 

@@ -36,10 +36,10 @@ async function ask(question=answer.question) {const input=await screen.findByLab
 function deferred<T>() {let resolve!:(value:T)=>void; const promise=new Promise<T>(done=>{resolve=done;}); return {promise,resolve};}
 const conversationRequest = vi.fn();
 const briefingRequest = vi.fn();
-beforeEach(()=>{vi.resetAllMocks();vi.mocked(api.summary).mockResolvedValue(kb);vi.mocked(api.agentStatus).mockResolvedValue(provider);vi.mocked(intelligenceApi.documentation).mockResolvedValue(documentation);vi.mocked(intelligenceApi.health).mockResolvedValue(health);conversationRequest.mockResolvedValue(answer);briefingRequest.mockResolvedValue({...answer, answer:'Briefing source statements.', statements:[]});vi.mocked(intelligenceApi.assistant).mockImplementation((question, history, signal) => signal ? conversationRequest(question, history, signal) : briefingRequest(question, history));});
+beforeEach(()=>{vi.resetAllMocks();vi.mocked(api.analyze).mockImplementation(async(kind,query)=>({...metadata,agent:kind,query,message:'Test evidence checked.',findings:[],coverage:[]}));vi.mocked(api.summary).mockResolvedValue(kb);vi.mocked(api.agentStatus).mockResolvedValue(provider);vi.mocked(intelligenceApi.documentation).mockResolvedValue(documentation);vi.mocked(intelligenceApi.health).mockResolvedValue(health);conversationRequest.mockResolvedValue(answer);briefingRequest.mockResolvedValue({...answer, answer:'Briefing source statements.', statements:[]});vi.mocked(intelligenceApi.assistant).mockImplementation((question, history, signal) => signal ? conversationRequest(question, history, signal) : briefingRequest(question, history));});
 
-test('M4 Overview and M3 open automatically once per source version, while M2 remains manual',async()=>{
-  show('/dashboard'); await screen.findByRole('heading',{name:'Your project, in focus.'});
+test('M4 Overview and M3 open automatically once per source version, after automatic M2 analysis',async()=>{
+  show('/dashboard'); await screen.findByRole('heading',{name:"Manohar B's project, in focus."});
   await screen.findByRole('heading',{name:'Project Insights & Risk Summary'});
   await waitFor(()=>expect(intelligenceApi.documentation).toHaveBeenCalledTimes(1));
   await waitFor(()=>expect(intelligenceApi.health).toHaveBeenCalledTimes(1));
@@ -47,12 +47,12 @@ test('M4 Overview and M3 open automatically once per source version, while M2 re
   nav('Project Health');await screen.findByText(health.methodology);
   nav('Project Assistant');await waitFor(()=>expect(briefingRequest).toHaveBeenCalledTimes(2));
   expect(screen.getByRole('heading',{name:'Your Project Briefing'})).toBeInTheDocument();
-  expect(conversationRequest).not.toHaveBeenCalled();expect(screen.getByRole('log')).toBeEmptyDOMElement();
+  expect(conversationRequest).not.toHaveBeenCalled();expect(screen.getByRole('log',{name:'Conversation history'})).toBeEmptyDOMElement();
   nav('Overview');nav('Documentation Studio');
-  expect(intelligenceApi.documentation).toHaveBeenCalledTimes(1);expect(intelligenceApi.health).toHaveBeenCalledTimes(1);expect(api.analyze).not.toHaveBeenCalled();expect(api.query).not.toHaveBeenCalled();
+  expect(intelligenceApi.documentation).toHaveBeenCalledTimes(1);expect(intelligenceApi.health).toHaveBeenCalledTimes(1);expect(api.analyze).toHaveBeenCalledTimes(3);expect(api.query).not.toHaveBeenCalled();
 });
 test('documentation preserves unknown fields, exact quotes, timestamps and keyboard tabs',async()=>{
-  show();await clickRun();await screen.findByText('Review the policy',{selector:'h3'});
+  show();await screen.findByText('Review the policy',{selector:'h3'});
   expect(screen.getAllByText('Not stated')).toHaveLength(3);
   expect(document.querySelector('time')).toHaveAttribute('datetime',metadata.generated_at);
   const stories=screen.getByRole('tab',{name:/User Stories/});stories.focus();fireEvent.keyDown(stories,{key:'End'});
@@ -76,12 +76,12 @@ test('documentation prevents duplicate requests and retains prior result on fail
   fireEvent.click(screen.getByRole('button',{name:'Retry request'}));await waitFor(()=>expect(screen.queryByRole('alert')).not.toBeInTheDocument());expect(intelligenceApi.documentation).toHaveBeenCalledTimes(3);
 });
 test('health shows unknown instead of a zero or healthy overall score and preserves its calculation',async()=>{
-  show('/project-health');expect(await screen.findByRole('img',{name:'Overall project health not assessed'})).toBeInTheDocument();await clickRun('Assess project health');await screen.findByText(health.methodology);
+  show('/project-health');expect(await screen.findByRole('img',{name:'Overall project health not assessed'})).toBeInTheDocument();await screen.findByText(health.methodology);
   expect(screen.getByRole('img',{name:'Overall project health not assessed'})).toBeInTheDocument();expect(screen.getByText('20 + 0 + 0 + 0 + 0 = 20/100')).toBeInTheDocument();
   expect(screen.getByRole('button',{name:/Timeline risk: Unknown/})).toBeInTheDocument();expect(screen.getByRole('button',{name:/Blocker health: Unknown/})).toBeInTheDocument();nav('Overview');nav('Project Health');expect(screen.getByText(health.methodology)).toBeInTheDocument();expect(intelligenceApi.health).toHaveBeenCalledTimes(1);
 });
 test('chat retains its draft, exact answer and unknown owner/date across navigation',async()=>{
-  show('/assistant');await ask();await screen.findByText(answer.answer);expect(within(screen.getByRole('log')).getAllByText('Not stated')).toHaveLength(3);
+  show('/assistant');await ask();await screen.findByText(answer.answer);expect(within(screen.getByRole('log',{name:'Conversation history'})).getAllByText('Not stated')).toHaveLength(3);
   fireEvent.change(screen.getByLabelText('Ask about your project'),{target:{value:'Which tasks are blocked?'}});nav('Overview');nav('Project Assistant');
   expect(screen.getByText(answer.answer)).toBeInTheDocument();expect(screen.getByLabelText('Ask about your project')).toHaveValue('Which tasks are blocked?');expect(screen.getAllByText(reference.quote,{selector:'blockquote'})[0]).toBeVisible();
 });
@@ -103,7 +103,7 @@ test('chat retry retains earlier useful answers without duplicating the failed q
 });
 test('successful uploads mark all M3 results stale and exclude old chat history from new requests',async()=>{
   const added={...source,id:'new',filename:'new.txt'};vi.mocked(api.upload).mockImplementation(async()=>{vi.mocked(api.summary).mockResolvedValue({...kb,document_count:2,indexed_documents:2,chunk_count:2,documents:[source,added]});return{documents:[added]};});
-  show();await clickRun();await screen.findByText('Review the policy',{selector:'h3'});nav('Project Health');await clickRun('Assess project health');await screen.findByText(health.methodology);nav('Project Assistant');await ask();await screen.findByText(answer.answer);
+  show();await screen.findByText('Review the policy',{selector:'h3'});nav('Project Health');await screen.findByText(health.methodology);nav('Project Assistant');await ask();await screen.findByText(answer.answer);
   nav('Documents');fireEvent.change(screen.getByLabelText('Choose project documents'),{target:{files:[new File(['new'],'new.txt')]}});fireEvent.click(screen.getByRole('button',{name:/Upload & index/}));await screen.findByText(/1 of 1 documents indexed/);
   for(const name of ['Documentation Studio','Project Health']) {nav(name);expect(screen.getByText(/Sources changed after this result began/)).toBeInTheDocument();}
   nav('Project Assistant');expect(screen.getByText('May be out of date')).toBeInTheDocument();await ask('What are our biggest risks?');await waitFor(()=>expect(conversationRequest).toHaveBeenCalledTimes(2));expect(conversationRequest.mock.calls[1][1]).toEqual([]);
@@ -133,7 +133,7 @@ test('briefing reuses default results but keeps a custom documentation focus sep
   await waitFor(()=>expect(intelligenceApi.documentation).toHaveBeenCalledTimes(2));nav('Project Assistant');
   await waitFor(()=>expect(briefingRequest).toHaveBeenCalledTimes(2));expect(intelligenceApi.documentation).toHaveBeenCalledTimes(2);
   expect(vi.mocked(intelligenceApi.documentation).mock.calls.map(call=>call[0])).toEqual(['Review the uploaded project documents.','Review policy actions']);
-  expect(screen.getByRole('log')).toBeEmptyDOMElement();
+  expect(screen.getByRole('log',{name:'Conversation history'})).toBeEmptyDOMElement();
 });
 test('automatic requests wait while indexing is in progress',async()=>{
   const processing={...source,status:'processing' as const,indexed:false};
@@ -141,7 +141,7 @@ test('automatic requests wait while indexing is in progress',async()=>{
   await act(async()=>{await new Promise(done=>setTimeout(done,400));});expect(intelligenceApi.documentation).not.toHaveBeenCalled();
 });
 test('sidebar orders analysis before intelligence without changing routes',async()=>{
-  show('/dashboard');await screen.findByRole('heading',{name:'Your project, in focus.'});
+  show('/dashboard');await screen.findByRole('heading',{name:"Manohar B's project, in focus."});
   const navigation=screen.getByRole('navigation',{name:'Main navigation'});
   expect([...navigation.querySelectorAll('.nav-label')].map(el=>el.textContent)).toEqual(['Workspace','Sources & Search','Project Analysis','Project Intelligence']);
   expect(within(navigation).getByRole('link',{name:'Project Assistant'})).toHaveAttribute('href','/assistant');
@@ -188,7 +188,7 @@ test('automatic insufficient documentation stays empty, is cached and does not i
 test('briefing failures preserve other sections and retry only the failed section',async()=>{
   briefingRequest.mockImplementation((question: string) => question==='Are we on track?' ? Promise.reject(new Error('Outlook unavailable')) : Promise.resolve({...answer,answer:'Blocker source statements.'}));
   show('/assistant');expect(await screen.findByRole('alert')).toHaveTextContent('Outlook unavailable');
-  expect(screen.getByText('Blocker source statements.')).toBeInTheDocument();expect(screen.getByRole('log')).toBeEmptyDOMElement();
+  expect(screen.getByText('Blocker source statements.')).toBeInTheDocument();expect(screen.getByRole('log',{name:'Conversation history'})).toBeEmptyDOMElement();
   briefingRequest.mockResolvedValue({...answer,answer:'Recovered outlook statements.'});
   fireEvent.click(screen.getByRole('button',{name:'Retry delivery outlook'}));await screen.findByText('Recovered outlook statements.');
   expect(briefingRequest).toHaveBeenCalledTimes(3);expect(intelligenceApi.documentation).toHaveBeenCalledTimes(1);expect(intelligenceApi.health).toHaveBeenCalledTimes(1);
@@ -214,7 +214,7 @@ test('M4 dashboard automatically displays exact results, direction and unknown f
   expect(dashboard.getByText('Returned risk entries, not unique incidents. No priority ranking is inferred.')).toBeInTheDocument();
   expect(dashboard.getByText('20 + 0 + 0 + 0 + 0 = 20/100')).toBeInTheDocument();
   expect(dashboard.getAllByText(reference.quote,{selector:'blockquote'}).length).toBeGreaterThan(0);
-  expect(api.analyze).not.toHaveBeenCalled();expect(api.query).not.toHaveBeenCalled();
+  expect(api.analyze).toHaveBeenCalledTimes(3);expect(api.query).not.toHaveBeenCalled();
 });
 test('M4 action filters use exact source statuses and preserve source references',async()=>{
   vi.mocked(intelligenceApi.documentation).mockResolvedValue({...documentation,action_items:[

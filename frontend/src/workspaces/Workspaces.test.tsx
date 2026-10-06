@@ -56,7 +56,7 @@ beforeEach(()=>{
     if(path==='/api/knowledge-base')return json(summaries[id]);
     if(path==='/api/agents/status')return json(provider);
     if(path==='/api/retrieval/query')return json(queryResult(id,String(body.query)));
-    if(path==='/api/agents/scope')return json(analysis(id));
+    if(['/api/agents/scope','/api/agents/risk','/api/agents/blockers'].includes(path))return json({...analysis(id),agent:path.split('/').at(-1),query:String(body.query)});
     if(path==='/api/documentation/generate')return json(docs(id));
     if(path==='/api/project-health/assess')return json(health(id));
     if(path==='/api/assistant/query')return json(answer(id,String(body.question)));
@@ -78,15 +78,15 @@ test('Strict Mode loads the actual registry once and binds the current project w
   expect(localStorage.length).toBe(0);
 });
 
-test('new workspace is empty and switching back restores retrieval, draft and queued files',async()=>{
-  show('/retrieval');const input=await screen.findByLabelText('What would you like to find?');fireEvent.change(input,{target:{value:'policy'}});fireEvent.click(screen.getByRole('button',{name:/Find evidence/}));await screen.findByText(evidence('legacy').text);
+test('new workspace is empty and switching back restores analysis, draft and queued files',async()=>{
+  show('/scope');await screen.findByText(evidence('legacy').text,{selector:'blockquote.finding-text'});const input=screen.getByLabelText('Analysis focus');fireEvent.change(input,{target:{value:'policy'}});
   nav('Documents');fireEvent.change(await screen.findByLabelText('Choose project documents'),{target:{files:[new File(['policy'],'pending.txt')]}});
   await open();fireEvent.click(screen.getByRole('button',{name:/New workspace/}));fireEvent.change(screen.getByLabelText('Project name'),{target:{value:'A fresh project'}});fireEvent.click(screen.getByRole('button',{name:'Create workspace'}));
   const active=await screen.findByRole('button',{name:'Switch workspace: A fresh project'});await waitFor(()=>expect(active).toHaveFocus());
   expect(screen.queryByText('legacy.txt')).not.toBeInTheDocument();expect(screen.queryByRole('button',{name:'Remove pending.txt'})).not.toBeInTheDocument();
   nav('Project Health');await screen.findByRole('heading',{name:'Project Health'});expect(count('/api/project-health/assess','d'.repeat(32))).toBe(0);
   await select('Current project');nav('Documents');expect(await screen.findByRole('button',{name:'Remove pending.txt'})).toBeInTheDocument();
-  nav('Evidence Search');expect(await screen.findByLabelText('What would you like to find?')).toHaveValue('policy');expect(screen.getByText(evidence('legacy').text)).toBeInTheDocument();expect(count('/api/retrieval/query','legacy')).toBe(1);
+  nav('Scope & Deliverables');expect(await screen.findByLabelText('Analysis focus')).toHaveValue('policy');expect(screen.getByText(evidence('legacy').text,{selector:'blockquote.finding-text'})).toBeInTheDocument();expect(count('/api/agents/scope','legacy')).toBe(1);
 });
 
 test('saved M2 results and default intelligence hydrate without rerunning completed analysis',async()=>{
@@ -100,12 +100,12 @@ test('saved M2 results and default intelligence hydrate without rerunning comple
 });
 
 test('late response stays with its originating workspace after a switch',async()=>{
-  const delayed=deferred<Response>();override=c=>c.path==='/api/retrieval/query'&&c.id==='legacy'?delayed.promise:undefined;
-  show('/retrieval');fireEvent.change(await screen.findByLabelText('What would you like to find?'),{target:{value:'policy'}});fireEvent.click(screen.getByRole('button',{name:/Find evidence/}));
-  await select('Beta project');await screen.findByLabelText('What would you like to find?');
-  await act(async()=>delayed.resolve(json(queryResult('legacy','policy'))));
-  expect(screen.queryByText(evidence('legacy').text)).not.toBeInTheDocument();expect(screen.getByLabelText('What would you like to find?')).toHaveValue('');
-  await select('Current project');expect(await screen.findByText(evidence('legacy').text)).toBeInTheDocument();
+  const delayed=deferred<Response>();override=c=>c.path==='/api/agents/scope'&&c.id==='legacy'?delayed.promise:undefined;
+  show('/scope');await waitFor(()=>expect(count('/api/agents/scope','legacy')).toBe(1));
+  await select('Beta project');await screen.findByLabelText('Analysis focus');
+  await act(async()=>delayed.resolve(json(analysis('legacy'))));
+  expect(screen.queryByText(evidence('legacy').text)).not.toBeInTheDocument();expect(screen.getByLabelText('Analysis focus')).not.toHaveValue('policy');
+  await select('Current project');expect(await screen.findByText(evidence('legacy').text,{selector:'blockquote.finding-text'})).toBeInTheDocument();
 });
 
 test('upload in flight finishes only in its original workspace and does not block another workspace queue',async()=>{
@@ -121,7 +121,7 @@ test('upload in flight finishes only in its original workspace and does not bloc
 
 test('inactive workspace intelligence does not auto-run and active completed results are cached on revisit',async()=>{
   show('/documentation');await screen.findByText('Review legacy policy',{selector:'h3'});await select('Beta project');await screen.findByText(`Review ${beta.id} policy`,{selector:'h3'});
-  nav('Project Health');await screen.findByText(health(beta.id).methodology);expect(count('/api/project-health/assess','legacy')).toBe(0);
+  nav('Project Health');await screen.findByText(health(beta.id).methodology);expect(count('/api/project-health/assess','legacy')).toBe(1);
   await select('Current project');await screen.findByText(health('legacy').methodology);nav('Documentation Studio');await screen.findByText('Review legacy policy',{selector:'h3'});
   expect(count('/api/documentation/generate','legacy')).toBe(1);expect(count('/api/documentation/generate',beta.id)).toBe(1);
 });

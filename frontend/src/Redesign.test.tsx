@@ -2,6 +2,7 @@ import {act, fireEvent, render, screen, waitFor, within} from '@testing-library/
 import {MemoryRouter} from 'react-router-dom';
 import {afterEach, beforeEach, expect, test, vi} from 'vitest';
 import App from './App';
+import {LegacyScreens} from './legacyScreens.testSupport';
 import {SessionProvider, useSession} from './SessionContext';
 import {api} from './api';
 import type {AgentResult, KnowledgeBase, QueryResult} from './types';
@@ -15,11 +16,11 @@ const passage = {id: 'a:chunk-1', document_id: 'a', filename: 'notes.txt', docum
 const searchResult: QueryResult = {status: 'ok', message: 'Relevant source passages.', query: 'review', results: [passage]};
 const analysis: AgentResult = {agent: 'blockers', status: 'partial', message: 'Missing details remain unknown.', query: 'Review pending decisions', provider: available.provider, generated_at: '2026-09-12T10:00:00Z', findings: [{category: 'action_items', evidence_id: passage.id, quote: passage.text, information_state: 'unclear', owner: null, due_date: null, dates: [], source_status: null, severity: null, confidence: 'explicit_source_statement'}], evidence: [passage], coverage: [{category: 'action_items', state: 'unclear', count: 1}], retrieved_count: 2, evidence_limited: false, warnings: []};
 function deferred<T>() {let resolve!: (value: T) => void; const promise = new Promise<T>(done => {resolve = done;}); return {promise, resolve};}
-function show(path = '/documents') {return render(<MemoryRouter initialEntries={[path]}><App/></MemoryRouter>);}
+function show(path = '/documents') {return render(path==='/retrieval'||path==='/knowledge-base'?<LegacyScreens path={path}/>:<MemoryRouter initialEntries={[path]}><App/></MemoryRouter>);}
 function nav(name: string) {fireEvent.click(within(screen.getByRole('navigation', {name: 'Main navigation'})).getByRole('link', {name}));}
-async function run() {const button = await screen.findByRole('button', {name: /Run analysis/}); await waitFor(() => expect(button).toBeEnabled()); fireEvent.click(button);}
+async function run() {const button = await screen.findByRole('button', {name: /^Refresh$/}); await waitFor(() => expect(button).toBeEnabled()); fireEvent.click(button);}
 function select(input: HTMLElement, files: File[]) {fireEvent.change(input, {target: {files}});}
-beforeEach(() => {vi.resetAllMocks(); vi.mocked(api.summary).mockResolvedValue(kb); vi.mocked(api.agentStatus).mockResolvedValue(available);});
+beforeEach(() => {vi.resetAllMocks();vi.mocked(api.analyze).mockImplementation(async(kind,query)=>({...analysis,agent:kind,query})); vi.mocked(api.summary).mockResolvedValue(kb); vi.mocked(api.agentStatus).mockResolvedValue(available);});
 afterEach(() => {vi.unstubAllGlobals();});
 
 test('queue appends browse and drop selections, removes files, and prevents duplicate entries', async () => {
@@ -93,38 +94,36 @@ test('search requests cannot duplicate during navigation and pending responses r
   await act(async () => pending.resolve(searchResult)); expect(screen.getByText(passage.text)).toBeInTheDocument();
 });
 
-test('each agent retains its own focus and result, without automatically generating dashboard results', async () => {
+test('each agent retains its own focus and result, with automatically generated results cached on the dashboard', async () => {
   vi.mocked(api.analyze).mockResolvedValue(analysis); show('/blockers');
   fireEvent.change(await screen.findByLabelText('Analysis focus'), {target: {value: analysis.query}}); await run();
   await screen.findByText('Analysis complete · partial information');
   expect(screen.getByText(/Generated/).querySelector('time')).toHaveAttribute('datetime', analysis.generated_at);
-  nav('Scope & Deliverables'); expect(screen.queryByText('Analysis complete · partial information')).not.toBeInTheDocument();
+  nav('Scope & Deliverables'); expect(screen.getByLabelText('Analysis focus')).not.toHaveValue(analysis.query);
   nav('Blockers & Actions'); expect(screen.getByLabelText('Analysis focus')).toHaveValue(analysis.query);
   expect(screen.getByText('Analysis complete · partial information')).toBeInTheDocument();
-  nav('Overview'); expect(screen.getByText('1 finding')).toBeInTheDocument(); expect(api.analyze).toHaveBeenCalledTimes(1);
+  nav('Overview'); await waitFor(()=>expect(screen.getAllByText('1 finding')).toHaveLength(3)); expect(api.analyze).toHaveBeenCalledTimes(3);
 });
 
-test('a result finishing after new sources are indexed is marked outdated until an explicit rerun', async () => {
-  const pending = deferred<AgentResult>(); vi.mocked(api.analyze).mockReturnValueOnce(pending.promise).mockResolvedValueOnce(analysis);
-  const addedSource = {...sourceDoc, id: 'added-source', filename: 'source.txt'};
-  vi.mocked(api.upload).mockImplementation(async () => {
-    vi.mocked(api.summary).mockResolvedValue({...kb, document_count: 2, indexed_documents: 2, chunk_count: 4, documents: [sourceDoc, addedSource]});
-    return {documents: [addedSource]};
-  }); show('/blockers'); await run();
-  nav('Documents'); select(await screen.findByLabelText('Choose project documents'), [new File(['source'], 'source.txt')]);
-  fireEvent.click(screen.getByRole('button', {name: /Upload & index/})); await screen.findByText(/1 of 1 documents indexed/);
-  await act(async () => pending.resolve(analysis)); nav('Blockers & Actions');
-  expect(screen.getByText(/These findings may be out of date/)).toBeInTheDocument(); expect(api.analyze).toHaveBeenCalledTimes(1);
-  await run(); await waitFor(() => expect(screen.queryByText(/These findings may be out of date/)).not.toBeInTheDocument());
-  expect(api.analyze).toHaveBeenCalledTimes(2);
+test('a late analysis response is discarded and new sources refresh automatically', async () => {
+  const pending=deferred<AgentResult>(); let blockerCalls=0;
+  vi.mocked(api.analyze).mockImplementation(async(kind,query)=>kind==='blockers'&&blockerCalls++===0?pending.promise:{...analysis,agent:kind,query,message:'Current result'});
+  const addedSource={...sourceDoc,id:'added-source',filename:'source.txt'};
+  vi.mocked(api.upload).mockImplementation(async()=>{vi.mocked(api.summary).mockResolvedValue({...kb,document_count:2,indexed_documents:2,chunk_count:4,documents:[sourceDoc,addedSource]});return{documents:[addedSource]};});
+  show('/blockers');await waitFor(()=>expect(blockerCalls).toBe(1));
+  nav('Documents');select(await screen.findByLabelText('Choose project documents'),[new File(['source'],'source.txt')]);
+  fireEvent.click(screen.getByRole('button',{name:/Upload & index/}));await screen.findByText(/1 of 1 documents indexed/);
+  nav('Blockers & Actions');await screen.findByText('Current result');
+  await act(async()=>pending.resolve({...analysis,message:'Old response'}));
+  expect(screen.queryByText('Old response')).not.toBeInTheDocument();expect(screen.getByText('Current result')).toBeInTheDocument();expect(blockerCalls).toBe(2);
 });
 
 test('provider failure has no contradictory ready state and can be checked again', async () => {
   vi.mocked(api.agentStatus).mockRejectedValueOnce(new Error('Availability unavailable')).mockResolvedValueOnce(available);
   show('/risks'); expect(await screen.findByRole('alert')).toHaveTextContent('Availability unavailable');
-  expect(screen.queryByText('Not analyzed yet')).not.toBeInTheDocument(); expect(screen.getByRole('button', {name: /Run analysis/})).toBeDisabled();
+  expect(screen.queryByText('Not analyzed yet')).not.toBeInTheDocument(); expect(screen.getByRole('button', {name: /^Refresh$/})).toBeDisabled();
   fireEvent.click(screen.getByRole('button', {name: 'Check availability again'}));
-  await waitFor(() => expect(screen.getByRole('button', {name: /Run analysis/})).toBeEnabled()); expect(api.analyze).not.toHaveBeenCalled();
+  await waitFor(() => expect(screen.getByRole('button', {name: /^Refresh$/})).toBeEnabled()); expect(api.analyze).not.toHaveBeenCalled();
 });
 
 test('document filters and sorting use loaded data and survive navigation', async () => {
@@ -142,7 +141,7 @@ function mobileMedia(matches: boolean) {
 }
 
 test('mobile navigation traps focus, closes with Escape or backdrop, and restores focus', async () => {
-  mobileMedia(true); show('/retrieval'); await screen.findByLabelText('What would you like to find?');
+  mobileMedia(true); show('/documents'); await screen.findByLabelText('Choose project documents');
   const open = screen.getByRole('button', {name: 'Open navigation'});
   expect(screen.queryByRole('navigation', {name: 'Main navigation'})).not.toBeInTheDocument();
   fireEvent.click(open); const dialog = screen.getByRole('dialog', {name: 'Workspace navigation'});
@@ -157,7 +156,7 @@ test('mobile navigation traps focus, closes with Escape or backdrop, and restore
 });
 
 test('following a mobile navigation link dismisses the dialog and restores focus', async () => {
-  mobileMedia(true); show('/retrieval'); await screen.findByLabelText('What would you like to find?');
+  mobileMedia(true); show('/documents'); await screen.findByLabelText('Choose project documents');
   const open = screen.getByRole('button', {name: 'Open navigation'}); fireEvent.click(open); nav('Documents');
   expect(await screen.findByRole('heading', {name: 'Documents'})).toBeInTheDocument(); expect(screen.queryByRole('dialog')).not.toBeInTheDocument(); expect(open).toHaveFocus();
 });
@@ -210,5 +209,5 @@ test('refreshing after an interrupted upload marks results outdated when new ind
   await screen.findByText('new.txt', {selector: '.filename strong'});
   nav('Blockers & Actions');
   expect(screen.getByText(/These findings may be out of date/)).toBeInTheDocument();
-  expect(api.analyze).toHaveBeenCalledTimes(1);
+  await waitFor(()=>expect(vi.mocked(api.analyze).mock.calls.filter(call=>call[0]==='blockers')).toHaveLength(2));
 });

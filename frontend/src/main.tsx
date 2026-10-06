@@ -10,3 +10,5 @@ import './presentation/presentation.css';
 import './presentation/theme.css';
 import './workspaces/workspaces.css';
 ReactDOM.createRoot(document.getElementById('root')!).render(<React.StrictMode><BrowserRouter><WorkspaceManagerProvider><App/></WorkspaceManagerProvider></BrowserRouter></React.StrictMode>);
+
+import './experience/experience.css';

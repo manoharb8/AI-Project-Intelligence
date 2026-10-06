@@ -1,3 +1,5 @@
+> **Current final UI source:** See [current file inventory and changes](docs/final-ui-changes.md), [workflow/upgrade instructions](docs/final-ui-workflow.md) and [verification](docs/final-ui-verification.md). The original milestone inventory below is retained as history.
+
 # AI Project Intelligence — complete unified source
 
 146 individual source, test, sample and documentation files. This is the M1 + M2 + M3 application, with no dependency folders or runtime databases.

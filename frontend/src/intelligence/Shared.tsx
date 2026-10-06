@@ -9,9 +9,9 @@ import {Busy, Empty, ErrorNotice, EvidenceReference, Notice, Timestamp} from '..
 export function UnknownValue({value}: {value: string | null}) {return <span className={value === null ? 'unknown-value' : undefined}>{value ?? 'Not stated'}</span>;}
 
 export function useAvailability(busy = false) {
-  const {kb, provider, providerError, checkingProvider, uploading, refreshing, connectionError} = useSession();
+  const {analysisReady, agents, kb, provider, providerError, checkingProvider, uploading, refreshing, connectionError} = useSession();
   const indexing = uploading || kb?.documents.some(document => document.status === 'processing');
-  return busy ? 'A request is running. Please wait.' : indexing ? 'Documents are uploading or indexing. Intelligence will prepare when they finish.' : connectionError ? 'Reconnect to the knowledge base before preparing current intelligence.' : refreshing ? 'Checking current indexed sources…' : !kb?.retrieval_ready ? 'Upload and index project documents first.' : checkingProvider ? 'Checking analysis availability…' : providerError ? 'Availability could not be checked. Try again below.' : !provider?.ready ? 'Analysis is unavailable. Check the provider status below.' : '';
+  return busy ? 'A request is running. Please wait.' : indexing ? 'Documents are uploading or indexing. Intelligence will prepare when they finish.' : connectionError ? 'Reconnect to the knowledge base before preparing current intelligence.' : refreshing ? 'Checking current indexed sources…' : !kb?.retrieval_ready ? 'Upload and index project documents first.' : checkingProvider ? 'Checking analysis availability…' : providerError ? 'Availability could not be checked. Try again below.' : !provider?.ready ? 'Analysis is unavailable. Check the provider status below.' : !analysisReady ? Object.values(agents).some(w=>w.error) ? 'Retry the failed project analysis before preparing intelligence.' : 'Project analysis is preparing. Intelligence follows automatically.' : '';
 }
 
 export function AvailabilityNotice() {
@@ -68,5 +68,5 @@ export function WorkspaceTabs<T extends string>({tabs, value, onChange, label}: 
 
 export function AutomaticControls({busy, waiting, onRefresh, children}: {busy: boolean; waiting: boolean; onRefresh: () => void; children: ReactNode}) {
   const unavailable = useAvailability(busy);
-  return <div className="automatic-controls"><div className="automatic-status"><span><ShieldCheck size={16}/>Automatic intelligence</span><p>{unavailable || (waiting ? 'Preparing current evidence shortly…' : 'Prepared on opening. Cached for this source version in your session.')}</p><button className="button secondary" disabled={Boolean(unavailable) || waiting} onClick={onRefresh}><RefreshCw size={15}/>Refresh</button></div><details className="optional-focus"><summary>Customize review focus & regenerate</summary>{children}</details></div>;
+  return <div className="automatic-controls"><div className="automatic-status"><span><ShieldCheck size={16}/>Automatic intelligence</span><p>{unavailable || (waiting ? 'Preparing current evidence shortly…' : 'Prepared after project analysis. Cached for this source version in your workspace.')}</p><button className="button secondary" disabled={Boolean(unavailable) || waiting} onClick={onRefresh}><RefreshCw size={15}/>Refresh</button></div><details className="optional-focus"><summary>Customize review focus & regenerate</summary>{children}</details></div>;
 }
