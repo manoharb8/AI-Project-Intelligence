@@ -1,0 +1,22 @@
+/* Point interaction only: compact perimeter hints and existing record-rail details. */
+.rpm-point-hint {position:fixed;z-index:34;width:220px;max-width:calc(100vw - 16px);box-sizing:border-box;padding:10px 12px;border:1px solid var(--line);border-radius:9px;background:var(--surface);color:var(--ink);box-shadow:0 6px 20px #08152922;pointer-events:none;--rpm-critical:#b43e4d;--rpm-high:#a65a1c;--rpm-moderate:#7c631b;--rpm-low:#2866a5;--rpm-other:#65748a;}
+.rpm-point-hint>div {display:flex;justify-content:space-between;align-items:center;gap:8px;}
+.rpm-point-hint code {font-size:11px;white-space:nowrap;}
+.rpm-point-hint>strong {display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:12px;line-height:1.4;margin-top:5px;font-weight:600;overflow-wrap:anywhere;}
+:root[data-theme=dark] .rpm-point-hint {--rpm-critical:#ff7e96;--rpm-high:#ffb767;--rpm-moderate:#f1d36f;--rpm-low:#75bbff;--rpm-other:#acbdd3;}
+.rpm-inline-details {border:1px solid var(--health-blue);border-radius:9px;background:var(--surface);margin:0 0 10px;min-width:0;overflow-wrap:anywhere;}
+.rpm-inline-details .risk-detail-content {padding:12px;}
+.rpm-inline-details h2 {font-size:14px;}.rpm-inline-details .section-overline {font-size:9px;}
+.rpm-inline-details .risk-detail-content h3 {font-size:13px;line-height:1.5;margin:10px 0;}
+.rpm-inline-details p,.rpm-inline-details .register-facts,.rpm-inline-details .source-quote-body {font-size:11px;line-height:1.6;}
+.rpm-inline-details .register-facts {display:grid;grid-template-columns:1fr;gap:8px;padding:10px;margin-top:10px;}
+.rpm-inline-details .register-facts dt {font-size:10px;}
+.rpm-inline-details .risk-detail-content .rpm-caution {margin:10px 0;}
+.rpm-inline-details .source-quote,.rpm-inline-details details {min-width:0;}
+.rpm-inline-details .rpm-record-id {font-size:11px;}
+.risk-priority-matrix .rpm-record[aria-expanded=true] {border-color:var(--health-blue);box-shadow:inset 3px 0 var(--health-blue);}
+.risk-priority-matrix .rpm-point[aria-pressed=true] .rpm-point-symbol {box-shadow:0 0 0 5px color-mix(in srgb,var(--rpm-colour) 22%,transparent)!important;}
+@media(hover:none),(pointer:coarse) {.rpm-point-hint {display:none;}}
+@media(prefers-reduced-motion:no-preference) {.rpm-point-hint {animation:rpm-panel-in 120ms ease-out;}.rpm-inline-details {animation:rpm-panel-in 150ms ease-out;}}
+@media(prefers-reduced-motion:reduce) {.rpm-point-hint,.rpm-inline-details {animation:none!important;transition:none!important;}}
+.rpm-record-scroll>.rpm-inline-details {grid-column:1/-1;}

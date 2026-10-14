@@ -1,0 +1,234 @@
+{
+  "routes": {
+    "/dashboard": 200,
+    "/documents": 200,
+    "/knowledge-base": 200,
+    "/retrieval": 200,
+    "/api/health": 200
+  },
+  "queries": [
+    {
+      "status": "ok",
+      "message": "Relevant source passages. Similarity measures relatedness, not factual confidence; review the evidence for your question.",
+      "query": "Who is responsible for the API work?",
+      "results": [
+        {
+          "id": "64a0aa8f7ea4494e927a19d05bddbd3b:chunk-1",
+          "document_id": "64a0aa8f7ea4494e927a19d05bddbd3b",
+          "filename": "project_proposal.pdf",
+          "document_type": "pdf",
+          "chunk_number": 1,
+          "location": "Page 1",
+          "text": "Atlas Portal - Project Proposal (controlled demo) The project goal is to build a web portal for customer support tickets. The portal will let customers submit tickets and track support responses. Milestones: requirements sign-off on 12 September 2026; API prototype on 20 September 2026; integration testing on 27 September 2026; pilot delivery on 30 September 2026. Deliverables: a React frontend, a ticket API, a database schema, and a testing report. Priya owns backend API development. Arjun owns the frontend. Meera owns testing.",
+          "similarity": 0.4429
+        },
+        {
+          "id": "788384375a9540359074a46c600d5a91:chunk-2",
+          "document_id": "788384375a9540359074a46c600d5a91",
+          "filename": "sprint_update.txt",
+          "document_type": "txt",
+          "chunk_number": 2,
+          "location": "Text section 2",
+          "text": "Schedule risks: API development is three days behind plan because the database schema has not been approved. This delay threatens the integration testing milestone on 27 September 2026. No revised delivery date is confirmed.",
+          "similarity": 0.324
+        },
+        {
+          "id": "d6174e5e3c6b4571bcdd43711497a432:chunk-1",
+          "document_id": "d6174e5e3c6b4571bcdd43711497a432",
+          "filename": "task_list.csv",
+          "document_type": "csv",
+          "chunk_number": 1,
+          "location": "CSV line 2",
+          "text": "Task: Build the ticket API; Owner: Priya; Status: In progress; Due date: 2026-09-20; Dependency: Approved database schema",
+          "similarity": 0.288
+        },
+        {
+          "id": "788384375a9540359074a46c600d5a91:chunk-3",
+          "document_id": "788384375a9540359074a46c600d5a91",
+          "filename": "sprint_update.txt",
+          "document_type": "txt",
+          "chunk_number": 3,
+          "location": "Text section 3",
+          "text": "Dependency gap: frontend integration depends on the ticket API contract. The contract is still pending review by Priya. The missing contract creates a delivery challenge for Arjun.",
+          "similarity": 0.2561
+        },
+        {
+          "id": "d6174e5e3c6b4571bcdd43711497a432:chunk-2",
+          "document_id": "d6174e5e3c6b4571bcdd43711497a432",
+          "filename": "task_list.csv",
+          "document_type": "csv",
+          "chunk_number": 2,
+          "location": "CSV line 3",
+          "text": "Task: Implement ticket form; Owner: Arjun; Status: Incomplete; Due date: 2026-09-22; Dependency: Ticket API contract",
+          "similarity": 0.2094
+        }
+      ]
+    },
+    {
+      "status": "ok",
+      "message": "Relevant source passages. Similarity measures relatedness, not factual confidence; review the evidence for your question.",
+      "query": "What milestones are defined?",
+      "results": [
+        {
+          "id": "64a0aa8f7ea4494e927a19d05bddbd3b:chunk-1",
+          "document_id": "64a0aa8f7ea4494e927a19d05bddbd3b",
+          "filename": "project_proposal.pdf",
+          "document_type": "pdf",
+          "chunk_number": 1,
+          "location": "Page 1",
+          "text": "Atlas Portal - Project Proposal (controlled demo) The project goal is to build a web portal for customer support tickets. The portal will let customers submit tickets and track support responses. Milestones: requirements sign-off on 12 September 2026; API prototype on 20 September 2026; integration testing on 27 September 2026; pilot delivery on 30 September 2026. Deliverables: a React frontend, a ticket API, a database schema, and a testing report. Priya owns backend API development. Arjun owns the frontend. Meera owns testing.",
+          "similarity": 0.175
+        }
+      ]
+    },
+    {
+      "status": "ok",
+      "message": "Relevant source passages. Similarity measures relatedness, not factual confidence; review the evidence for your question.",
+      "query": "What are the current project risks?",
+      "results": [
+        {
+          "id": "50cb3c86abf24718bd57fdf7809da7b8:chunk-3",
+          "document_id": "50cb3c86abf24718bd57fdf7809da7b8",
+          "filename": "meeting_notes.docx",
+          "document_type": "docx",
+          "chunk_number": 3,
+          "location": "Paragraph/block 3",
+          "text": "Current project blockers: the staging server is unavailable. Integration testing cannot start until access is restored.",
+          "similarity": 0.2421
+        },
+        {
+          "id": "64a0aa8f7ea4494e927a19d05bddbd3b:chunk-1",
+          "document_id": "64a0aa8f7ea4494e927a19d05bddbd3b",
+          "filename": "project_proposal.pdf",
+          "document_type": "pdf",
+          "chunk_number": 1,
+          "location": "Page 1",
+          "text": "Atlas Portal - Project Proposal (controlled demo) The project goal is to build a web portal for customer support tickets. The portal will let customers submit tickets and track support responses. Milestones: requirements sign-off on 12 September 2026; API prototype on 20 September 2026; integration testing on 27 September 2026; pilot delivery on 30 September 2026. Deliverables: a React frontend, a ticket API, a database schema, and a testing report. Priya owns backend API development. Arjun owns the frontend. Meera owns testing.",
+          "similarity": 0.207
+        },
+        {
+          "id": "788384375a9540359074a46c600d5a91:chunk-2",
+          "document_id": "788384375a9540359074a46c600d5a91",
+          "filename": "sprint_update.txt",
+          "document_type": "txt",
+          "chunk_number": 2,
+          "location": "Text section 2",
+          "text": "Schedule risks: API development is three days behind plan because the database schema has not been approved. This delay threatens the integration testing milestone on 27 September 2026. No revised delivery date is confirmed.",
+          "similarity": 0.1731
+        }
+      ]
+    },
+    {
+      "status": "insufficient_information",
+      "message": "Insufficient information: no relevant evidence was found in the indexed documents.",
+      "query": "How do I bake a chocolate cake?",
+      "results": []
+    }
+  ],
+  "upload": {
+    "documents": [
+      {
+        "id": "50cb3c86abf24718bd57fdf7809da7b8",
+        "filename": "meeting_notes.docx",
+        "document_type": "docx",
+        "size_bytes": 37052,
+        "uploaded_at": "2026-09-10T13:12:50.019179+00:00",
+        "status": "indexed",
+        "chunk_count": 8,
+        "indexed": true,
+        "error": null
+      },
+      {
+        "id": "64a0aa8f7ea4494e927a19d05bddbd3b",
+        "filename": "project_proposal.pdf",
+        "document_type": "pdf",
+        "size_bytes": 1951,
+        "uploaded_at": "2026-09-10T13:12:50.079669+00:00",
+        "status": "indexed",
+        "chunk_count": 1,
+        "indexed": true,
+        "error": null
+      },
+      {
+        "id": "788384375a9540359074a46c600d5a91",
+        "filename": "sprint_update.txt",
+        "document_type": "txt",
+        "size_bytes": 632,
+        "uploaded_at": "2026-09-10T13:12:50.099948+00:00",
+        "status": "indexed",
+        "chunk_count": 4,
+        "indexed": true,
+        "error": null
+      },
+      {
+        "id": "d6174e5e3c6b4571bcdd43711497a432",
+        "filename": "task_list.csv",
+        "document_type": "csv",
+        "size_bytes": 323,
+        "uploaded_at": "2026-09-10T13:12:50.123762+00:00",
+        "status": "indexed",
+        "chunk_count": 4,
+        "indexed": true,
+        "error": null
+      }
+    ]
+  },
+  "summary": {
+    "document_count": 4,
+    "indexed_documents": 4,
+    "chunk_count": 17,
+    "supported_formats": [
+      "pdf",
+      "docx",
+      "csv",
+      "txt"
+    ],
+    "retrieval_ready": true,
+    "documents": [
+      {
+        "id": "50cb3c86abf24718bd57fdf7809da7b8",
+        "filename": "meeting_notes.docx",
+        "document_type": "docx",
+        "size_bytes": 37052,
+        "uploaded_at": "2026-09-10T13:12:50.019179+00:00",
+        "status": "indexed",
+        "chunk_count": 8,
+        "indexed": true,
+        "error": null
+      },
+      {
+        "id": "64a0aa8f7ea4494e927a19d05bddbd3b",
+        "filename": "project_proposal.pdf",
+        "document_type": "pdf",
+        "size_bytes": 1951,
+        "uploaded_at": "2026-09-10T13:12:50.079669+00:00",
+        "status": "indexed",
+        "chunk_count": 1,
+        "indexed": true,
+        "error": null
+      },
+      {
+        "id": "788384375a9540359074a46c600d5a91",
+        "filename": "sprint_update.txt",
+        "document_type": "txt",
+        "size_bytes": 632,
+        "uploaded_at": "2026-09-10T13:12:50.099948+00:00",
+        "status": "indexed",
+        "chunk_count": 4,
+        "indexed": true,
+        "error": null
+      },
+      {
+        "id": "d6174e5e3c6b4571bcdd43711497a432",
+        "filename": "task_list.csv",
+        "document_type": "csv",
+        "size_bytes": 323,
+        "uploaded_at": "2026-09-10T13:12:50.123762+00:00",
+        "status": "indexed",
+        "chunk_count": 4,
+        "indexed": true,
+        "error": null
+      }
+    ]
+  }
+}
