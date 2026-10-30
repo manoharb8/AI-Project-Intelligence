@@ -1,0 +1,536 @@
+{
+  "status": "partial",
+  "query": "Review the uploaded project documents.",
+  "generated_at": "2026-10-13T12:49:26.245650+00:00",
+  "provider": "Local extractive analysis",
+  "evidence": [
+    {
+      "id": "bd6f75db4b4641c98aa24a399b85e0ae:chunk-30",
+      "document_id": "bd6f75db4b4641c98aa24a399b85e0ae",
+      "filename": "AI_Project_Meeting_Notes_03_Export_Readiness_Update_Corrected.docx",
+      "document_type": "docx",
+      "chunk_number": 30,
+      "location": "Paragraph/block 32",
+      "text": "Risk ID: R-05; Risk Title: Risk rating extraction; Risk Description: Delivery challenge involving risk rating extraction; Probability: 3/5 \u2014 Moderate; Impact: 3/5 \u2014 Moderate; Severity: Moderate; Status: Open; Owner: Neha Rao; Target Date: 2026-10-13; Due date: 2026-10-13; Mitigation: Run T-11 labelled and natural-language rating checks; Supporting Evidence: The matrix depends on retaining explicitly documented probability and impact fields; As of: 2026-10-08.",
+      "similarity": 0.542
+    },
+    {
+      "id": "c1da078abe0c43709ddb4e62605a3701:chunk-32",
+      "document_id": "c1da078abe0c43709ddb4e62605a3701",
+      "filename": "AI_Project_Meeting_Notes_02_Progress_and_Blockers_Corrected.docx",
+      "document_type": "docx",
+      "chunk_number": 32,
+      "location": "Paragraph/block 34",
+      "text": "Risk ID: R-05; Risk Title: Risk rating extraction; Risk Description: Delivery challenge involving risk rating extraction; Probability: 3/5 \u2014 Moderate; Impact: 3/5 \u2014 Moderate; Severity: Moderate; Status: Open; Owner: Neha Rao; Target Date: 2026-10-13; Due date: 2026-10-13; Mitigation: Run T-11 labelled and natural-language rating checks; Supporting Evidence: The matrix depends on retaining explicitly documented probability and impact fields; As of: 2026-10-07.",
+      "similarity": 0.5394
+    },
+    {
+      "id": "3a1d5ad3935541fab6347a797457c915:chunk-33",
+      "document_id": "3a1d5ad3935541fab6347a797457c915",
+      "filename": "AI_Project_Meeting_Notes_01_Initial_Project_Review_Corrected.docx",
+      "document_type": "docx",
+      "chunk_number": 33,
+      "location": "Paragraph/block 35",
+      "text": "Risk ID: R-05; Risk Title: Risk rating extraction; Risk Description: Delivery challenge involving risk rating extraction; Probability: 3/5 \u2014 Moderate; Impact: 3/5 \u2014 Moderate; Severity: Moderate; Status: Open; Owner: Neha Rao; Target Date: 2026-10-13; Due date: 2026-10-13; Mitigation: Run T-11 labelled and natural-language rating checks; Supporting Evidence: The matrix depends on retaining explicitly documented probability and impact fields; As of: 2026-10-05.",
+      "similarity": 0.5354
+    },
+    {
+      "id": "bd6f75db4b4641c98aa24a399b85e0ae:chunk-26",
+      "document_id": "bd6f75db4b4641c98aa24a399b85e0ae",
+      "filename": "AI_Project_Meeting_Notes_03_Export_Readiness_Update_Corrected.docx",
+      "document_type": "docx",
+      "chunk_number": 26,
+      "location": "Paragraph/block 28",
+      "text": "Risk ID: R-03; Risk Title: Document format coverage; Risk Description: Delivery challenge involving document format coverage; Probability: 3/5 \u2014 Moderate; Impact: 4/5 \u2014 High; Severity: High; Status: Open; Owner: Meera Shah; Target Date: 2026-10-10; Due date: 2026-10-10; Mitigation: Complete T-09 cross-format checks after T-17 provides approved fixtures; Supporting Evidence: Approved PDF and DOCX fixtures are required for cross-format verification; As of: 2026-10-08.",
+      "similarity": 0.5216
+    },
+    {
+      "id": "c1da078abe0c43709ddb4e62605a3701:chunk-28",
+      "document_id": "c1da078abe0c43709ddb4e62605a3701",
+      "filename": "AI_Project_Meeting_Notes_02_Progress_and_Blockers_Corrected.docx",
+      "document_type": "docx",
+      "chunk_number": 28,
+      "location": "Paragraph/block 30",
+      "text": "Risk ID: R-03; Risk Title: Document format coverage; Risk Description: Delivery challenge involving document format coverage; Probability: 3/5 \u2014 Moderate; Impact: 4/5 \u2014 High; Severity: High; Status: Open; Owner: Meera Shah; Target Date: 2026-10-10; Due date: 2026-10-10; Mitigation: Complete T-09 cross-format checks after T-17 provides approved fixtures; Supporting Evidence: Approved PDF and DOCX fixtures are required for cross-format verification; As of: 2026-10-07.",
+      "similarity": 0.5192
+    },
+    {
+      "id": "3a1d5ad3935541fab6347a797457c915:chunk-29",
+      "document_id": "3a1d5ad3935541fab6347a797457c915",
+      "filename": "AI_Project_Meeting_Notes_01_Initial_Project_Review_Corrected.docx",
+      "document_type": "docx",
+      "chunk_number": 29,
+      "location": "Paragraph/block 31",
+      "text": "Risk ID: R-03; Risk Title: Document format coverage; Risk Description: Delivery challenge involving document format coverage; Probability: 3/5 \u2014 Moderate; Impact: 4/5 \u2014 High; Severity: High; Status: Open; Owner: Meera Shah; Target Date: 2026-10-10; Due date: 2026-10-10; Mitigation: Complete T-09 cross-format checks after T-17 provides approved fixtures; Supporting Evidence: Approved PDF and DOCX fixtures are required for cross-format verification; As of: 2026-10-05.",
+      "similarity": 0.5162
+    },
+    {
+      "id": "bd6f75db4b4641c98aa24a399b85e0ae:chunk-21",
+      "document_id": "bd6f75db4b4641c98aa24a399b85e0ae",
+      "filename": "AI_Project_Meeting_Notes_03_Export_Readiness_Update_Corrected.docx",
+      "document_type": "docx",
+      "chunk_number": 21,
+      "location": "Paragraph/block 22",
+      "text": "Risk ID: R-01; Risk Title: RAG retrieval regression; Risk Description: Delivery challenge involving rag retrieval regression; Probability: 3/5 \u2014 Moderate; Impact: 4/5 \u2014 High; Severity: High; Status: In Progress; Owner: Neha Rao; Target Date: 2026-10-10; Due date: 2026-10-10; Mitigation: Run T-07 golden-source retrieval checks; Supporting Evidence: Retrieval checks are needed to establish whether source passages support the answers; As of: 2026-10-08.",
+      "similarity": 0.4727
+    },
+    {
+      "id": "3a1d5ad3935541fab6347a797457c915:chunk-24",
+      "document_id": "3a1d5ad3935541fab6347a797457c915",
+      "filename": "AI_Project_Meeting_Notes_01_Initial_Project_Review_Corrected.docx",
+      "document_type": "docx",
+      "chunk_number": 24,
+      "location": "Paragraph/block 25",
+      "text": "Risk ID: R-01; Risk Title: RAG retrieval regression; Risk Description: Delivery challenge involving rag retrieval regression; Probability: 3/5 \u2014 Moderate; Impact: 4/5 \u2014 High; Severity: High; Status: Open; Owner: Neha Rao; Target Date: 2026-10-10; Due date: 2026-10-10; Mitigation: Run T-07 golden-source retrieval checks; Supporting Evidence: Retrieval checks are needed to establish whether source passages support the answers; As of: 2026-10-05.",
+      "similarity": 0.4713
+    },
+    {
+      "id": "c1da078abe0c43709ddb4e62605a3701:chunk-23",
+      "document_id": "c1da078abe0c43709ddb4e62605a3701",
+      "filename": "AI_Project_Meeting_Notes_02_Progress_and_Blockers_Corrected.docx",
+      "document_type": "docx",
+      "chunk_number": 23,
+      "location": "Paragraph/block 24",
+      "text": "Risk ID: R-01; Risk Title: RAG retrieval regression; Risk Description: Delivery challenge involving rag retrieval regression; Probability: 3/5 \u2014 Moderate; Impact: 4/5 \u2014 High; Severity: High; Status: In Progress; Owner: Neha Rao; Target Date: 2026-10-10; Due date: 2026-10-10; Mitigation: Run T-07 golden-source retrieval checks; Supporting Evidence: Retrieval checks are needed to establish whether source passages support the answers; As of: 2026-10-07.",
+      "similarity": 0.469
+    },
+    {
+      "id": "bd6f75db4b4641c98aa24a399b85e0ae:chunk-23",
+      "document_id": "bd6f75db4b4641c98aa24a399b85e0ae",
+      "filename": "AI_Project_Meeting_Notes_03_Export_Readiness_Update_Corrected.docx",
+      "document_type": "docx",
+      "chunk_number": 23,
+      "location": "Paragraph/block 24",
+      "text": "Risk ID: R-02; Risk Title: Workspace data mixing; Risk Description: Delivery challenge involving workspace data mixing; Probability: 4/5 \u2014 High; Impact: 5/5 \u2014 Very High; Severity: Critical; Status: Open; Owner: Ravi Kumar; Target Date: 2026-10-09; Due date: 2026-10-09; Mitigation: Complete T-08 isolation checks after T-16 provides isolated QA access; Supporting Evidence: Isolated QA access is required before workspace isolation can be verified; As of: 2026-10-08.",
+      "similarity": 0.4538
+    },
+    {
+      "id": "c1da078abe0c43709ddb4e62605a3701:chunk-25",
+      "document_id": "c1da078abe0c43709ddb4e62605a3701",
+      "filename": "AI_Project_Meeting_Notes_02_Progress_and_Blockers_Corrected.docx",
+      "document_type": "docx",
+      "chunk_number": 25,
+      "location": "Paragraph/block 26",
+      "text": "Risk ID: R-02; Risk Title: Workspace data mixing; Risk Description: Delivery challenge involving workspace data mixing; Probability: 4/5 \u2014 High; Impact: 5/5 \u2014 Very High; Severity: Critical; Status: Open; Owner: Ravi Kumar; Target Date: 2026-10-09; Due date: 2026-10-09; Mitigation: Complete T-08 isolation checks after T-16 provides isolated QA access; Supporting Evidence: Isolated QA access is required before workspace isolation can be verified; As of: 2026-10-07.",
+      "similarity": 0.4534
+    },
+    {
+      "id": "3a1d5ad3935541fab6347a797457c915:chunk-26",
+      "document_id": "3a1d5ad3935541fab6347a797457c915",
+      "filename": "AI_Project_Meeting_Notes_01_Initial_Project_Review_Corrected.docx",
+      "document_type": "docx",
+      "chunk_number": 26,
+      "location": "Paragraph/block 27",
+      "text": "Risk ID: R-02; Risk Title: Workspace data mixing; Risk Description: Delivery challenge involving workspace data mixing; Probability: 4/5 \u2014 High; Impact: 5/5 \u2014 Very High; Severity: Critical; Status: Open; Owner: Ravi Kumar; Target Date: 2026-10-09; Due date: 2026-10-09; Mitigation: Complete T-08 isolation checks after T-16 provides isolated QA access; Supporting Evidence: Isolated QA access is required before workspace isolation can be verified; As of: 2026-10-05.",
+      "similarity": 0.4487
+    },
+    {
+      "id": "3a1d5ad3935541fab6347a797457c915:chunk-31",
+      "document_id": "3a1d5ad3935541fab6347a797457c915",
+      "filename": "AI_Project_Meeting_Notes_01_Initial_Project_Review_Corrected.docx",
+      "document_type": "docx",
+      "chunk_number": 31,
+      "location": "Paragraph/block 33",
+      "text": "Risk ID: R-04; Risk Title: Stale incremental insights; Risk Description: Delivery challenge involving stale incremental insights; Probability: 4/5 \u2014 High; Impact: 3/5 \u2014 Moderate; Severity: High; Status: Open; Owner: Arjun Das; Target Date: 2026-10-12; Due date: 2026-10-12; Mitigation: Run T-10 incremental-upload race checks; Supporting Evidence: Incremental-upload checks must establish that refreshed results use the current source version; As of: 2026-10-05.",
+      "similarity": 0.4261
+    },
+    {
+      "id": "bd6f75db4b4641c98aa24a399b85e0ae:chunk-28",
+      "document_id": "bd6f75db4b4641c98aa24a399b85e0ae",
+      "filename": "AI_Project_Meeting_Notes_03_Export_Readiness_Update_Corrected.docx",
+      "document_type": "docx",
+      "chunk_number": 28,
+      "location": "Paragraph/block 30",
+      "text": "Risk ID: R-04; Risk Title: Stale incremental insights; Risk Description: Delivery challenge involving stale incremental insights; Probability: 4/5 \u2014 High; Impact: 3/5 \u2014 Moderate; Severity: High; Status: In Progress; Owner: Arjun Das; Target Date: 2026-10-12; Due date: 2026-10-12; Mitigation: Run T-10 incremental-upload race checks; Supporting Evidence: Incremental-upload checks must establish that refreshed results use the current source version; As of: 2026-10-08.",
+      "similarity": 0.4255
+    },
+    {
+      "id": "c1da078abe0c43709ddb4e62605a3701:chunk-30",
+      "document_id": "c1da078abe0c43709ddb4e62605a3701",
+      "filename": "AI_Project_Meeting_Notes_02_Progress_and_Blockers_Corrected.docx",
+      "document_type": "docx",
+      "chunk_number": 30,
+      "location": "Paragraph/block 32",
+      "text": "Risk ID: R-04; Risk Title: Stale incremental insights; Risk Description: Delivery challenge involving stale incremental insights; Probability: 4/5 \u2014 High; Impact: 3/5 \u2014 Moderate; Severity: High; Status: In Progress; Owner: Arjun Das; Target Date: 2026-10-12; Due date: 2026-10-12; Mitigation: Run T-10 incremental-upload race checks; Supporting Evidence: Incremental-upload checks must establish that refreshed results use the current source version; As of: 2026-10-07.",
+      "similarity": 0.4228
+    },
+    {
+      "id": "3a1d5ad3935541fab6347a797457c915:chunk-9",
+      "document_id": "3a1d5ad3935541fab6347a797457c915",
+      "filename": "AI_Project_Meeting_Notes_01_Initial_Project_Review_Corrected.docx",
+      "document_type": "docx",
+      "chunk_number": 9,
+      "location": "Paragraph/block 9",
+      "text": "Goal: help project reviewers turn uploaded documents into evidence-grounded scope, risk, delivery, blocker and action insights.",
+      "similarity": 0.5278
+    },
+    {
+      "id": "c1da078abe0c43709ddb4e62605a3701:chunk-17",
+      "document_id": "c1da078abe0c43709ddb4e62605a3701",
+      "filename": "AI_Project_Meeting_Notes_02_Progress_and_Blockers_Corrected.docx",
+      "document_type": "docx",
+      "chunk_number": 17,
+      "location": "Paragraph/block 17",
+      "text": "Delivery forecast: the mentor demonstration target remains 2026-10-19; no revised delivery date is confirmed.",
+      "similarity": 0.4238
+    },
+    {
+      "id": "bd6f75db4b4641c98aa24a399b85e0ae:chunk-9",
+      "document_id": "bd6f75db4b4641c98aa24a399b85e0ae",
+      "filename": "AI_Project_Meeting_Notes_03_Export_Readiness_Update_Corrected.docx",
+      "document_type": "docx",
+      "chunk_number": 9,
+      "location": "Paragraph/block 9",
+      "text": "Blocker B-03: export font verification is blocked because the approved font checklist is unavailable; Action item: T-19 obtain the approved font checklist; Owner: Arjun Das; Due date: 2026-10-09; Status: Open; Linked risk: R-07; Recorded on: 2026-10-08.",
+      "similarity": 0.2166
+    },
+    {
+      "id": "3a1d5ad3935541fab6347a797457c915:chunk-16",
+      "document_id": "3a1d5ad3935541fab6347a797457c915",
+      "filename": "AI_Project_Meeting_Notes_01_Initial_Project_Review_Corrected.docx",
+      "document_type": "docx",
+      "chunk_number": 16,
+      "location": "Paragraph/block 16",
+      "text": "Action item: T-10 incremental upload race checks; Owner: Arjun Das; Due date: 2026-10-12.",
+      "similarity": 0.4226
+    }
+  ],
+  "retrieved_count": 31,
+  "evidence_limited": true,
+  "warnings": [
+    "Assessment covers bounded retrieved evidence, not an exhaustive audit of every document or real-world project status.",
+    "Unknown fields are null in the API and shown as Not stated. No acceptance criteria, mitigation, or commitments are inferred.",
+    "User stories are structured drafts of explicit requirements, not newly invented requirements. Review partial stories before adoption.",
+    "Local mode uses conservative English extraction rules and may miss indirect wording.",
+    "The retrieval budget was reached. Use a narrower focus to review further evidence."
+  ],
+  "user_stories": [
+    {
+      "id": "story-57a7ac62a6e8",
+      "title": "help project reviewers turn uploaded documents into evidence-grounded scope, risk, delivery, blocker and action insights",
+      "references": [
+        {
+          "evidence_id": "3a1d5ad3935541fab6347a797457c915:chunk-9",
+          "quote": "Goal: help project reviewers turn uploaded documents into evidence-grounded scope, risk, delivery, blocker and action insights."
+        }
+      ],
+      "role": null,
+      "need": "help project reviewers turn uploaded documents into evidence-grounded scope, risk, delivery, blocker and action insights",
+      "benefit": null,
+      "acceptance_criteria": [],
+      "information_state": "partial"
+    }
+  ],
+  "risks": [
+    {
+      "id": "risk-c7df776711b4",
+      "title": "Delivery forecast: the mentor demonstration target remains 2026-10-19; no revised delivery date is confirmed.",
+      "references": [
+        {
+          "evidence_id": "c1da078abe0c43709ddb4e62605a3701:chunk-17",
+          "quote": "Delivery forecast: the mentor demonstration target remains 2026-10-19; no revised delivery date is confirmed."
+        }
+      ],
+      "description": "Delivery forecast: the mentor demonstration target remains 2026-10-19; no revised delivery date is confirmed.",
+      "categories": [
+        "delivery_forecast"
+      ],
+      "impact": null,
+      "likelihood": null,
+      "status": null,
+      "mitigation": null,
+      "severity": null
+    },
+    {
+      "id": "risk-63e56b71ee4c",
+      "title": "Blocker B-03: export font verification is blocked because the approved font checklist is unavailable; Action item: T-19 obtain the approved font checklist; Owner: Arjun Das; Due date: 2026-10-09; Status: Open; Linked risk: R-07; Recorded on: 2026-10-08.",
+      "references": [
+        {
+          "evidence_id": "bd6f75db4b4641c98aa24a399b85e0ae:chunk-9",
+          "quote": "Blocker B-03: export font verification is blocked because the approved font checklist is unavailable; Action item: T-19 obtain the approved font checklist; Owner: Arjun Das; Due date: 2026-10-09; Status: Open; Linked risk: R-07; Recorded on: 2026-10-08."
+        }
+      ],
+      "description": "Blocker B-03: export font verification is blocked because the approved font checklist is unavailable; Action item: T-19 obtain the approved font checklist; Owner: Arjun Das; Due date: 2026-10-09; Status: Open; Linked risk: R-07; Recorded on: 2026-10-08.",
+      "categories": [
+        "delivery_challenges"
+      ],
+      "impact": null,
+      "likelihood": null,
+      "status": "Open",
+      "mitigation": null,
+      "severity": null
+    },
+    {
+      "id": "risk-aa13d914049d",
+      "title": "Risk ID: R-05; Risk Title: Risk rating extraction; Risk Description: Delivery challenge involving risk rating extraction; Probability: 3/5 \u2014 Moderate; Impact: 3/5 \u2014 Moderate; Severity: Moderate; Status: Open; Owner: Neha Rao; Target Date: 2026-10-13; Due date: 2026-10-13; Mitigation: Run T-11 labelled and natural-language rating checks; Supporting Evidence: The matrix depends on retaining explicitly documented probability and impact fields; As of: 2026-10-08.",
+      "references": [
+        {
+          "evidence_id": "bd6f75db4b4641c98aa24a399b85e0ae:chunk-30",
+          "quote": "Risk ID: R-05; Risk Title: Risk rating extraction; Risk Description: Delivery challenge involving risk rating extraction; Probability: 3/5 \u2014 Moderate; Impact: 3/5 \u2014 Moderate; Severity: Moderate; Status: Open; Owner: Neha Rao; Target Date: 2026-10-13; Due date: 2026-10-13; Mitigation: Run T-11 labelled and natural-language rating checks; Supporting Evidence: The matrix depends on retaining explicitly documented probability and impact fields; As of: 2026-10-08."
+        }
+      ],
+      "description": "Risk ID: R-05; Risk Title: Risk rating extraction; Risk Description: Delivery challenge involving risk rating extraction; Probability: 3/5 \u2014 Moderate; Impact: 3/5 \u2014 Moderate; Severity: Moderate; Status: Open; Owner: Neha Rao; Target Date: 2026-10-13; Due date: 2026-10-13; Mitigation: Run T-11 labelled and natural-language rating checks; Supporting Evidence: The matrix depends on retaining explicitly documented probability and impact fields; As of: 2026-10-08.",
+      "categories": [],
+      "impact": "3/5 \u2014 Moderate",
+      "likelihood": "3/5 \u2014 Moderate",
+      "status": "Open",
+      "mitigation": "Run T-11 labelled and natural-language rating checks",
+      "severity": "Moderate"
+    },
+    {
+      "id": "risk-92b2ba74387c",
+      "title": "Risk ID: R-05; Risk Title: Risk rating extraction; Risk Description: Delivery challenge involving risk rating extraction; Probability: 3/5 \u2014 Moderate; Impact: 3/5 \u2014 Moderate; Severity: Moderate; Status: Open; Owner: Neha Rao; Target Date: 2026-10-13; Due date: 2026-10-13; Mitigation: Run T-11 labelled and natural-language rating checks; Supporting Evidence: The matrix depends on retaining explicitly documented probability and impact fields; As of: 2026-10-07.",
+      "references": [
+        {
+          "evidence_id": "c1da078abe0c43709ddb4e62605a3701:chunk-32",
+          "quote": "Risk ID: R-05; Risk Title: Risk rating extraction; Risk Description: Delivery challenge involving risk rating extraction; Probability: 3/5 \u2014 Moderate; Impact: 3/5 \u2014 Moderate; Severity: Moderate; Status: Open; Owner: Neha Rao; Target Date: 2026-10-13; Due date: 2026-10-13; Mitigation: Run T-11 labelled and natural-language rating checks; Supporting Evidence: The matrix depends on retaining explicitly documented probability and impact fields; As of: 2026-10-07."
+        }
+      ],
+      "description": "Risk ID: R-05; Risk Title: Risk rating extraction; Risk Description: Delivery challenge involving risk rating extraction; Probability: 3/5 \u2014 Moderate; Impact: 3/5 \u2014 Moderate; Severity: Moderate; Status: Open; Owner: Neha Rao; Target Date: 2026-10-13; Due date: 2026-10-13; Mitigation: Run T-11 labelled and natural-language rating checks; Supporting Evidence: The matrix depends on retaining explicitly documented probability and impact fields; As of: 2026-10-07.",
+      "categories": [],
+      "impact": "3/5 \u2014 Moderate",
+      "likelihood": "3/5 \u2014 Moderate",
+      "status": "Open",
+      "mitigation": "Run T-11 labelled and natural-language rating checks",
+      "severity": "Moderate"
+    },
+    {
+      "id": "risk-95fe1ee7ea4f",
+      "title": "Risk ID: R-05; Risk Title: Risk rating extraction; Risk Description: Delivery challenge involving risk rating extraction; Probability: 3/5 \u2014 Moderate; Impact: 3/5 \u2014 Moderate; Severity: Moderate; Status: Open; Owner: Neha Rao; Target Date: 2026-10-13; Due date: 2026-10-13; Mitigation: Run T-11 labelled and natural-language rating checks; Supporting Evidence: The matrix depends on retaining explicitly documented probability and impact fields; As of: 2026-10-05.",
+      "references": [
+        {
+          "evidence_id": "3a1d5ad3935541fab6347a797457c915:chunk-33",
+          "quote": "Risk ID: R-05; Risk Title: Risk rating extraction; Risk Description: Delivery challenge involving risk rating extraction; Probability: 3/5 \u2014 Moderate; Impact: 3/5 \u2014 Moderate; Severity: Moderate; Status: Open; Owner: Neha Rao; Target Date: 2026-10-13; Due date: 2026-10-13; Mitigation: Run T-11 labelled and natural-language rating checks; Supporting Evidence: The matrix depends on retaining explicitly documented probability and impact fields; As of: 2026-10-05."
+        }
+      ],
+      "description": "Risk ID: R-05; Risk Title: Risk rating extraction; Risk Description: Delivery challenge involving risk rating extraction; Probability: 3/5 \u2014 Moderate; Impact: 3/5 \u2014 Moderate; Severity: Moderate; Status: Open; Owner: Neha Rao; Target Date: 2026-10-13; Due date: 2026-10-13; Mitigation: Run T-11 labelled and natural-language rating checks; Supporting Evidence: The matrix depends on retaining explicitly documented probability and impact fields; As of: 2026-10-05.",
+      "categories": [],
+      "impact": "3/5 \u2014 Moderate",
+      "likelihood": "3/5 \u2014 Moderate",
+      "status": "Open",
+      "mitigation": "Run T-11 labelled and natural-language rating checks",
+      "severity": "Moderate"
+    },
+    {
+      "id": "risk-4e0e09dea8bc",
+      "title": "Risk ID: R-03; Risk Title: Document format coverage; Risk Description: Delivery challenge involving document format coverage; Probability: 3/5 \u2014 Moderate; Impact: 4/5 \u2014 High; Severity: High; Status: Open; Owner: Meera Shah; Target Date: 2026-10-10; Due date: 2026-10-10; Mitigation: Complete T-09 cross-format checks after T-17 provides approved fixtures; Supporting Evidence: Approved PDF and DOCX fixtures are required for cross-format verification; As of: 2026-10-08.",
+      "references": [
+        {
+          "evidence_id": "bd6f75db4b4641c98aa24a399b85e0ae:chunk-26",
+          "quote": "Risk ID: R-03; Risk Title: Document format coverage; Risk Description: Delivery challenge involving document format coverage; Probability: 3/5 \u2014 Moderate; Impact: 4/5 \u2014 High; Severity: High; Status: Open; Owner: Meera Shah; Target Date: 2026-10-10; Due date: 2026-10-10; Mitigation: Complete T-09 cross-format checks after T-17 provides approved fixtures; Supporting Evidence: Approved PDF and DOCX fixtures are required for cross-format verification; As of: 2026-10-08."
+        }
+      ],
+      "description": "Risk ID: R-03; Risk Title: Document format coverage; Risk Description: Delivery challenge involving document format coverage; Probability: 3/5 \u2014 Moderate; Impact: 4/5 \u2014 High; Severity: High; Status: Open; Owner: Meera Shah; Target Date: 2026-10-10; Due date: 2026-10-10; Mitigation: Complete T-09 cross-format checks after T-17 provides approved fixtures; Supporting Evidence: Approved PDF and DOCX fixtures are required for cross-format verification; As of: 2026-10-08.",
+      "categories": [],
+      "impact": "4/5 \u2014 High",
+      "likelihood": "3/5 \u2014 Moderate",
+      "status": "Open",
+      "mitigation": "Complete T-09 cross-format checks after T-17 provides approved fixtures",
+      "severity": "High"
+    },
+    {
+      "id": "risk-cfba85046461",
+      "title": "Risk ID: R-03; Risk Title: Document format coverage; Risk Description: Delivery challenge involving document format coverage; Probability: 3/5 \u2014 Moderate; Impact: 4/5 \u2014 High; Severity: High; Status: Open; Owner: Meera Shah; Target Date: 2026-10-10; Due date: 2026-10-10; Mitigation: Complete T-09 cross-format checks after T-17 provides approved fixtures; Supporting Evidence: Approved PDF and DOCX fixtures are required for cross-format verification; As of: 2026-10-07.",
+      "references": [
+        {
+          "evidence_id": "c1da078abe0c43709ddb4e62605a3701:chunk-28",
+          "quote": "Risk ID: R-03; Risk Title: Document format coverage; Risk Description: Delivery challenge involving document format coverage; Probability: 3/5 \u2014 Moderate; Impact: 4/5 \u2014 High; Severity: High; Status: Open; Owner: Meera Shah; Target Date: 2026-10-10; Due date: 2026-10-10; Mitigation: Complete T-09 cross-format checks after T-17 provides approved fixtures; Supporting Evidence: Approved PDF and DOCX fixtures are required for cross-format verification; As of: 2026-10-07."
+        }
+      ],
+      "description": "Risk ID: R-03; Risk Title: Document format coverage; Risk Description: Delivery challenge involving document format coverage; Probability: 3/5 \u2014 Moderate; Impact: 4/5 \u2014 High; Severity: High; Status: Open; Owner: Meera Shah; Target Date: 2026-10-10; Due date: 2026-10-10; Mitigation: Complete T-09 cross-format checks after T-17 provides approved fixtures; Supporting Evidence: Approved PDF and DOCX fixtures are required for cross-format verification; As of: 2026-10-07.",
+      "categories": [],
+      "impact": "4/5 \u2014 High",
+      "likelihood": "3/5 \u2014 Moderate",
+      "status": "Open",
+      "mitigation": "Complete T-09 cross-format checks after T-17 provides approved fixtures",
+      "severity": "High"
+    },
+    {
+      "id": "risk-c8cce269db1f",
+      "title": "Risk ID: R-03; Risk Title: Document format coverage; Risk Description: Delivery challenge involving document format coverage; Probability: 3/5 \u2014 Moderate; Impact: 4/5 \u2014 High; Severity: High; Status: Open; Owner: Meera Shah; Target Date: 2026-10-10; Due date: 2026-10-10; Mitigation: Complete T-09 cross-format checks after T-17 provides approved fixtures; Supporting Evidence: Approved PDF and DOCX fixtures are required for cross-format verification; As of: 2026-10-05.",
+      "references": [
+        {
+          "evidence_id": "3a1d5ad3935541fab6347a797457c915:chunk-29",
+          "quote": "Risk ID: R-03; Risk Title: Document format coverage; Risk Description: Delivery challenge involving document format coverage; Probability: 3/5 \u2014 Moderate; Impact: 4/5 \u2014 High; Severity: High; Status: Open; Owner: Meera Shah; Target Date: 2026-10-10; Due date: 2026-10-10; Mitigation: Complete T-09 cross-format checks after T-17 provides approved fixtures; Supporting Evidence: Approved PDF and DOCX fixtures are required for cross-format verification; As of: 2026-10-05."
+        }
+      ],
+      "description": "Risk ID: R-03; Risk Title: Document format coverage; Risk Description: Delivery challenge involving document format coverage; Probability: 3/5 \u2014 Moderate; Impact: 4/5 \u2014 High; Severity: High; Status: Open; Owner: Meera Shah; Target Date: 2026-10-10; Due date: 2026-10-10; Mitigation: Complete T-09 cross-format checks after T-17 provides approved fixtures; Supporting Evidence: Approved PDF and DOCX fixtures are required for cross-format verification; As of: 2026-10-05.",
+      "categories": [],
+      "impact": "4/5 \u2014 High",
+      "likelihood": "3/5 \u2014 Moderate",
+      "status": "Open",
+      "mitigation": "Complete T-09 cross-format checks after T-17 provides approved fixtures",
+      "severity": "High"
+    },
+    {
+      "id": "risk-b65bde10bc72",
+      "title": "Risk ID: R-01; Risk Title: RAG retrieval regression; Risk Description: Delivery challenge involving rag retrieval regression; Probability: 3/5 \u2014 Moderate; Impact: 4/5 \u2014 High; Severity: High; Status: In Progress; Owner: Neha Rao; Target Date: 2026-10-10; Due date: 2026-10-10; Mitigation: Run T-07 golden-source retrieval checks; Supporting Evidence: Retrieval checks are needed to establish whether source passages support the answers; As of: 2026-10-08.",
+      "references": [
+        {
+          "evidence_id": "bd6f75db4b4641c98aa24a399b85e0ae:chunk-21",
+          "quote": "Risk ID: R-01; Risk Title: RAG retrieval regression; Risk Description: Delivery challenge involving rag retrieval regression; Probability: 3/5 \u2014 Moderate; Impact: 4/5 \u2014 High; Severity: High; Status: In Progress; Owner: Neha Rao; Target Date: 2026-10-10; Due date: 2026-10-10; Mitigation: Run T-07 golden-source retrieval checks; Supporting Evidence: Retrieval checks are needed to establish whether source passages support the answers; As of: 2026-10-08."
+        }
+      ],
+      "description": "Risk ID: R-01; Risk Title: RAG retrieval regression; Risk Description: Delivery challenge involving rag retrieval regression; Probability: 3/5 \u2014 Moderate; Impact: 4/5 \u2014 High; Severity: High; Status: In Progress; Owner: Neha Rao; Target Date: 2026-10-10; Due date: 2026-10-10; Mitigation: Run T-07 golden-source retrieval checks; Supporting Evidence: Retrieval checks are needed to establish whether source passages support the answers; As of: 2026-10-08.",
+      "categories": [],
+      "impact": "4/5 \u2014 High",
+      "likelihood": "3/5 \u2014 Moderate",
+      "status": "In Progress",
+      "mitigation": "Run T-07 golden-source retrieval checks",
+      "severity": "High"
+    },
+    {
+      "id": "risk-d4b3b5375101",
+      "title": "Risk ID: R-01; Risk Title: RAG retrieval regression; Risk Description: Delivery challenge involving rag retrieval regression; Probability: 3/5 \u2014 Moderate; Impact: 4/5 \u2014 High; Severity: High; Status: Open; Owner: Neha Rao; Target Date: 2026-10-10; Due date: 2026-10-10; Mitigation: Run T-07 golden-source retrieval checks; Supporting Evidence: Retrieval checks are needed to establish whether source passages support the answers; As of: 2026-10-05.",
+      "references": [
+        {
+          "evidence_id": "3a1d5ad3935541fab6347a797457c915:chunk-24",
+          "quote": "Risk ID: R-01; Risk Title: RAG retrieval regression; Risk Description: Delivery challenge involving rag retrieval regression; Probability: 3/5 \u2014 Moderate; Impact: 4/5 \u2014 High; Severity: High; Status: Open; Owner: Neha Rao; Target Date: 2026-10-10; Due date: 2026-10-10; Mitigation: Run T-07 golden-source retrieval checks; Supporting Evidence: Retrieval checks are needed to establish whether source passages support the answers; As of: 2026-10-05."
+        }
+      ],
+      "description": "Risk ID: R-01; Risk Title: RAG retrieval regression; Risk Description: Delivery challenge involving rag retrieval regression; Probability: 3/5 \u2014 Moderate; Impact: 4/5 \u2014 High; Severity: High; Status: Open; Owner: Neha Rao; Target Date: 2026-10-10; Due date: 2026-10-10; Mitigation: Run T-07 golden-source retrieval checks; Supporting Evidence: Retrieval checks are needed to establish whether source passages support the answers; As of: 2026-10-05.",
+      "categories": [],
+      "impact": "4/5 \u2014 High",
+      "likelihood": "3/5 \u2014 Moderate",
+      "status": "Open",
+      "mitigation": "Run T-07 golden-source retrieval checks",
+      "severity": "High"
+    },
+    {
+      "id": "risk-f1c5877b8f1f",
+      "title": "Risk ID: R-01; Risk Title: RAG retrieval regression; Risk Description: Delivery challenge involving rag retrieval regression; Probability: 3/5 \u2014 Moderate; Impact: 4/5 \u2014 High; Severity: High; Status: In Progress; Owner: Neha Rao; Target Date: 2026-10-10; Due date: 2026-10-10; Mitigation: Run T-07 golden-source retrieval checks; Supporting Evidence: Retrieval checks are needed to establish whether source passages support the answers; As of: 2026-10-07.",
+      "references": [
+        {
+          "evidence_id": "c1da078abe0c43709ddb4e62605a3701:chunk-23",
+          "quote": "Risk ID: R-01; Risk Title: RAG retrieval regression; Risk Description: Delivery challenge involving rag retrieval regression; Probability: 3/5 \u2014 Moderate; Impact: 4/5 \u2014 High; Severity: High; Status: In Progress; Owner: Neha Rao; Target Date: 2026-10-10; Due date: 2026-10-10; Mitigation: Run T-07 golden-source retrieval checks; Supporting Evidence: Retrieval checks are needed to establish whether source passages support the answers; As of: 2026-10-07."
+        }
+      ],
+      "description": "Risk ID: R-01; Risk Title: RAG retrieval regression; Risk Description: Delivery challenge involving rag retrieval regression; Probability: 3/5 \u2014 Moderate; Impact: 4/5 \u2014 High; Severity: High; Status: In Progress; Owner: Neha Rao; Target Date: 2026-10-10; Due date: 2026-10-10; Mitigation: Run T-07 golden-source retrieval checks; Supporting Evidence: Retrieval checks are needed to establish whether source passages support the answers; As of: 2026-10-07.",
+      "categories": [],
+      "impact": "4/5 \u2014 High",
+      "likelihood": "3/5 \u2014 Moderate",
+      "status": "In Progress",
+      "mitigation": "Run T-07 golden-source retrieval checks",
+      "severity": "High"
+    },
+    {
+      "id": "risk-6704444dc199",
+      "title": "Risk ID: R-02; Risk Title: Workspace data mixing; Risk Description: Delivery challenge involving workspace data mixing; Probability: 4/5 \u2014 High; Impact: 5/5 \u2014 Very High; Severity: Critical; Status: Open; Owner: Ravi Kumar; Target Date: 2026-10-09; Due date: 2026-10-09; Mitigation: Complete T-08 isolation checks after T-16 provides isolated QA access; Supporting Evidence: Isolated QA access is required before workspace isolation can be verified; As of: 2026-10-08.",
+      "references": [
+        {
+          "evidence_id": "bd6f75db4b4641c98aa24a399b85e0ae:chunk-23",
+          "quote": "Risk ID: R-02; Risk Title: Workspace data mixing; Risk Description: Delivery challenge involving workspace data mixing; Probability: 4/5 \u2014 High; Impact: 5/5 \u2014 Very High; Severity: Critical; Status: Open; Owner: Ravi Kumar; Target Date: 2026-10-09; Due date: 2026-10-09; Mitigation: Complete T-08 isolation checks after T-16 provides isolated QA access; Supporting Evidence: Isolated QA access is required before workspace isolation can be verified; As of: 2026-10-08."
+        }
+      ],
+      "description": "Risk ID: R-02; Risk Title: Workspace data mixing; Risk Description: Delivery challenge involving workspace data mixing; Probability: 4/5 \u2014 High; Impact: 5/5 \u2014 Very High; Severity: Critical; Status: Open; Owner: Ravi Kumar; Target Date: 2026-10-09; Due date: 2026-10-09; Mitigation: Complete T-08 isolation checks after T-16 provides isolated QA access; Supporting Evidence: Isolated QA access is required before workspace isolation can be verified; As of: 2026-10-08.",
+      "categories": [],
+      "impact": "5/5 \u2014 Very High",
+      "likelihood": "4/5 \u2014 High",
+      "status": "Open",
+      "mitigation": "Complete T-08 isolation checks after T-16 provides isolated QA access",
+      "severity": "Critical"
+    },
+    {
+      "id": "risk-0ce979dd5338",
+      "title": "Risk ID: R-02; Risk Title: Workspace data mixing; Risk Description: Delivery challenge involving workspace data mixing; Probability: 4/5 \u2014 High; Impact: 5/5 \u2014 Very High; Severity: Critical; Status: Open; Owner: Ravi Kumar; Target Date: 2026-10-09; Due date: 2026-10-09; Mitigation: Complete T-08 isolation checks after T-16 provides isolated QA access; Supporting Evidence: Isolated QA access is required before workspace isolation can be verified; As of: 2026-10-07.",
+      "references": [
+        {
+          "evidence_id": "c1da078abe0c43709ddb4e62605a3701:chunk-25",
+          "quote": "Risk ID: R-02; Risk Title: Workspace data mixing; Risk Description: Delivery challenge involving workspace data mixing; Probability: 4/5 \u2014 High; Impact: 5/5 \u2014 Very High; Severity: Critical; Status: Open; Owner: Ravi Kumar; Target Date: 2026-10-09; Due date: 2026-10-09; Mitigation: Complete T-08 isolation checks after T-16 provides isolated QA access; Supporting Evidence: Isolated QA access is required before workspace isolation can be verified; As of: 2026-10-07."
+        }
+      ],
+      "description": "Risk ID: R-02; Risk Title: Workspace data mixing; Risk Description: Delivery challenge involving workspace data mixing; Probability: 4/5 \u2014 High; Impact: 5/5 \u2014 Very High; Severity: Critical; Status: Open; Owner: Ravi Kumar; Target Date: 2026-10-09; Due date: 2026-10-09; Mitigation: Complete T-08 isolation checks after T-16 provides isolated QA access; Supporting Evidence: Isolated QA access is required before workspace isolation can be verified; As of: 2026-10-07.",
+      "categories": [],
+      "impact": "5/5 \u2014 Very High",
+      "likelihood": "4/5 \u2014 High",
+      "status": "Open",
+      "mitigation": "Complete T-08 isolation checks after T-16 provides isolated QA access",
+      "severity": "Critical"
+    },
+    {
+      "id": "risk-f13f53e5e380",
+      "title": "Risk ID: R-02; Risk Title: Workspace data mixing; Risk Description: Delivery challenge involving workspace data mixing; Probability: 4/5 \u2014 High; Impact: 5/5 \u2014 Very High; Severity: Critical; Status: Open; Owner: Ravi Kumar; Target Date: 2026-10-09; Due date: 2026-10-09; Mitigation: Complete T-08 isolation checks after T-16 provides isolated QA access; Supporting Evidence: Isolated QA access is required before workspace isolation can be verified; As of: 2026-10-05.",
+      "references": [
+        {
+          "evidence_id": "3a1d5ad3935541fab6347a797457c915:chunk-26",
+          "quote": "Risk ID: R-02; Risk Title: Workspace data mixing; Risk Description: Delivery challenge involving workspace data mixing; Probability: 4/5 \u2014 High; Impact: 5/5 \u2014 Very High; Severity: Critical; Status: Open; Owner: Ravi Kumar; Target Date: 2026-10-09; Due date: 2026-10-09; Mitigation: Complete T-08 isolation checks after T-16 provides isolated QA access; Supporting Evidence: Isolated QA access is required before workspace isolation can be verified; As of: 2026-10-05."
+        }
+      ],
+      "description": "Risk ID: R-02; Risk Title: Workspace data mixing; Risk Description: Delivery challenge involving workspace data mixing; Probability: 4/5 \u2014 High; Impact: 5/5 \u2014 Very High; Severity: Critical; Status: Open; Owner: Ravi Kumar; Target Date: 2026-10-09; Due date: 2026-10-09; Mitigation: Complete T-08 isolation checks after T-16 provides isolated QA access; Supporting Evidence: Isolated QA access is required before workspace isolation can be verified; As of: 2026-10-05.",
+      "categories": [],
+      "impact": "5/5 \u2014 Very High",
+      "likelihood": "4/5 \u2014 High",
+      "status": "Open",
+      "mitigation": "Complete T-08 isolation checks after T-16 provides isolated QA access",
+      "severity": "Critical"
+    },
+    {
+      "id": "risk-f86f1f07bd9b",
+      "title": "Risk ID: R-04; Risk Title: Stale incremental insights; Risk Description: Delivery challenge involving stale incremental insights; Probability: 4/5 \u2014 High; Impact: 3/5 \u2014 Moderate; Severity: High; Status: Open; Owner: Arjun Das; Target Date: 2026-10-12; Due date: 2026-10-12; Mitigation: Run T-10 incremental-upload race checks; Supporting Evidence: Incremental-upload checks must establish that refreshed results use the current source version; As of: 2026-10-05.",
+      "references": [
+        {
+          "evidence_id": "3a1d5ad3935541fab6347a797457c915:chunk-31",
+          "quote": "Risk ID: R-04; Risk Title: Stale incremental insights; Risk Description: Delivery challenge involving stale incremental insights; Probability: 4/5 \u2014 High; Impact: 3/5 \u2014 Moderate; Severity: High; Status: Open; Owner: Arjun Das; Target Date: 2026-10-12; Due date: 2026-10-12; Mitigation: Run T-10 incremental-upload race checks; Supporting Evidence: Incremental-upload checks must establish that refreshed results use the current source version; As of: 2026-10-05."
+        }
+      ],
+      "description": "Risk ID: R-04; Risk Title: Stale incremental insights; Risk Description: Delivery challenge involving stale incremental insights; Probability: 4/5 \u2014 High; Impact: 3/5 \u2014 Moderate; Severity: High; Status: Open; Owner: Arjun Das; Target Date: 2026-10-12; Due date: 2026-10-12; Mitigation: Run T-10 incremental-upload race checks; Supporting Evidence: Incremental-upload checks must establish that refreshed results use the current source version; As of: 2026-10-05.",
+      "categories": [],
+      "impact": "3/5 \u2014 Moderate",
+      "likelihood": "4/5 \u2014 High",
+      "status": "Open",
+      "mitigation": "Run T-10 incremental-upload race checks",
+      "severity": "High"
+    },
+    {
+      "id": "risk-1ae2a819bb43",
+      "title": "Risk ID: R-04; Risk Title: Stale incremental insights; Risk Description: Delivery challenge involving stale incremental insights; Probability: 4/5 \u2014 High; Impact: 3/5 \u2014 Moderate; Severity: High; Status: In Progress; Owner: Arjun Das; Target Date: 2026-10-12; Due date: 2026-10-12; Mitigation: Run T-10 incremental-upload race checks; Supporting Evidence: Incremental-upload checks must establish that refreshed results use the current source version; As of: 2026-10-08.",
+      "references": [
+        {
+          "evidence_id": "bd6f75db4b4641c98aa24a399b85e0ae:chunk-28",
+          "quote": "Risk ID: R-04; Risk Title: Stale incremental insights; Risk Description: Delivery challenge involving stale incremental insights; Probability: 4/5 \u2014 High; Impact: 3/5 \u2014 Moderate; Severity: High; Status: In Progress; Owner: Arjun Das; Target Date: 2026-10-12; Due date: 2026-10-12; Mitigation: Run T-10 incremental-upload race checks; Supporting Evidence: Incremental-upload checks must establish that refreshed results use the current source version; As of: 2026-10-08."
+        }
+      ],
+      "description": "Risk ID: R-04; Risk Title: Stale incremental insights; Risk Description: Delivery challenge involving stale incremental insights; Probability: 4/5 \u2014 High; Impact: 3/5 \u2014 Moderate; Severity: High; Status: In Progress; Owner: Arjun Das; Target Date: 2026-10-12; Due date: 2026-10-12; Mitigation: Run T-10 incremental-upload race checks; Supporting Evidence: Incremental-upload checks must establish that refreshed results use the current source version; As of: 2026-10-08.",
+      "categories": [],
+      "impact": "3/5 \u2014 Moderate",
+      "likelihood": "4/5 \u2014 High",
+      "status": "In Progress",
+      "mitigation": "Run T-10 incremental-upload race checks",
+      "severity": "High"
+    },
+    {
+      "id": "risk-9e0a6335419a",
+      "title": "Risk ID: R-04; Risk Title: Stale incremental insights; Risk Description: Delivery challenge involving stale incremental insights; Probability: 4/5 \u2014 High; Impact: 3/5 \u2014 Moderate; Severity: High; Status: In Progress; Owner: Arjun Das; Target Date: 2026-10-12; Due date: 2026-10-12; Mitigation: Run T-10 incremental-upload race checks; Supporting Evidence: Incremental-upload checks must establish that refreshed results use the current source version; As of: 2026-10-07.",
+      "references": [
+        {
+          "evidence_id": "c1da078abe0c43709ddb4e62605a3701:chunk-30",
+          "quote": "Risk ID: R-04; Risk Title: Stale incremental insights; Risk Description: Delivery challenge involving stale incremental insights; Probability: 4/5 \u2014 High; Impact: 3/5 \u2014 Moderate; Severity: High; Status: In Progress; Owner: Arjun Das; Target Date: 2026-10-12; Due date: 2026-10-12; Mitigation: Run T-10 incremental-upload race checks; Supporting Evidence: Incremental-upload checks must establish that refreshed results use the current source version; As of: 2026-10-07."
+        }
+      ],
+      "description": "Risk ID: R-04; Risk Title: Stale incremental insights; Risk Description: Delivery challenge involving stale incremental insights; Probability: 4/5 \u2014 High; Impact: 3/5 \u2014 Moderate; Severity: High; Status: In Progress; Owner: Arjun Das; Target Date: 2026-10-12; Due date: 2026-10-12; Mitigation: Run T-10 incremental-upload race checks; Supporting Evidence: Incremental-upload checks must establish that refreshed results use the current source version; As of: 2026-10-07.",
+      "categories": [],
+      "impact": "3/5 \u2014 Moderate",
+      "likelihood": "4/5 \u2014 High",
+      "status": "In Progress",
+      "mitigation": "Run T-10 incremental-upload race checks",
+      "severity": "High"
+    }
+  ],
+  "action_items": [
+    {
+      "id": "action-5e79ecf7dcc5",
+      "title": "Action item: T-10 incremental upload race checks; Owner: Arjun Das; Due date: 2026-10-12.",
+      "references": [
+        {
+          "evidence_id": "3a1d5ad3935541fab6347a797457c915:chunk-16",
+          "quote": "Action item: T-10 incremental upload race checks; Owner: Arjun Das; Due date: 2026-10-12."
+        }
+      ],
+      "description": "Action item: T-10 incremental upload race checks; Owner: Arjun Das; Due date: 2026-10-12.",
+      "owner": "Arjun Das",
+      "due_date": "2026-10-12",
+      "status": null,
+      "dependency": null
+    }
+  ]
+}

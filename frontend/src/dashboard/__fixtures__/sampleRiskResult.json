@@ -1,0 +1,627 @@
+{
+  "status": "partial",
+  "query": "Review the uploaded project documents.",
+  "generated_at": "2026-10-10T16:02:27.525633+00:00",
+  "provider": "Local extractive analysis",
+  "evidence": [
+    {
+      "id": "5bd8107ae759475c8e6d6bd282f8cd67:chunk-2",
+      "document_id": "5bd8107ae759475c8e6d6bd282f8cd67",
+      "filename": "AI_Project_Sprint_Update.txt",
+      "document_type": "txt",
+      "chunk_number": 2,
+      "location": "Text section 2",
+      "text": "Goal: help project reviewers turn uploaded documents into evidence-grounded scope, risk, delivery, blocker and action insights.",
+      "similarity": 0.5278
+    },
+    {
+      "id": "7832de4e28ef477c8de58bcdc0109c36:chunk-1",
+      "document_id": "7832de4e28ef477c8de58bcdc0109c36",
+      "filename": "AI_Project_Proposal.pdf",
+      "document_type": "pdf",
+      "chunk_number": 1,
+      "location": "Page 1",
+      "text": "AIPI-DEMO-26 | Fictional demo scenario 1 AI Project Proposal AI Project Intelligence & Risk Advisor Project AIPI-DEMO-26 | Snapshot 2026-10-07 | Version 1.0 This proposal defines a demonstration-readiness scenario for the existing application. The current review focuses on evidence quality, workspace boundaries and a concise executive dashboard. Fictional demo scenario for this application. This dataset is not a record of actual defects, approvals or historical M1-M4 work. Scope and intended outcome Goal: help project reviewers turn uploaded documents into evidence-grounded scope, risk, delivery, blocker and action insights. Deliverables: one unified application with document upload, isolated workspaces, source retrieval, three project-analysis agents, Documentation Studio, Project Health, Project Assistant, an executive Overview and PDF/Word report export. Scope excludes external integrations, authentication changes, a new RAG pipeline and any replacement of approved health scoring. Historical milestone records are outside this fictional dataset. Architecture baseline Frontend: React, TypeScript, Vite, Tailwind CSS, React Router and Lucide. Backend: Python, FastAPI and Pydantic. RAG: WordLlama l2_supercat with 256-dimensional embeddings and persistent ChromaDB retrieval. Text processing retains 180-word chunks and 30-word overlap. Local deterministic/extractive analysis is the demonstration",
+      "similarity": 0.4979
+    },
+    {
+      "id": "36bc1d30e6ee4e9c9502d88e1332de7a:chunk-34",
+      "document_id": "36bc1d30e6ee4e9c9502d88e1332de7a",
+      "filename": "AI_Project_SRS.docx",
+      "document_type": "docx",
+      "chunk_number": 34,
+      "location": "Paragraph/block 34",
+      "text": "US-01: As a project reviewer, I want to upload PDF, DOCX, TXT and CSV sources, so that the same project evidence can support every review; Acceptance criteria: Each readable source exposes its filename and location. US-02: As a project coordinator, I want to review all returned risks, so that missing ratings are visible without invented coordinates; Acceptance criteria: Unspecified probability or impact is displayed as Not stated. US-03: As a mentor, I want to inspect a finding's source quotation, so that the project claim can be checked; Acceptance criteria: Every available reference opens the exact source text. US-04: As a project reviewer, I want to download the project report as PDF or Word, so that I can review the current evidence offline; Acceptance criteria: Available source references and uncertainty labels are retained.",
+      "similarity": 0.3381
+    },
+    {
+      "id": "5bd8107ae759475c8e6d6bd282f8cd67:chunk-7",
+      "document_id": "5bd8107ae759475c8e6d6bd282f8cd67",
+      "filename": "AI_Project_Sprint_Update.txt",
+      "document_type": "txt",
+      "chunk_number": 7,
+      "location": "Text section 7",
+      "text": "Schedule risks: incremental-upload validation, risk-language checks and local provider setup remain pending or in progress. Delayed completion could threaten the intelligence review milestone and demonstration plan. The delivery challenge is to establish current evidence after an upload, display explicitly stated risk ratings and run locally without an external key. These checks depend on the reviewed baseline. The following named risks record the agreed source assessments. Delivery challenge | Owner: Arjun Das; Risk ID: R-04; Risk Title: Stale incremental insights; Probability: High; Impact: Moderate; Severity: High; Status: Open; Due date: 2026-10-12; Mitigation: incremental upload race checks in T-10. Delivery challenge | Owner: Neha Rao; Risk ID: R-05; Risk Title: Risk rating extraction; Probability: Medium; Impact: Moderate; Severity: Moderate; Status: Open; Due date: 2026-10-13; Mitigation: explicit risk-language checks in T-11. Delivery challenge | Owner: Ravi Kumar; Risk ID: R-06; Risk Title: Local provider readiness; Probability: Moderate; Impact: Moderate; Severity: Moderate; Status: Open; Due date: 2026-10-13; Mitigation: offline provider setup checks in T-12.",
+      "similarity": 0.2526
+    },
+    {
+      "id": "55874d2ec7af4e808539fd5c52d858cb:chunk-28",
+      "document_id": "55874d2ec7af4e808539fd5c52d858cb",
+      "filename": "AI_Project_Meeting_Notes.docx",
+      "document_type": "docx",
+      "chunk_number": 28,
+      "location": "Paragraph/block 28",
+      "text": "Action item: review a future scanned-PDF policy; Owner: Not stated; Due date: Not stated; Status: Pending review. OCR is outside the current scope. This review is not a commitment to implement it.",
+      "similarity": 0.2682
+    },
+    {
+      "id": "5bd8107ae759475c8e6d6bd282f8cd67:chunk-8",
+      "document_id": "5bd8107ae759475c8e6d6bd282f8cd67",
+      "filename": "AI_Project_Sprint_Update.txt",
+      "document_type": "txt",
+      "chunk_number": 8,
+      "location": "Text section 8",
+      "text": "Dependency gaps: final review approval is pending because export, dashboard and assistant validation have not started. The report contract requires evidence references; missing reference validation is an approval dependency. The assistant contract requires grounded answers; missing answer validation is another dependency. Dashboard sign-off requires readable evidence. These gaps could delay review approval. The following risks describe possible contract failures and their assigned mitigation, not confirmed production incidents. Delivery challenge | Owner: Arjun Das; Risk ID: R-07; Risk Title: Export evidence omission; Probability: Low; Impact: High; Severity: Moderate; Status: Open; Due date: 2026-10-14; Mitigation: PDF and Word evidence checks in T-13. Delivery challenge | Owner: Arjun Das; Risk ID: R-08; Risk Title: Dense dashboard layout; Probability: Low; Impact: Low; Severity: Low; Status: Open; Due date: 2026-10-15; Mitigation: mobile and long-text checks in T-14. Delivery challenge | Owner: Meera Shah; Risk ID: R-09; Risk Title: Unsupported assistant answer; Probability: Moderate; Impact: High; Severity: High; Status: Open; Due date: 2026-10-14; Mitigation: unsupported-question checks in T-15.",
+      "similarity": 0.3642
+    },
+    {
+      "id": "55874d2ec7af4e808539fd5c52d858cb:chunk-29",
+      "document_id": "55874d2ec7af4e808539fd5c52d858cb",
+      "filename": "AI_Project_Meeting_Notes.docx",
+      "document_type": "docx",
+      "chunk_number": 29,
+      "location": "Paragraph/block 29",
+      "text": "Delivery forecast: the mentor demonstration target remains 2026-10-19; readiness depends on the D-02 and D-03 validation reviews. No revised delivery date is confirmed. Overall delivery probability is Not stated.",
+      "similarity": 0.3465
+    },
+    {
+      "id": "5bd8107ae759475c8e6d6bd282f8cd67:chunk-6",
+      "document_id": "5bd8107ae759475c8e6d6bd282f8cd67",
+      "filename": "AI_Project_Sprint_Update.txt",
+      "document_type": "txt",
+      "chunk_number": 6,
+      "location": "Text section 6",
+      "text": "Schedule risks: incomplete RAG retrieval checks, workspace isolation checks and document-format validation may delay the evidence review milestone. The plan requires approved PDF/DOCX fixtures and isolated QA access before testing can start. Missing access blocks the workspace task; missing fixtures block format checks. Project review depends on resolving these validation gaps. The following named delivery risks carry the explicit assessments and mitigation targets. Delivery challenge | Owner: Neha Rao; Risk ID: R-01; Risk Title: RAG retrieval regression; Probability: High; Impact: High; Severity: Critical; Status: Open; Due date: 2026-10-10; Mitigation: golden-source retrieval checks in T-07. Delivery challenge | Owner: Ravi Kumar; Risk ID: R-02; Risk Title: Workspace data mixing; Probability: Low; Impact: Critical; Severity: Critical; Status: Open; Due date: 2026-10-09; Mitigation: workspace isolation checks in T-08. Delivery challenge | Owner: Meera Shah; Risk ID: R-03; Risk Title: Document format coverage; Probability: Moderate; Impact: High; Severity: High; Status: Open; Due date: 2026-10-10; Mitigation: cross-format ingestion checks in T-09.",
+      "similarity": 0.3252
+    },
+    {
+      "id": "55874d2ec7af4e808539fd5c52d858cb:chunk-25",
+      "document_id": "55874d2ec7af4e808539fd5c52d858cb",
+      "filename": "AI_Project_Meeting_Notes.docx",
+      "document_type": "docx",
+      "chunk_number": 25,
+      "location": "Paragraph/block 25",
+      "text": "Action item: Provide approved edge-case documents; Owner: Priya Menon; Due date: 2026-10-08; Status: In progress; Dependency: Not stated; Task ID: T-17.",
+      "similarity": 0.4712
+    },
+    {
+      "id": "55874d2ec7af4e808539fd5c52d858cb:chunk-16",
+      "document_id": "55874d2ec7af4e808539fd5c52d858cb",
+      "filename": "AI_Project_Meeting_Notes.docx",
+      "document_type": "docx",
+      "chunk_number": 16,
+      "location": "Paragraph/block 16",
+      "text": "Action item: Workspace isolation checks; Owner: Ravi Kumar; Due date: 2026-10-09; Status: Blocked; Dependency: B-01; Task ID: T-08.",
+      "similarity": 0.471
+    }
+  ],
+  "retrieved_count": 24,
+  "evidence_limited": true,
+  "warnings": [
+    "Assessment covers bounded retrieved evidence, not an exhaustive audit of every document or real-world project status.",
+    "Unknown fields are null in the API and shown as Not stated. No acceptance criteria, mitigation, or commitments are inferred.",
+    "User stories are structured drafts of explicit requirements, not newly invented requirements. Review partial stories before adoption.",
+    "Local mode uses conservative English extraction rules and may miss indirect wording.",
+    "The retrieval budget was reached. Use a narrower focus to review further evidence."
+  ],
+  "user_stories": [
+    {
+      "id": "story-57a7ac62a6e8",
+      "title": "help project reviewers turn uploaded documents into evidence-grounded scope, risk, delivery, blocker and action insights",
+      "references": [
+        {
+          "evidence_id": "5bd8107ae759475c8e6d6bd282f8cd67:chunk-2",
+          "quote": "Goal: help project reviewers turn uploaded documents into evidence-grounded scope, risk, delivery, blocker and action insights."
+        }
+      ],
+      "role": null,
+      "need": "help project reviewers turn uploaded documents into evidence-grounded scope, risk, delivery, blocker and action insights",
+      "benefit": null,
+      "acceptance_criteria": [],
+      "information_state": "partial"
+    },
+    {
+      "id": "story-be0a7da04776",
+      "title": "help project reviewers turn uploaded documents into evidence-grounded scope, risk, delivery, blocker and action insights",
+      "references": [
+        {
+          "evidence_id": "7832de4e28ef477c8de58bcdc0109c36:chunk-1",
+          "quote": "Scope and intended outcome Goal: help project reviewers turn uploaded documents into evidence-grounded scope, risk, delivery, blocker and action insights."
+        }
+      ],
+      "role": null,
+      "need": "help project reviewers turn uploaded documents into evidence-grounded scope, risk, delivery, blocker and action insights",
+      "benefit": null,
+      "acceptance_criteria": [],
+      "information_state": "partial"
+    },
+    {
+      "id": "story-4425dceedef6",
+      "title": "to upload PDF, DOCX, TXT and CSV sources",
+      "references": [
+        {
+          "evidence_id": "36bc1d30e6ee4e9c9502d88e1332de7a:chunk-34",
+          "quote": "US-01: As a project reviewer, I want to upload PDF, DOCX, TXT and CSV sources, so that the same project evidence can support every review; Acceptance criteria: Each readable source exposes its filename and location."
+        }
+      ],
+      "role": "project reviewer",
+      "need": "to upload PDF, DOCX, TXT and CSV sources",
+      "benefit": "the same project evidence can support every review",
+      "acceptance_criteria": [
+        "Each readable source exposes its filename and location"
+      ],
+      "information_state": "explicit"
+    },
+    {
+      "id": "story-9da5a611947f",
+      "title": "to review all returned risks",
+      "references": [
+        {
+          "evidence_id": "36bc1d30e6ee4e9c9502d88e1332de7a:chunk-34",
+          "quote": "US-02: As a project coordinator, I want to review all returned risks, so that missing ratings are visible without invented coordinates; Acceptance criteria: Unspecified probability or impact is displayed as Not stated."
+        }
+      ],
+      "role": "project coordinator",
+      "need": "to review all returned risks",
+      "benefit": "missing ratings are visible without invented coordinates",
+      "acceptance_criteria": [
+        "Unspecified probability or impact is displayed as Not stated"
+      ],
+      "information_state": "explicit"
+    },
+    {
+      "id": "story-626c4d86e8f0",
+      "title": "to inspect a finding's source quotation",
+      "references": [
+        {
+          "evidence_id": "36bc1d30e6ee4e9c9502d88e1332de7a:chunk-34",
+          "quote": "US-03: As a mentor, I want to inspect a finding's source quotation, so that the project claim can be checked; Acceptance criteria: Every available reference opens the exact source text."
+        }
+      ],
+      "role": "mentor",
+      "need": "to inspect a finding's source quotation",
+      "benefit": "the project claim can be checked",
+      "acceptance_criteria": [
+        "Every available reference opens the exact source text"
+      ],
+      "information_state": "explicit"
+    },
+    {
+      "id": "story-54f335c02cdf",
+      "title": "to download the project report as PDF or Word",
+      "references": [
+        {
+          "evidence_id": "36bc1d30e6ee4e9c9502d88e1332de7a:chunk-34",
+          "quote": "US-04: As a project reviewer, I want to download the project report as PDF or Word, so that I can review the current evidence offline; Acceptance criteria: Available source references and uncertainty labels are retained."
+        }
+      ],
+      "role": "project reviewer",
+      "need": "to download the project report as PDF or Word",
+      "benefit": "I can review the current evidence offline",
+      "acceptance_criteria": [
+        "Available source references and uncertainty labels are retained"
+      ],
+      "information_state": "explicit"
+    }
+  ],
+  "risks": [
+    {
+      "id": "risk-3696819dff24",
+      "title": "Schedule risks: incremental-upload validation, risk-language checks and local provider setup remain pending or in progress.",
+      "references": [
+        {
+          "evidence_id": "5bd8107ae759475c8e6d6bd282f8cd67:chunk-7",
+          "quote": "Schedule risks: incremental-upload validation, risk-language checks and local provider setup remain pending or in progress."
+        }
+      ],
+      "description": "Schedule risks: incremental-upload validation, risk-language checks and local provider setup remain pending or in progress.",
+      "categories": [
+        "schedule_risks"
+      ],
+      "impact": null,
+      "likelihood": null,
+      "status": null,
+      "mitigation": null,
+      "severity": null
+    },
+    {
+      "id": "risk-5c60e1af6921",
+      "title": "Delayed completion could threaten the intelligence review milestone and demonstration plan.",
+      "references": [
+        {
+          "evidence_id": "5bd8107ae759475c8e6d6bd282f8cd67:chunk-7",
+          "quote": "Delayed completion could threaten the intelligence review milestone and demonstration plan."
+        }
+      ],
+      "description": "Delayed completion could threaten the intelligence review milestone and demonstration plan.",
+      "categories": [
+        "schedule_risks"
+      ],
+      "impact": null,
+      "likelihood": null,
+      "status": null,
+      "mitigation": null,
+      "severity": null
+    },
+    {
+      "id": "risk-c7257564fc30",
+      "title": "The delivery challenge is to establish current evidence after an upload, display explicitly stated risk ratings and run locally without an external key.",
+      "references": [
+        {
+          "evidence_id": "5bd8107ae759475c8e6d6bd282f8cd67:chunk-7",
+          "quote": "The delivery challenge is to establish current evidence after an upload, display explicitly stated risk ratings and run locally without an external key."
+        }
+      ],
+      "description": "The delivery challenge is to establish current evidence after an upload, display explicitly stated risk ratings and run locally without an external key.",
+      "categories": [
+        "delivery_challenges"
+      ],
+      "impact": null,
+      "likelihood": null,
+      "status": null,
+      "mitigation": null,
+      "severity": null
+    },
+    {
+      "id": "risk-f02c2bb0891a",
+      "title": "Delivery challenge | Owner: Arjun Das; Risk ID: R-04; Risk Title: Stale incremental insights; Probability: High; Impact: Moderate; Severity: High; Status: Open; Due date: 2026-10-12; Mitigation: incremental upload race checks in T-10.",
+      "references": [
+        {
+          "evidence_id": "5bd8107ae759475c8e6d6bd282f8cd67:chunk-7",
+          "quote": "Delivery challenge | Owner: Arjun Das; Risk ID: R-04; Risk Title: Stale incremental insights; Probability: High; Impact: Moderate; Severity: High; Status: Open; Due date: 2026-10-12; Mitigation: incremental upload race checks in T-10."
+        }
+      ],
+      "description": "Delivery challenge | Owner: Arjun Das; Risk ID: R-04; Risk Title: Stale incremental insights; Probability: High; Impact: Moderate; Severity: High; Status: Open; Due date: 2026-10-12; Mitigation: incremental upload race checks in T-10.",
+      "categories": [
+        "delivery_challenges"
+      ],
+      "impact": "Moderate",
+      "likelihood": "High",
+      "status": "Open",
+      "mitigation": "incremental upload race checks in T-10",
+      "severity": "High"
+    },
+    {
+      "id": "risk-aaf7f91c9c18",
+      "title": "Delivery challenge | Owner: Neha Rao; Risk ID: R-05; Risk Title: Risk rating extraction; Probability: Medium; Impact: Moderate; Severity: Moderate; Status: Open; Due date: 2026-10-13; Mitigation: explicit risk-language checks in T-11.",
+      "references": [
+        {
+          "evidence_id": "5bd8107ae759475c8e6d6bd282f8cd67:chunk-7",
+          "quote": "Delivery challenge | Owner: Neha Rao; Risk ID: R-05; Risk Title: Risk rating extraction; Probability: Medium; Impact: Moderate; Severity: Moderate; Status: Open; Due date: 2026-10-13; Mitigation: explicit risk-language checks in T-11."
+        }
+      ],
+      "description": "Delivery challenge | Owner: Neha Rao; Risk ID: R-05; Risk Title: Risk rating extraction; Probability: Medium; Impact: Moderate; Severity: Moderate; Status: Open; Due date: 2026-10-13; Mitigation: explicit risk-language checks in T-11.",
+      "categories": [
+        "delivery_challenges"
+      ],
+      "impact": "Moderate",
+      "likelihood": "Medium",
+      "status": "Open",
+      "mitigation": "explicit risk-language checks in T-11",
+      "severity": "Moderate"
+    },
+    {
+      "id": "risk-f0c1efabed33",
+      "title": "Delivery challenge | Owner: Ravi Kumar; Risk ID: R-06; Risk Title: Local provider readiness; Probability: Moderate; Impact: Moderate; Severity: Moderate; Status: Open; Due date: 2026-10-13; Mitigation: offline provider setup checks in T-12.",
+      "references": [
+        {
+          "evidence_id": "5bd8107ae759475c8e6d6bd282f8cd67:chunk-7",
+          "quote": "Delivery challenge | Owner: Ravi Kumar; Risk ID: R-06; Risk Title: Local provider readiness; Probability: Moderate; Impact: Moderate; Severity: Moderate; Status: Open; Due date: 2026-10-13; Mitigation: offline provider setup checks in T-12."
+        }
+      ],
+      "description": "Delivery challenge | Owner: Ravi Kumar; Risk ID: R-06; Risk Title: Local provider readiness; Probability: Moderate; Impact: Moderate; Severity: Moderate; Status: Open; Due date: 2026-10-13; Mitigation: offline provider setup checks in T-12.",
+      "categories": [
+        "delivery_challenges"
+      ],
+      "impact": "Moderate",
+      "likelihood": "Moderate",
+      "status": "Open",
+      "mitigation": "offline provider setup checks in T-12",
+      "severity": "Moderate"
+    },
+    {
+      "id": "risk-31a2cf34d9be",
+      "title": "Dependency gaps: final review approval is pending because export, dashboard and assistant validation have not started.",
+      "references": [
+        {
+          "evidence_id": "5bd8107ae759475c8e6d6bd282f8cd67:chunk-8",
+          "quote": "Dependency gaps: final review approval is pending because export, dashboard and assistant validation have not started."
+        }
+      ],
+      "description": "Dependency gaps: final review approval is pending because export, dashboard and assistant validation have not started.",
+      "categories": [
+        "dependency_gaps"
+      ],
+      "impact": null,
+      "likelihood": null,
+      "status": null,
+      "mitigation": null,
+      "severity": null
+    },
+    {
+      "id": "risk-a80d88442c55",
+      "title": "The report contract requires evidence references; missing reference validation is an approval dependency.",
+      "references": [
+        {
+          "evidence_id": "5bd8107ae759475c8e6d6bd282f8cd67:chunk-8",
+          "quote": "The report contract requires evidence references; missing reference validation is an approval dependency."
+        }
+      ],
+      "description": "The report contract requires evidence references; missing reference validation is an approval dependency.",
+      "categories": [
+        "dependency_gaps"
+      ],
+      "impact": null,
+      "likelihood": null,
+      "status": null,
+      "mitigation": null,
+      "severity": null
+    },
+    {
+      "id": "risk-c4f9f62cfac3",
+      "title": "The assistant contract requires grounded answers; missing answer validation is another dependency.",
+      "references": [
+        {
+          "evidence_id": "5bd8107ae759475c8e6d6bd282f8cd67:chunk-8",
+          "quote": "The assistant contract requires grounded answers; missing answer validation is another dependency."
+        }
+      ],
+      "description": "The assistant contract requires grounded answers; missing answer validation is another dependency.",
+      "categories": [
+        "dependency_gaps"
+      ],
+      "impact": null,
+      "likelihood": null,
+      "status": null,
+      "mitigation": null,
+      "severity": null
+    },
+    {
+      "id": "risk-f719b7ddb142",
+      "title": "These gaps could delay review approval.",
+      "references": [
+        {
+          "evidence_id": "5bd8107ae759475c8e6d6bd282f8cd67:chunk-8",
+          "quote": "These gaps could delay review approval."
+        }
+      ],
+      "description": "These gaps could delay review approval.",
+      "categories": [
+        "schedule_risks"
+      ],
+      "impact": null,
+      "likelihood": null,
+      "status": null,
+      "mitigation": null,
+      "severity": null
+    },
+    {
+      "id": "risk-60cfb22b2bae",
+      "title": "Delivery challenge | Owner: Arjun Das; Risk ID: R-07; Risk Title: Export evidence omission; Probability: Low; Impact: High; Severity: Moderate; Status: Open; Due date: 2026-10-14; Mitigation: PDF and Word evidence checks in T-13.",
+      "references": [
+        {
+          "evidence_id": "5bd8107ae759475c8e6d6bd282f8cd67:chunk-8",
+          "quote": "Delivery challenge | Owner: Arjun Das; Risk ID: R-07; Risk Title: Export evidence omission; Probability: Low; Impact: High; Severity: Moderate; Status: Open; Due date: 2026-10-14; Mitigation: PDF and Word evidence checks in T-13."
+        }
+      ],
+      "description": "Delivery challenge | Owner: Arjun Das; Risk ID: R-07; Risk Title: Export evidence omission; Probability: Low; Impact: High; Severity: Moderate; Status: Open; Due date: 2026-10-14; Mitigation: PDF and Word evidence checks in T-13.",
+      "categories": [
+        "delivery_challenges"
+      ],
+      "impact": "High",
+      "likelihood": "Low",
+      "status": "Open",
+      "mitigation": "PDF and Word evidence checks in T-13",
+      "severity": "Moderate"
+    },
+    {
+      "id": "risk-da85215edb10",
+      "title": "Delivery challenge | Owner: Arjun Das; Risk ID: R-08; Risk Title: Dense dashboard layout; Probability: Low; Impact: Low; Severity: Low; Status: Open; Due date: 2026-10-15; Mitigation: mobile and long-text checks in T-14.",
+      "references": [
+        {
+          "evidence_id": "5bd8107ae759475c8e6d6bd282f8cd67:chunk-8",
+          "quote": "Delivery challenge | Owner: Arjun Das; Risk ID: R-08; Risk Title: Dense dashboard layout; Probability: Low; Impact: Low; Severity: Low; Status: Open; Due date: 2026-10-15; Mitigation: mobile and long-text checks in T-14."
+        }
+      ],
+      "description": "Delivery challenge | Owner: Arjun Das; Risk ID: R-08; Risk Title: Dense dashboard layout; Probability: Low; Impact: Low; Severity: Low; Status: Open; Due date: 2026-10-15; Mitigation: mobile and long-text checks in T-14.",
+      "categories": [
+        "delivery_challenges"
+      ],
+      "impact": "Low",
+      "likelihood": "Low",
+      "status": "Open",
+      "mitigation": "mobile and long-text checks in T-14",
+      "severity": "Low"
+    },
+    {
+      "id": "risk-0ffdaa363fd4",
+      "title": "Delivery challenge | Owner: Meera Shah; Risk ID: R-09; Risk Title: Unsupported assistant answer; Probability: Moderate; Impact: High; Severity: High; Status: Open; Due date: 2026-10-14; Mitigation: unsupported-question checks in T-15.",
+      "references": [
+        {
+          "evidence_id": "5bd8107ae759475c8e6d6bd282f8cd67:chunk-8",
+          "quote": "Delivery challenge | Owner: Meera Shah; Risk ID: R-09; Risk Title: Unsupported assistant answer; Probability: Moderate; Impact: High; Severity: High; Status: Open; Due date: 2026-10-14; Mitigation: unsupported-question checks in T-15."
+        }
+      ],
+      "description": "Delivery challenge | Owner: Meera Shah; Risk ID: R-09; Risk Title: Unsupported assistant answer; Probability: Moderate; Impact: High; Severity: High; Status: Open; Due date: 2026-10-14; Mitigation: unsupported-question checks in T-15.",
+      "categories": [
+        "delivery_challenges"
+      ],
+      "impact": "High",
+      "likelihood": "Moderate",
+      "status": "Open",
+      "mitigation": "unsupported-question checks in T-15",
+      "severity": "High"
+    },
+    {
+      "id": "risk-cdd3ce15bce8",
+      "title": "Delivery forecast: the mentor demonstration target remains 2026-10-19; readiness depends on the D-02 and D-03 validation reviews.",
+      "references": [
+        {
+          "evidence_id": "55874d2ec7af4e808539fd5c52d858cb:chunk-29",
+          "quote": "Delivery forecast: the mentor demonstration target remains 2026-10-19; readiness depends on the D-02 and D-03 validation reviews."
+        }
+      ],
+      "description": "Delivery forecast: the mentor demonstration target remains 2026-10-19; readiness depends on the D-02 and D-03 validation reviews.",
+      "categories": [
+        "delivery_forecast"
+      ],
+      "impact": null,
+      "likelihood": null,
+      "status": null,
+      "mitigation": null,
+      "severity": null
+    },
+    {
+      "id": "risk-1be4c046c968",
+      "title": "No revised delivery date is confirmed.",
+      "references": [
+        {
+          "evidence_id": "55874d2ec7af4e808539fd5c52d858cb:chunk-29",
+          "quote": "No revised delivery date is confirmed."
+        }
+      ],
+      "description": "No revised delivery date is confirmed.",
+      "categories": [
+        "delivery_forecast"
+      ],
+      "impact": null,
+      "likelihood": null,
+      "status": null,
+      "mitigation": null,
+      "severity": null
+    },
+    {
+      "id": "risk-2f85a827c9f7",
+      "title": "Schedule risks: incomplete RAG retrieval checks, workspace isolation checks and document-format validation may delay the evidence review milestone.",
+      "references": [
+        {
+          "evidence_id": "5bd8107ae759475c8e6d6bd282f8cd67:chunk-6",
+          "quote": "Schedule risks: incomplete RAG retrieval checks, workspace isolation checks and document-format validation may delay the evidence review milestone."
+        }
+      ],
+      "description": "Schedule risks: incomplete RAG retrieval checks, workspace isolation checks and document-format validation may delay the evidence review milestone.",
+      "categories": [
+        "schedule_risks"
+      ],
+      "impact": null,
+      "likelihood": null,
+      "status": null,
+      "mitigation": null,
+      "severity": null
+    },
+    {
+      "id": "risk-82798fee63a2",
+      "title": "Delivery challenge | Owner: Neha Rao; Risk ID: R-01; Risk Title: RAG retrieval regression; Probability: High; Impact: High; Severity: Critical; Status: Open; Due date: 2026-10-10; Mitigation: golden-source retrieval checks in T-07.",
+      "references": [
+        {
+          "evidence_id": "5bd8107ae759475c8e6d6bd282f8cd67:chunk-6",
+          "quote": "Delivery challenge | Owner: Neha Rao; Risk ID: R-01; Risk Title: RAG retrieval regression; Probability: High; Impact: High; Severity: Critical; Status: Open; Due date: 2026-10-10; Mitigation: golden-source retrieval checks in T-07."
+        }
+      ],
+      "description": "Delivery challenge | Owner: Neha Rao; Risk ID: R-01; Risk Title: RAG retrieval regression; Probability: High; Impact: High; Severity: Critical; Status: Open; Due date: 2026-10-10; Mitigation: golden-source retrieval checks in T-07.",
+      "categories": [
+        "delivery_challenges"
+      ],
+      "impact": "High",
+      "likelihood": "High",
+      "status": "Open",
+      "mitigation": "golden-source retrieval checks in T-07",
+      "severity": "Critical"
+    },
+    {
+      "id": "risk-3c6b16e5c800",
+      "title": "Delivery challenge | Owner: Ravi Kumar; Risk ID: R-02; Risk Title: Workspace data mixing; Probability: Low; Impact: Critical; Severity: Critical; Status: Open; Due date: 2026-10-09; Mitigation: workspace isolation checks in T-08.",
+      "references": [
+        {
+          "evidence_id": "5bd8107ae759475c8e6d6bd282f8cd67:chunk-6",
+          "quote": "Delivery challenge | Owner: Ravi Kumar; Risk ID: R-02; Risk Title: Workspace data mixing; Probability: Low; Impact: Critical; Severity: Critical; Status: Open; Due date: 2026-10-09; Mitigation: workspace isolation checks in T-08."
+        }
+      ],
+      "description": "Delivery challenge | Owner: Ravi Kumar; Risk ID: R-02; Risk Title: Workspace data mixing; Probability: Low; Impact: Critical; Severity: Critical; Status: Open; Due date: 2026-10-09; Mitigation: workspace isolation checks in T-08.",
+      "categories": [
+        "delivery_challenges"
+      ],
+      "impact": "Critical",
+      "likelihood": "Low",
+      "status": "Open",
+      "mitigation": "workspace isolation checks in T-08",
+      "severity": "Critical"
+    },
+    {
+      "id": "risk-6e42d8ddff15",
+      "title": "Delivery challenge | Owner: Meera Shah; Risk ID: R-03; Risk Title: Document format coverage; Probability: Moderate; Impact: High; Severity: High; Status: Open; Due date: 2026-10-10; Mitigation: cross-format ingestion checks in T-09.",
+      "references": [
+        {
+          "evidence_id": "5bd8107ae759475c8e6d6bd282f8cd67:chunk-6",
+          "quote": "Delivery challenge | Owner: Meera Shah; Risk ID: R-03; Risk Title: Document format coverage; Probability: Moderate; Impact: High; Severity: High; Status: Open; Due date: 2026-10-10; Mitigation: cross-format ingestion checks in T-09."
+        }
+      ],
+      "description": "Delivery challenge | Owner: Meera Shah; Risk ID: R-03; Risk Title: Document format coverage; Probability: Moderate; Impact: High; Severity: High; Status: Open; Due date: 2026-10-10; Mitigation: cross-format ingestion checks in T-09.",
+      "categories": [
+        "delivery_challenges"
+      ],
+      "impact": "High",
+      "likelihood": "Moderate",
+      "status": "Open",
+      "mitigation": "cross-format ingestion checks in T-09",
+      "severity": "High"
+    }
+  ],
+  "action_items": [
+    {
+      "id": "action-e3849969cff8",
+      "title": "Action item: review a future scanned-PDF policy; Owner: Not stated; Due date: Not stated; Status: Pending review. OCR is outside the current scope. This review is not a commitment to implement it.",
+      "references": [
+        {
+          "evidence_id": "55874d2ec7af4e808539fd5c52d858cb:chunk-28",
+          "quote": "Action item: review a future scanned-PDF policy; Owner: Not stated; Due date: Not stated; Status: Pending review. OCR is outside the current scope. This review is not a commitment to implement it."
+        }
+      ],
+      "description": "Action item: review a future scanned-PDF policy; Owner: Not stated; Due date: Not stated; Status: Pending review. OCR is outside the current scope. This review is not a commitment to implement it.",
+      "owner": null,
+      "due_date": null,
+      "status": "Pending review. OCR is outside the current scope. This review is not a commitment to implement it",
+      "dependency": null
+    },
+    {
+      "id": "action-b8c1822b4a30",
+      "title": "Action item: Provide approved edge-case documents; Owner: Priya Menon; Due date: 2026-10-08; Status: In progress; Dependency: Not stated; Task ID: T-17.",
+      "references": [
+        {
+          "evidence_id": "55874d2ec7af4e808539fd5c52d858cb:chunk-25",
+          "quote": "Action item: Provide approved edge-case documents; Owner: Priya Menon; Due date: 2026-10-08; Status: In progress; Dependency: Not stated; Task ID: T-17."
+        }
+      ],
+      "description": "Action item: Provide approved edge-case documents; Owner: Priya Menon; Due date: 2026-10-08; Status: In progress; Dependency: Not stated; Task ID: T-17.",
+      "owner": "Priya Menon",
+      "due_date": "2026-10-08",
+      "status": "In progress",
+      "dependency": null
+    },
+    {
+      "id": "action-1c07c9b5e296",
+      "title": "Action item: Workspace isolation checks; Owner: Ravi Kumar; Due date: 2026-10-09; Status: Blocked; Dependency: B-01; Task ID: T-08.",
+      "references": [
+        {
+          "evidence_id": "55874d2ec7af4e808539fd5c52d858cb:chunk-16",
+          "quote": "Action item: Workspace isolation checks; Owner: Ravi Kumar; Due date: 2026-10-09; Status: Blocked; Dependency: B-01; Task ID: T-08."
+        }
+      ],
+      "description": "Action item: Workspace isolation checks; Owner: Ravi Kumar; Due date: 2026-10-09; Status: Blocked; Dependency: B-01; Task ID: T-08.",
+      "owner": "Ravi Kumar",
+      "due_date": "2026-10-09",
+      "status": "Blocked",
+      "dependency": "B-01"
+    }
+  ]
+}

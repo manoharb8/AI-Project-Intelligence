@@ -1,0 +1,9 @@
+﻿Task_ID,Task,Owner,Status,Due_Date,Dependency,Linked_Risk_IDs
+T-01,Confirm staging credentials,Daniel Reed,Blocked,2026-10-30,Security approval,R-01
+T-02,Complete API end-to-end integration,Daniel Reed,Blocked,2026-11-03,T-01,R-01
+T-03,Raise automated coverage to 80%,Priya Nair,In progress,2026-11-06,Service-path tests,R-02
+T-04,Complete accessibility review,Elena Torres,In progress,2026-11-04,Resident request flow,R-03
+T-05,Assign load-test owner and target,Not recorded,Unassigned,2026-10-31,Product owner decision,R-05
+T-06,Rehearse staging rollback,Daniel Reed,Not started,2026-11-09,Staging environment,R-04
+T-07,Review budget and contingency,Amina Patel,In progress,2026-11-02,Latest estimate,R-06
+T-08,Prepare beta candidate,Maya Chen,Not started,2026-11-13,T-02; T-03; T-04; T-06,R-01; R-02; R-03; R-04

@@ -1,0 +1,21 @@
+import {ArrowUpRight, BarChart3} from 'lucide-react';
+import type {AssistantResult, DocumentationResult, HealthResult} from './types';
+import {categoryLabels} from '../agentSpecs';
+import {ScoreRing} from './ScoreRing';
+import {SourceQuotes} from './Shared';
+
+export function VisualSummary({documentation, health, outlook, blockers, stale}: {documentation: DocumentationResult | null; health: HealthResult | null; outlook: AssistantResult | null; blockers: AssistantResult | null; stale: boolean}) {
+  const categories = [...(outlook?.statements ?? []), ...(blockers?.statements ?? [])].reduce<Record<string, number>>((counts, item) => ({...counts, [item.category]: (counts[item.category] ?? 0) + 1}), {});
+  const largest = Math.max(1, ...Object.values(categories));
+  const actionCount = documentation?.action_items.length;
+  return <section className="visual-summary panel" id="briefing-visual-summary" aria-labelledby="visual-summary-title">
+    <header className="section-heading"><div><p className="eyebrow">Returned evidence · visible values</p><h2 id="visual-summary-title"><BarChart3 size={20}/>Visual Summary</h2></div>{stale && <span className="badge processing">Includes earlier source results</span>}</header>
+    <div className="visual-summary-grid">
+      <div className="summary-health"><ScoreRing score={health?.overall_score ?? null} small/><h3>{health?.interpretation ?? 'Health assessment unavailable'}</h3><p>Evidence health, not delivery probability.</p><a href="#briefing-health-calculation" className="text-link">Why this score?<ArrowUpRight size={14}/></a></div>
+      <div className="summary-dimensions"><h3>Health dimensions</h3>{health ? health.dimensions.map(dimension => <div className="summary-bar" key={dimension.id}><div><a href={`#briefing-dimension-${dimension.id}`}>{dimension.label}</a><strong>{dimension.score === null ? 'Unknown' : `${dimension.score} / 100`}</strong></div><div className={`summary-track ${dimension.higher_is_better ? '' : 'risk'}`} aria-hidden="true">{dimension.score !== null && <span style={{width: `${dimension.score}%`}}/>}</div><small>{dimension.higher_is_better ? 'Higher is better' : 'Higher means more risk'}{dimension.score === null && ' · insufficient or conflicting evidence'}</small></div>) : <p className="unknown-value">Dimension data is unavailable.</p>}</div>
+      <div className="summary-categories"><h3>Returned briefing statements</h3><p>Delivery and blocker responses, by category. Counts are not verified unique incidents.</p>{Object.keys(categories).length ? Object.entries(categories).map(([category, count]) => <div className="summary-bar" key={category}><div><a href={['pending_decisions','unresolved_issues'].includes(category) ? '#briefing-blockers' : '#briefing-outlook'}>{categoryLabels[category] ?? category}</a><strong>{count}</strong></div><div className="summary-track" aria-hidden="true"><span style={{width: `${count / largest * 100}%`}}/></div></div>) : <p className="unknown-value">No supported statements available to chart.</p>}</div>
+    </div>
+    {health && <div className="briefing-health-calculation" id="briefing-health-calculation"><h3>Why this score?</h3><p>{health.methodology}</p>{health.dimensions.map(dimension => <details id={`briefing-dimension-${dimension.id}`} key={dimension.id}><summary>{dimension.label}: {dimension.score === null ? 'Unknown' : `${dimension.score} / 100`} · calculation & evidence</summary><p>{dimension.calculation}</p><p>{dimension.explanation}</p><SourceQuotes references={dimension.references} evidence={health.evidence}/></details>)}</div>}
+    <div className="summary-action-counts"><div><h3>Documented action entries</h3><p>Owner and date gaps can overlap.</p></div>{documentation && actionCount ? <dl><div><dt>Returned entries</dt><dd><a href="#briefing-actions">{actionCount}</a></dd></div><div><dt>Owner not stated</dt><dd><a href="#briefing-actions">{documentation.action_items.filter(item => item.owner === null).length}</a></dd></div><div><dt>Due date not stated</dt><dd><a href="#briefing-actions">{documentation.action_items.filter(item => item.due_date === null).length}</a></dd></div></dl> : <p className="unknown-value">{documentation ? 'No action entries established; real-world action count is unknown.' : 'Action breakdown unavailable.'}</p>}</div>
+  </section>;
+}

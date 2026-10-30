@@ -1,0 +1,97 @@
+{
+  "verified_date": "2026-09-25",
+  "python": {
+    "total_passed": 228,
+    "failures": 0,
+    "skipped": 0,
+    "warnings": 2,
+    "runtime": "Python 3.12.14 Linux",
+    "suite_seconds": 30.96,
+    "breakdown": {
+      "existing_backend": 129,
+      "m3_backend": 59,
+      "historical_m1": 38,
+      "live_application": 2
+    }
+  },
+  "frontend": {
+    "passed": 48,
+    "existing": 34,
+    "m3": 14,
+    "production_build": "passed"
+  },
+  "live_report": "milestone3-live-verification.json",
+  "cross_format": [
+    "pdf",
+    "docx",
+    "csv",
+    "txt"
+  ],
+  "not_verified": [
+    "Rendered layouts at 360px, 768px, 1024px and 1440px (preview access blocked)",
+    "Browser computed contrast and manual assistive-technology audit",
+    "Native Windows execution",
+    "Live external LLM provider"
+  ],
+  "preservation": {
+    "baseline_source_files": 102,
+    "modified_original_paths": [
+      "PROJECT_FILES.md",
+      "README.md",
+      "backend/app/main.py",
+      "frontend/src/App.tsx",
+      "frontend/src/SessionContext.tsx",
+      "frontend/src/api.ts",
+      "frontend/src/components/UI.tsx",
+      "frontend/src/main.tsx",
+      "frontend/src/pages/Overview.tsx"
+    ],
+    "added_paths": [
+      "backend/app/agents/documentation.py",
+      "backend/app/api/intelligence.py",
+      "backend/app/intelligence/__init__.py",
+      "backend/app/intelligence/evidence.py",
+      "backend/app/intelligence/schemas.py",
+      "backend/app/services/assistant.py",
+      "backend/app/services/project_health.py",
+      "backend/tests/test_m3_documentation.py",
+      "backend/tests/test_m3_health.py",
+      "backend/tests/test_m3_integration.py",
+      "docs/health-scoring.md",
+      "docs/milestone3-changes.md",
+      "docs/milestone3-demo.md",
+      "docs/milestone3-live-verification.json",
+      "docs/milestone3-verification-results.json",
+      "docs/milestone3-verification.md",
+      "docs/milestone3.md",
+      "frontend/src/Intelligence.test.tsx",
+      "frontend/src/intelligence/IntelligenceContext.tsx",
+      "frontend/src/intelligence/OverviewIntelligence.tsx",
+      "frontend/src/intelligence/Shared.tsx",
+      "frontend/src/intelligence/api.ts",
+      "frontend/src/intelligence/intelligence.css",
+      "frontend/src/intelligence/types.ts",
+      "frontend/src/pages/Assistant.tsx",
+      "frontend/src/pages/Documentation.tsx",
+      "frontend/src/pages/ProjectHealth.tsx",
+      "rag_pipeline/__init__.py",
+      "rag_pipeline/chunking.py",
+      "rag_pipeline/embeddings.py",
+      "rag_pipeline/ingestion.py",
+      "rag_pipeline/models.py",
+      "rag_pipeline/normalization.py",
+      "rag_pipeline/pipeline.py",
+      "rag_pipeline/retrieval.py",
+      "rag_pipeline/vector_store.py",
+      "scripts/smoke_m3.py",
+      "tests/test_m3_live_application.py"
+    ],
+    "historical_tests_samples_documents_unchanged": true,
+    "historical_m2_report_sha256": "b3afe430f90490781c32d8dc943bc04e0d32fabaa24c4be6111d20d6d069895b"
+  },
+  "delivery": {
+    "zip_created": false,
+    "github_push": false,
+    "new_dependencies": false
+  }
+}

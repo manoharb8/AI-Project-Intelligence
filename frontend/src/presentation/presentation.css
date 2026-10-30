@@ -1,0 +1,171 @@
+/* Scoped presentation patch: no request, source, agent or scoring behavior. */
+:root {
+  --health-blue:#4877ab;--health-amber:#92601a;--health-teal:#2d8275;
+  --health-track:#e9eef6;--health-grid:#acbfd433;--health-tooltip:#132b43;--health-tooltip-ink:#f1f7ff;
+  --pulse-blue:#608bb7;--pulse-accent:#e1aa55;--pulse-teal:#4b9d91;
+}
+/* Keep the main identity; the separate workspace and footer cards are gone. */
+.brand {padding:0;gap:4px;align-items:center;margin:0 0 32px;}
+.brand-identity {display:flex;align-items:center;gap:11px;min-width:0;outline-offset:5px;border-radius:10px;}
+.intelligence-brand-symbol {display:block;width:48px;height:53px;flex:0 0 48px;filter:drop-shadow(0 5px 9px #020d1b38);}
+.intelligence-brand-symbol svg {display:block;width:100%;height:100%;}
+.brand-wordmark {font-size:13px;line-height:1.45;letter-spacing:-.2px;color:#f5f8fd;font-weight:650;}
+.brand-wordmark small {color:#b6c9df;font-size:11px;font-weight:450;margin-top:3px;letter-spacing:.2px;}
+.brand-layer {transform-box:fill-box;transform-origin:center;}
+.brand-identity:hover .brand-layer-top,.brand:focus-within .brand-layer-top {transform:translateY(-2px);}
+.brand-identity:hover .brand-layer-middle,.brand:focus-within .brand-layer-middle {transform:translateY(-1px);}
+.brand-identity:hover .intelligence-brand-symbol,.brand:focus-within .intelligence-brand-symbol {filter:drop-shadow(0 5px 10px #5282ad44);}
+.sidebar nav {padding-top:0;}
+/* Actual tab-session display preference, keyboard-operable via native button. */
+.theme-toggle {display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:5px 9px 5px 6px;border:1px solid var(--line);border-radius:22px;background:var(--surface);color:var(--muted);flex-shrink:0;font-size:11px;}
+.theme-toggle-track {position:relative;display:flex;align-items:center;justify-content:space-between;width:54px;height:30px;border-radius:18px;background:#e8eef5;padding:0 7px;}
+.theme-toggle-track svg {z-index:1;}
+.theme-toggle-thumb {position:absolute;left:3px;top:3px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 2px 6px #122e4520;}
+.theme-sun {color:#865716;}.theme-moon {color:#526986;}
+.theme-toggle[aria-checked=true] .theme-toggle-thumb {transform:translateX(24px);background:#37536f;box-shadow:0 2px 7px #0004;}
+.theme-toggle[aria-checked=true] .theme-toggle-track {background:#101e2e;}
+.theme-toggle[aria-checked=true] .theme-sun {color:#a6b8cf;}
+.theme-toggle[aria-checked=true] .theme-moon {color:#ffda8f;}
+.theme-toggle:hover {border-color:#92a9c3;box-shadow:0 3px 12px #1230510d;}
+/* Current-value comparison. The only quantitative horizontal axis is 0–100. */
+.health-comparison {min-width:0;}
+.comparison-header {display:flex;justify-content:space-between;align-items:center;gap:18px;margin:20px 0 16px;}
+.visual-eyebrow {font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);font-weight:650;}
+.comparison-score {display:flex;gap:7px;align-items:baseline;margin-top:5px;}
+.comparison-score strong {font-size:44px;line-height:1.1;letter-spacing:-1.5px;color:var(--ink);font-variant-numeric:tabular-nums;}
+.comparison-score > span {font-size:12px;color:var(--muted);}
+.comparison-header h3 {font-size:17px;}
+.comparison-header p {font-size:11px;color:var(--muted);margin-top:5px;}
+.health-metric {--metric-color:var(--health-blue);position:relative;min-width:0;padding:12px 0;}
+.metric-amber {--metric-color:var(--health-amber);}.metric-teal {--metric-color:var(--health-teal);}
+.health-metric-inspect {display:block;width:100%;border:0;background:transparent;color:var(--ink);padding:0;text-align:left;border-radius:6px;position:relative;}
+.health-metric-label {display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:12px;}
+.health-metric-label > span {font-weight:550;}
+.health-metric-label strong {font-size:13px;white-space:nowrap;font-variant-numeric:tabular-nums;}
+.health-metric-plot {display:block;position:relative;height:32px;margin:8px 5px 5px;background:linear-gradient(180deg,transparent 49%,var(--health-track) 49%,var(--health-track) 53%,transparent 53%);}
+.metric-grid {position:absolute;inset:0;display:flex;justify-content:space-between;pointer-events:none;}
+.metric-grid i {height:100%;border-left:1px dashed var(--health-grid);}
+.metric-ribbon {position:absolute;left:0;top:5px;height:22px;color:var(--metric-color);transform-origin:left;}
+.metric-ribbon::before {content:'';position:absolute;inset:0;background:linear-gradient(180deg,color-mix(in srgb,var(--metric-color) 20%,transparent),color-mix(in srgb,var(--metric-color) 5%,transparent));clip-path:polygon(0 47%,20% 20%,48% 40%,72% 0,100% 28%,100% 75%,78% 58%,52% 87%,24% 70%,0 52%);}
+.metric-ribbon::after {content:'';position:absolute;inset:0;top:10px;height:2px;border-radius:3px;background:linear-gradient(90deg,color-mix(in srgb,var(--metric-color) 35%,transparent),var(--metric-color));box-shadow:0 3px 8px color-mix(in srgb,var(--metric-color) 12%,transparent);}
+.metric-marker {position:absolute;right:-5px;top:6px;width:10px;height:10px;border:2px solid var(--surface);background:var(--metric-color);border-radius:3px;transform:rotate(45deg);z-index:1;box-shadow:0 0 0 1px var(--metric-color),0 3px 9px color-mix(in srgb,var(--metric-color) 25%,transparent);}
+.health-metric-inspect:hover .metric-marker,.health-metric-inspect:focus-visible .metric-marker {box-shadow:0 0 0 5px color-mix(in srgb,var(--metric-color) 12%,transparent),0 0 0 1px var(--metric-color);}
+.health-metric-hint {display:block;color:var(--muted);font-size:10px;line-height:1.6;}
+.metric-amber .health-metric-hint {color:var(--health-amber);font-weight:600;}
+.metric-no-value {position:absolute;left:0;top:5px;background:var(--surface);font-size:11px;padding:1px 9px 1px 0;color:var(--muted);}
+.metric-tooltip {position:absolute;left:0;right:0;top:calc(100% - 2px);z-index:20;background:var(--health-tooltip);color:var(--health-tooltip-ink);box-shadow:0 12px 28px #091b3d30;border:1px solid #647c9844;border-radius:11px;padding:14px 16px;pointer-events:auto;font-size:12px;line-height:1.7;}
+.metric-tooltip > strong,.metric-tooltip > span {display:block;}.metric-tooltip > span {font-size:10px;color:#b6d0e8;margin-top:3px;}
+.metric-tooltip p {margin-top:10px;}.metric-tooltip-calculation {border-top:1px solid #8badcb33;padding-top:9px;}
+.metric-evidence-link {display:inline-flex;gap:6px;align-items:center;color:var(--muted);font-size:10px;padding:5px 0;min-height:28px;}
+.metric-evidence-link:hover {text-decoration:underline;color:var(--health-blue);}
+.comparison-axis {display:flex;justify-content:space-between;gap:10px;font-size:10px;font-variant-numeric:tabular-nums;color:var(--muted);margin:0 1px;}
+.comparison-note {font-size:10px;color:var(--muted);border-bottom:1px solid var(--line);padding:11px 0 14px;}
+.comparison-dimensions {padding-top:3px;}
+.comparison-dimensions .health-metric {border-bottom:1px solid var(--line);}
+.comparison-dimensions .health-metric:last-child {border-bottom:0;}
+.insights-health {overflow:visible;}
+/* A layered, non-circular score field. Shape motion settles; no loop. */
+.health-pulse {width:350px;max-width:100%;flex:0 0 350px;--pulse-accent:#dfad61;}
+.pulse-good {--pulse-accent:#5ca89c;}.pulse-attention {--pulse-accent:#d88770;}
+.pulse-unknown {--pulse-accent:#93a2b6;--pulse-teal:#879cb1;}
+.health-pulse-field {position:relative;isolation:isolate;width:100%;aspect-ratio:360/292;display:grid;place-items:center;}
+.health-pulse-field > svg {width:100%;height:100%;position:absolute;inset:0;overflow:visible;filter:drop-shadow(0 8px 15px rgb(3 14 28 / 14%));opacity:calc(.67 + var(--field-intensity));}
+.pulse-score-core {position:relative;z-index:1;text-align:center;width:152px;min-height:110px;padding:12px 9px;background:linear-gradient(145deg,#f9fcffeb,#edf3fbe3);border:1px solid #f5faffbd;border-radius:24px 17px 24px 17px;box-shadow:0 8px 24px #071f3630,inset 0 1px #fff9;color:#213e5d;}
+.pulse-core-label {display:block;font-size:9px;letter-spacing:1.1px;text-transform:uppercase;color:#4f6b88;}
+.pulse-score {display:block;font-size:40px;font-variant-numeric:tabular-nums;line-height:1.25;letter-spacing:-1.2px;margin:4px 0;}
+.pulse-score small {font-size:12px;font-weight:500;margin-left:3px;letter-spacing:0;}
+.pulse-interpretation {font-size:11px;line-height:1.5;display:block;}
+.pulse-indicators {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:-6px;position:relative;}
+.pulse-indicator {padding:9px 7px;background:#ffffff08;border:1px solid #ffffff18;border-radius:8px;min-width:0;}
+.pulse-indicator > span {display:block;font-size:9px;color:#c4d6ea;}
+.pulse-indicator > strong {display:block;font-size:12px;color:#f2f7fc;margin-top:4px;}
+.health-pulse.pulse-small {width:190px;flex-basis:190px;}
+.pulse-small .pulse-score-core {width:110px;min-height:77px;padding:8px 5px;border-radius:17px 12px 17px 12px;}
+.pulse-small .pulse-core-label {font-size:7px;letter-spacing:.7px;}
+.pulse-small .pulse-score {font-size:29px;margin:2px 0;}.pulse-small .pulse-interpretation {font-size:9px;}
+.health-overview {overflow:visible;gap:28px;}
+.health-overview-main {min-width:0;flex:1;}
+.health-dimension {overflow:visible;}
+.health-dimension .health-metric {margin-top:14px;}
+.health-dimension .health-metric-label > span {display:none;}
+.health-dimension .health-metric-label strong {font-size:29px;font-weight:650;letter-spacing:-.6px;}
+.health-dimension .health-metric-plot {height:43px;margin-top:12px;}
+.health-dimension .metric-ribbon {top:11px;}
+.health-dimension .metric-no-value {top:10px;}
+.dimension-explanations > article {scroll-margin-top:24px;}
+.summary-health .health-pulse {margin:0 auto;}
+/* Shared controls: same labels/actions and honest operation notices. */
+.button {position:relative;isolation:isolate;}
+.button:not(:disabled):active {transform:translateY(1px);box-shadow:inset 0 2px 4px #533b181f;}
+.button.secondary:not(:disabled):hover {border-color:#98afc9;box-shadow:0 5px 14px #12304f12;}
+.button:disabled {box-shadow:none;opacity:.56;}
+.notice {position:relative;border-left-width:3px;box-shadow:0 5px 16px #18344d05;}
+.notice > svg {margin-top:2px;}
+.workspace-status-trigger[aria-expanded=true] {background:#eaf1fb;border-color:#a1b8d2;}
+@media (prefers-reduced-motion:no-preference) {
+  .brand-identity {animation:brand-entrance 360ms ease-out both;}
+  .brand-layer,.intelligence-brand-symbol {transition:transform 220ms ease,filter 220ms ease;}
+  .theme-toggle-thumb {transition:transform 230ms cubic-bezier(.2,.75,.3,1),background-color 180ms ease;}
+  .theme-toggle-track,.theme-toggle svg {transition:background-color 180ms ease,color 180ms ease;}
+  .metric-ribbon {animation:ribbon-enter 450ms cubic-bezier(.18,.7,.25,1) both;}
+  .metric-marker {transition:box-shadow 160ms ease;}
+  .metric-tooltip {animation:tooltip-enter 140ms ease-out both;}
+  .pulse-layers {animation:pulse-arrive 620ms cubic-bezier(.2,.7,.3,1) both;transform-origin:180px 146px;}
+  .pulse-layer {transform-origin:180px 146px;}
+  .pulse-layer-a {animation:field-blue 720ms ease-out both;}
+  .pulse-layer-b {animation:field-warm 850ms ease-out both;}
+  .pulse-layer-c {animation:field-calm 750ms ease-out both;}
+  .pulse-score,.comparison-score > strong {animation:score-reveal 420ms ease-out both;}
+  .health-pulse-field:hover .pulse-layer-a {transform:translateY(-2px);}
+  .pulse-layer {transition:transform 220ms ease;}
+  @keyframes brand-entrance {from{opacity:0;transform:translateY(3px);}to{opacity:1;transform:translateY(0);}}
+  @keyframes ribbon-enter {from{transform:scaleX(.02);opacity:.3;}to{transform:scaleX(1);opacity:1;}}
+  @keyframes tooltip-enter {from{opacity:0;transform:translateY(-3px);}to{opacity:1;transform:translateY(0);}}
+  @keyframes pulse-arrive {from{opacity:0;transform:scale(.93);}to{opacity:1;transform:scale(1);}}
+  @keyframes field-blue {from{transform:rotate(-9deg) scale(.95);}to{transform:rotate(0) scale(1);}}
+  @keyframes field-warm {from{transform:rotate(8deg) scale(.92);}to{transform:rotate(0) scale(1);}}
+  @keyframes field-calm {from{transform:translateY(8px);}to{transform:translateY(0);}}
+  @keyframes score-reveal {from{opacity:.2;transform:translateY(5px);}to{opacity:1;transform:translateY(0);}}
+}
+@media (max-width:1200px) {
+  .health-pulse {width:300px;flex-basis:300px;}
+  .theme-label {display:none;}.theme-toggle {padding:5px;}
+  .health-overview {gap:16px;}
+}
+@media (max-width:1024px) {
+  .brand-wordmark {font-size:12px;}.intelligence-brand-symbol {width:43px;height:49px;flex-basis:43px;}
+  .brand-identity {gap:8px;}.health-overview {flex-direction:column;align-items:stretch;}
+  .health-pulse {align-self:center;flex-basis:auto;width:330px;}
+}
+@media (max-width:767px) {
+  .brand {margin-bottom:24px;}.brand-identity {gap:12px;}.brand-wordmark {font-size:14px;}
+  .intelligence-brand-symbol {width:48px;height:53px;flex-basis:48px;}
+  .topbar {gap:6px;}.workspace-tools {gap:4px;}.topbar-refresh {display:none;}
+  .theme-toggle-track {width:50px;}.theme-toggle[aria-checked=true] .theme-toggle-thumb {transform:translateX(20px);}
+  .comparison-header {gap:12px;}.comparison-score strong {font-size:40px;}
+  .metric-evidence-link {min-height:36px;}.metric-tooltip {font-size:12px;}
+  .health-overview {padding:24px 20px;}.health-pulse {max-width:310px;width:100%;}
+}
+@media (max-width:390px) {
+  .theme-toggle {border-color:transparent;background:transparent;}.topbar-location strong {font-size:11px;}
+  .comparison-header h3 {font-size:15px;}.comparison-header p {font-size:10px;}
+  .health-overview {padding:22px 16px;}.pulse-indicators {gap:5px;}.pulse-indicator {padding:8px 5px;}
+}
+@media (prefers-reduced-motion:reduce) {
+  *,*::before,*::after {animation:none!important;transition:none!important;scroll-behavior:auto!important;}
+  .brand-identity:hover .brand-layer,.brand:focus-within .brand-layer,.health-pulse-field:hover .pulse-layer {transform:none!important;}
+}
+
+/* Supporting labels remain legible without changing their wording or meaning. */
+.source-quote summary small {color:#5c6e83;}
+.section-overline,.answer-category,.agent-index,.entry-marker,.question-index,.dimension-calculation,.coverage-heading {color:#566c85;}
+.action-status-breakdown > p {color:#536980;}
+.analysis-notes {color:var(--muted);}
+
+/* Controlled final polish: existing branding, workspace controls and actions. */
+.intelligence-brand-symbol{filter:drop-shadow(0 4px 8px #020d1b30);}
+.brand-layer-top{transform-origin:28px 22px;}
+.project-switcher-trigger{border-color:var(--line);background:color-mix(in srgb,var(--health-blue) 3%,var(--surface));}
+.topbar .theme-toggle,.topbar .workspace-status-trigger,.topbar .topbar-refresh{min-height:40px;border-radius:12px;}
+.executive-overview .page-heading .button{box-shadow:0 3px 10px #e6a9441c;}
+@media(prefers-reduced-motion:no-preference){.brand-identity:hover .brand-layer-top{transform:translateY(-1px)}.executive-card{transition:box-shadow 150ms ease,border-color 150ms ease}.executive-card:hover{border-color:color-mix(in srgb,var(--health-blue) 25%,var(--line));box-shadow:0 7px 22px #112b4810;}}

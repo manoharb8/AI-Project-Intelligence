@@ -1,0 +1,10 @@
+Atlas Citizen Services Portal — Sprint Update
+Project: ATL-26 | Snapshot: 2026-10-29
+
+Resident request creation and staff triage are implemented in development. Staging API integration is blocked because Security approval for staging credentials is still pending. The request was logged on 2026-10-20; no approval is recorded as of this update.
+
+Automated test coverage is 54%; the release gate is 80%. Priya Nair owns the improvement plan and targets 2026-11-06. Accessibility review is pending with Elena Torres. Rollback steps are documented but no rehearsal has run; Daniel Reed owns the rehearsal by 2026-11-09.
+
+The performance/load-test script has no recorded owner and the expected peak-load target is unspecified. Security response is requested by 2026-10-30; product owner to assign the load-test owner and confirm target by 2026-10-31.
+
+Baseline beta remains 2026-11-13. No revised delivery date is approved, so the baseline is not a confirmed forecast.

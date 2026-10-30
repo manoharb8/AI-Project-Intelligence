@@ -1,0 +1,7 @@
+﻿Risk_ID,Risk_Title,Probability,Impact,Severity,Status,Owner,Evidence,Mitigation
+R-01,Staging credentials pending,High,High,High,Open,Daniel Reed,Requested 2026-10-20; still pending 2026-10-29.,Escalate to Security by 2026-10-30.
+R-02,Automated coverage below gate,Medium,High,High,Open,Priya Nair,Current coverage 54%; gate is 80%.,Add service-path tests and publish report by 2026-11-06.
+R-03,Accessibility sign-off pending,Medium,Medium,Medium,Open,Elena Torres,Keyboard/screen-reader review is not signed off.,Complete review by 2026-11-04.
+R-04,Rollback not rehearsed,Low,High,Medium,Open,Daniel Reed,Steps are documented but no rehearsal evidence is stored.,Rehearse rollback by 2026-11-09.
+R-05,Performance test owner missing,Medium,Medium,Medium,Open,Not recorded,Owner and peak-load target are missing from current records.,Assign an owner and confirm the target by 2026-10-31.
+R-06,Budget contingency needs review,Low,Medium,Low,Open,Amina Patel,"Forecast INR 8,90,000 vs ceiling INR 9,50,000.",Review assumptions before release planning.

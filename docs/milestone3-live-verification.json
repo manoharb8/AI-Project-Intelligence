@@ -1,0 +1,3055 @@
+{
+  "verified_at": "2026-09-25T10:18:55.562101+00:00",
+  "runtime": "extractive",
+  "routes": {
+    "/dashboard": 200,
+    "/documents": 200,
+    "/knowledge-base": 200,
+    "/retrieval": 200,
+    "/scope": 200,
+    "/risks": 200,
+    "/blockers": 200,
+    "/documentation": 200,
+    "/project-health": 200,
+    "/assistant": 200
+  },
+  "empty_health": {
+    "status": "insufficient_information",
+    "query": "Review the uploaded project documents.",
+    "generated_at": "2026-09-25T10:18:57.461455+00:00",
+    "provider": "Local extractive analysis",
+    "evidence": [],
+    "retrieved_count": 0,
+    "evidence_limited": false,
+    "warnings": [
+      "Assessment covers bounded retrieved evidence, not an exhaustive audit of every document or real-world project status.",
+      "This is a transparent heuristic of retrieved project evidence, not a delivery probability, completion percentage, or independently verified assessment.",
+      "Repeated wording is deduplicated; differently worded statements about the same underlying problem may still be counted separately.",
+      "Dates are reported as written. No present-day lateness, revised deadline, or unstated severity is inferred."
+    ],
+    "overall_score": null,
+    "interpretation": "Insufficient evidence for an overall score",
+    "assessed_dimensions": 0,
+    "dimensions": [
+      {
+        "id": "scope_clarity",
+        "label": "Scope clarity",
+        "state": "insufficient_information",
+        "score": null,
+        "health_contribution": null,
+        "higher_is_better": true,
+        "weight": 40,
+        "count": 0,
+        "explanation": "Five scope categories receive 20 points when explicitly established, 10 when unclear, and 0 when not retrieved. No scope evidence makes this dimension unavailable.",
+        "calculation": "0 + 0 + 0 + 0 + 0 (no scope evidence)",
+        "references": [],
+        "scope_signals": [
+          {
+            "category": "goals",
+            "state": "missing",
+            "points": 0.0,
+            "references": []
+          },
+          {
+            "category": "deliverables",
+            "state": "missing",
+            "points": 0.0,
+            "references": []
+          },
+          {
+            "category": "milestones",
+            "state": "missing",
+            "points": 0.0,
+            "references": []
+          },
+          {
+            "category": "timelines",
+            "state": "missing",
+            "points": 0.0,
+            "references": []
+          },
+          {
+            "category": "responsibilities",
+            "state": "missing",
+            "points": 0.0,
+            "references": []
+          }
+        ]
+      },
+      {
+        "id": "timeline_risk",
+        "label": "Timeline risk",
+        "state": "insufficient_information",
+        "score": null,
+        "health_contribution": null,
+        "higher_is_better": false,
+        "weight": 35,
+        "count": null,
+        "explanation": "Each unique schedule-risk or delivery-challenge statement adds risk points: critical 45, high 30, medium 20, low 10, unstated severity 25. Risk is capped at 100; a higher risk score is worse. Zero concerns requires an explicit source statement. Missing evidence never means no concerns. Conflicting zero and concern statements make the dimension unavailable.",
+        "calculation": "Not calculated: neither a supported concern nor an explicit zero statement was retrieved.",
+        "references": [],
+        "scope_signals": []
+      },
+      {
+        "id": "blocker_health",
+        "label": "Blocker health",
+        "state": "insufficient_information",
+        "score": null,
+        "health_contribution": null,
+        "higher_is_better": true,
+        "weight": 25,
+        "count": null,
+        "explanation": "Each unique unresolved-issue or blocked-task statement reduces blocker health by 20 points. The count measures retrieved statements, not independently verified incidents. Zero concerns requires an explicit source statement. Missing evidence never means no concerns. Conflicting zero and concern statements make the dimension unavailable.",
+        "calculation": "Not calculated: neither a supported concern nor an explicit zero statement was retrieved.",
+        "references": [],
+        "scope_signals": []
+      }
+    ],
+    "methodology_version": "evidence-health-v1",
+    "methodology": "Overall = round half up(0.40 \u00d7 scope clarity + 0.35 \u00d7 (100 \u2212 timeline risk) + 0.25 \u00d7 blocker health). All three dimensions must be assessable; weights are never silently redistributed. Bands: 75\u2013100 fewer documented concerns; 45\u201374 review needed; 0\u201344 needs attention."
+  },
+  "upload": {
+    "documents": [
+      {
+        "id": "3bc4df34076e45f78f41520c1f0af18f",
+        "filename": "meeting_notes.docx",
+        "document_type": "docx",
+        "size_bytes": 37052,
+        "uploaded_at": "2026-09-25T10:18:57.485382+00:00",
+        "status": "indexed",
+        "chunk_count": 8,
+        "indexed": true,
+        "error": null
+      },
+      {
+        "id": "1a44d28a350047f8a61439e908ecf014",
+        "filename": "project_proposal.pdf",
+        "document_type": "pdf",
+        "size_bytes": 1951,
+        "uploaded_at": "2026-09-25T10:18:57.517392+00:00",
+        "status": "indexed",
+        "chunk_count": 1,
+        "indexed": true,
+        "error": null
+      },
+      {
+        "id": "c628aa386cde4896b1148f10f0e3200b",
+        "filename": "sprint_update.txt",
+        "document_type": "txt",
+        "size_bytes": 632,
+        "uploaded_at": "2026-09-25T10:18:57.527249+00:00",
+        "status": "indexed",
+        "chunk_count": 4,
+        "indexed": true,
+        "error": null
+      },
+      {
+        "id": "592be80b7a924ca89ba5cc6e34b452d3",
+        "filename": "task_list.csv",
+        "document_type": "csv",
+        "size_bytes": 318,
+        "uploaded_at": "2026-09-25T10:18:57.539853+00:00",
+        "status": "indexed",
+        "chunk_count": 4,
+        "indexed": true,
+        "error": null
+      }
+    ]
+  },
+  "summary": {
+    "document_count": 4,
+    "indexed_documents": 4,
+    "chunk_count": 17,
+    "supported_formats": [
+      "pdf",
+      "docx",
+      "csv",
+      "txt"
+    ],
+    "retrieval_ready": true,
+    "documents": [
+      {
+        "id": "3bc4df34076e45f78f41520c1f0af18f",
+        "filename": "meeting_notes.docx",
+        "document_type": "docx",
+        "size_bytes": 37052,
+        "uploaded_at": "2026-09-25T10:18:57.485382+00:00",
+        "status": "indexed",
+        "chunk_count": 8,
+        "indexed": true,
+        "error": null
+      },
+      {
+        "id": "1a44d28a350047f8a61439e908ecf014",
+        "filename": "project_proposal.pdf",
+        "document_type": "pdf",
+        "size_bytes": 1951,
+        "uploaded_at": "2026-09-25T10:18:57.517392+00:00",
+        "status": "indexed",
+        "chunk_count": 1,
+        "indexed": true,
+        "error": null
+      },
+      {
+        "id": "c628aa386cde4896b1148f10f0e3200b",
+        "filename": "sprint_update.txt",
+        "document_type": "txt",
+        "size_bytes": 632,
+        "uploaded_at": "2026-09-25T10:18:57.527249+00:00",
+        "status": "indexed",
+        "chunk_count": 4,
+        "indexed": true,
+        "error": null
+      },
+      {
+        "id": "592be80b7a924ca89ba5cc6e34b452d3",
+        "filename": "task_list.csv",
+        "document_type": "csv",
+        "size_bytes": 318,
+        "uploaded_at": "2026-09-25T10:18:57.539853+00:00",
+        "status": "indexed",
+        "chunk_count": 4,
+        "indexed": true,
+        "error": null
+      }
+    ]
+  },
+  "agent_status": {
+    "provider": "Local extractive analysis",
+    "mode": "extractive",
+    "ready": true,
+    "message": "Uses explicit source statements and conservative rules. No generative LLM is running.",
+    "agents": [
+      "scope",
+      "risk",
+      "blockers"
+    ]
+  },
+  "queries": [
+    {
+      "status": "ok",
+      "message": "Relevant source passages. Similarity measures relatedness, not factual confidence; review the evidence for your question.",
+      "query": "What are the current project risks?",
+      "results": [
+        {
+          "id": "3bc4df34076e45f78f41520c1f0af18f:chunk-3",
+          "document_id": "3bc4df34076e45f78f41520c1f0af18f",
+          "filename": "meeting_notes.docx",
+          "document_type": "docx",
+          "chunk_number": 3,
+          "location": "Paragraph/block 3",
+          "text": "Current project blockers: the staging server is unavailable. Integration testing cannot start until access is restored.",
+          "similarity": 0.2421
+        },
+        {
+          "id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+          "document_id": "1a44d28a350047f8a61439e908ecf014",
+          "filename": "project_proposal.pdf",
+          "document_type": "pdf",
+          "chunk_number": 1,
+          "location": "Page 1",
+          "text": "Atlas Portal - Project Proposal (controlled demo) The project goal is to build a web portal for customer support tickets. The portal will let customers submit tickets and track support responses. Milestones: requirements sign-off on 12 September 2026; API prototype on 20 September 2026; integration testing on 27 September 2026; pilot delivery on 30 September 2026. Deliverables: a React frontend, a ticket API, a database schema, and a testing report. Priya owns backend API development. Arjun owns the frontend. Meera owns testing.",
+          "similarity": 0.207
+        },
+        {
+          "id": "c628aa386cde4896b1148f10f0e3200b:chunk-2",
+          "document_id": "c628aa386cde4896b1148f10f0e3200b",
+          "filename": "sprint_update.txt",
+          "document_type": "txt",
+          "chunk_number": 2,
+          "location": "Text section 2",
+          "text": "Schedule risks: API development is three days behind plan because the database schema has not been approved. This delay threatens the integration testing milestone on 27 September 2026. No revised delivery date is confirmed.",
+          "similarity": 0.1731
+        }
+      ]
+    }
+  ],
+  "agents": [
+    {
+      "agent": "scope",
+      "status": "ok",
+      "message": "Findings are quoted from retrieved project evidence. Missing details remain unknown.",
+      "query": "Review the uploaded project documents.",
+      "provider": "Local extractive analysis",
+      "generated_at": "2026-09-25T10:18:57.604424+00:00",
+      "findings": [
+        {
+          "category": "timelines",
+          "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-4",
+          "quote": "Task: Approve requirements; Owner: Sana; Status: Completed; Due date: 2026-09-12; Dependency: Stakeholder review",
+          "information_state": "known",
+          "owner": null,
+          "due_date": "2026-09-12",
+          "dates": [
+            "2026-09-12"
+          ],
+          "source_status": "Completed",
+          "severity": null,
+          "confidence": "explicit_source_statement"
+        },
+        {
+          "category": "responsibilities",
+          "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-4",
+          "quote": "Task: Approve requirements; Owner: Sana; Status: Completed; Due date: 2026-09-12; Dependency: Stakeholder review",
+          "information_state": "known",
+          "owner": "Sana",
+          "due_date": null,
+          "dates": [
+            "2026-09-12"
+          ],
+          "source_status": "Completed",
+          "severity": null,
+          "confidence": "explicit_source_statement"
+        },
+        {
+          "category": "goals",
+          "evidence_id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+          "quote": "Atlas Portal - Project Proposal (controlled demo) The project goal is to build a web portal for customer support tickets.",
+          "information_state": "known",
+          "owner": null,
+          "due_date": null,
+          "dates": [],
+          "source_status": null,
+          "severity": null,
+          "confidence": "explicit_source_statement"
+        },
+        {
+          "category": "milestones",
+          "evidence_id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+          "quote": "Milestones: requirements sign-off on 12 September 2026; API prototype on 20 September 2026; integration testing on 27 September 2026; pilot delivery on 30 September 2026.",
+          "information_state": "known",
+          "owner": null,
+          "due_date": null,
+          "dates": [
+            "12 September 2026",
+            "20 September 2026",
+            "27 September 2026",
+            "30 September 2026"
+          ],
+          "source_status": null,
+          "severity": null,
+          "confidence": "explicit_source_statement"
+        },
+        {
+          "category": "timelines",
+          "evidence_id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+          "quote": "Milestones: requirements sign-off on 12 September 2026; API prototype on 20 September 2026; integration testing on 27 September 2026; pilot delivery on 30 September 2026.",
+          "information_state": "known",
+          "owner": null,
+          "due_date": null,
+          "dates": [
+            "12 September 2026",
+            "20 September 2026",
+            "27 September 2026",
+            "30 September 2026"
+          ],
+          "source_status": null,
+          "severity": null,
+          "confidence": "explicit_source_statement"
+        },
+        {
+          "category": "deliverables",
+          "evidence_id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+          "quote": "Deliverables: a React frontend, a ticket API, a database schema, and a testing report.",
+          "information_state": "known",
+          "owner": null,
+          "due_date": null,
+          "dates": [],
+          "source_status": null,
+          "severity": null,
+          "confidence": "explicit_source_statement"
+        },
+        {
+          "category": "responsibilities",
+          "evidence_id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+          "quote": "Priya owns backend API development.",
+          "information_state": "known",
+          "owner": "Priya",
+          "due_date": null,
+          "dates": [],
+          "source_status": null,
+          "severity": null,
+          "confidence": "explicit_source_statement"
+        },
+        {
+          "category": "responsibilities",
+          "evidence_id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+          "quote": "Arjun owns the frontend.",
+          "information_state": "known",
+          "owner": "Arjun",
+          "due_date": null,
+          "dates": [],
+          "source_status": null,
+          "severity": null,
+          "confidence": "explicit_source_statement"
+        },
+        {
+          "category": "responsibilities",
+          "evidence_id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+          "quote": "Meera owns testing.",
+          "information_state": "known",
+          "owner": "Meera",
+          "due_date": null,
+          "dates": [],
+          "source_status": null,
+          "severity": null,
+          "confidence": "explicit_source_statement"
+        },
+        {
+          "category": "timelines",
+          "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-1",
+          "quote": "Task: Build the ticket API; Owner: Priya; Status: In progress; Due date: 2026-09-20; Dependency: Approved database schema",
+          "information_state": "known",
+          "owner": null,
+          "due_date": "2026-09-20",
+          "dates": [
+            "2026-09-20"
+          ],
+          "source_status": "In progress",
+          "severity": null,
+          "confidence": "explicit_source_statement"
+        },
+        {
+          "category": "responsibilities",
+          "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-1",
+          "quote": "Task: Build the ticket API; Owner: Priya; Status: In progress; Due date: 2026-09-20; Dependency: Approved database schema",
+          "information_state": "known",
+          "owner": "Priya",
+          "due_date": null,
+          "dates": [
+            "2026-09-20"
+          ],
+          "source_status": "In progress",
+          "severity": null,
+          "confidence": "explicit_source_statement"
+        },
+        {
+          "category": "timelines",
+          "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-3",
+          "quote": "Task: Run integration tests; Owner: Meera; Status: Blocked; Due date: 2026-09-27; Dependency: Staging server access",
+          "information_state": "known",
+          "owner": null,
+          "due_date": "2026-09-27",
+          "dates": [
+            "2026-09-27"
+          ],
+          "source_status": "Blocked",
+          "severity": null,
+          "confidence": "explicit_source_statement"
+        },
+        {
+          "category": "responsibilities",
+          "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-3",
+          "quote": "Task: Run integration tests; Owner: Meera; Status: Blocked; Due date: 2026-09-27; Dependency: Staging server access",
+          "information_state": "known",
+          "owner": "Meera",
+          "due_date": null,
+          "dates": [
+            "2026-09-27"
+          ],
+          "source_status": "Blocked",
+          "severity": null,
+          "confidence": "explicit_source_statement"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-4",
+          "document_id": "592be80b7a924ca89ba5cc6e34b452d3",
+          "filename": "task_list.csv",
+          "document_type": "csv",
+          "chunk_number": 4,
+          "location": "CSV line 5",
+          "text": "Task: Approve requirements; Owner: Sana; Status: Completed; Due date: 2026-09-12; Dependency: Stakeholder review",
+          "similarity": 0.2578
+        },
+        {
+          "id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+          "document_id": "1a44d28a350047f8a61439e908ecf014",
+          "filename": "project_proposal.pdf",
+          "document_type": "pdf",
+          "chunk_number": 1,
+          "location": "Page 1",
+          "text": "Atlas Portal - Project Proposal (controlled demo) The project goal is to build a web portal for customer support tickets. The portal will let customers submit tickets and track support responses. Milestones: requirements sign-off on 12 September 2026; API prototype on 20 September 2026; integration testing on 27 September 2026; pilot delivery on 30 September 2026. Deliverables: a React frontend, a ticket API, a database schema, and a testing report. Priya owns backend API development. Arjun owns the frontend. Meera owns testing.",
+          "similarity": 0.3741
+        },
+        {
+          "id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-1",
+          "document_id": "592be80b7a924ca89ba5cc6e34b452d3",
+          "filename": "task_list.csv",
+          "document_type": "csv",
+          "chunk_number": 1,
+          "location": "CSV line 2",
+          "text": "Task: Build the ticket API; Owner: Priya; Status: In progress; Due date: 2026-09-20; Dependency: Approved database schema",
+          "similarity": 0.1634
+        },
+        {
+          "id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-3",
+          "document_id": "592be80b7a924ca89ba5cc6e34b452d3",
+          "filename": "task_list.csv",
+          "document_type": "csv",
+          "chunk_number": 3,
+          "location": "CSV line 4",
+          "text": "Task: Run integration tests; Owner: Meera; Status: Blocked; Due date: 2026-09-27; Dependency: Staging server access",
+          "similarity": 0.2151
+        }
+      ],
+      "coverage": [
+        {
+          "category": "goals",
+          "state": "known",
+          "count": 1
+        },
+        {
+          "category": "milestones",
+          "state": "known",
+          "count": 1
+        },
+        {
+          "category": "timelines",
+          "state": "known",
+          "count": 4
+        },
+        {
+          "category": "responsibilities",
+          "state": "known",
+          "count": 6
+        },
+        {
+          "category": "deliverables",
+          "state": "known",
+          "count": 1
+        }
+      ],
+      "retrieved_count": 11,
+      "evidence_limited": false,
+      "warnings": [
+        "Missing means not established in this retrieved evidence, not necessarily absent from every document.",
+        "Local extractive mode uses fixed English-language rules; it is not a generative LLM and may miss indirect wording."
+      ]
+    },
+    {
+      "agent": "risk",
+      "status": "partial",
+      "message": "Findings are quoted from retrieved project evidence. Missing details remain unknown.",
+      "query": "Review the uploaded project documents.",
+      "provider": "Local extractive analysis",
+      "generated_at": "2026-09-25T10:18:57.623953+00:00",
+      "findings": [
+        {
+          "category": "schedule_risks",
+          "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-2",
+          "quote": "Schedule risks: API development is three days behind plan because the database schema has not been approved.",
+          "information_state": "known",
+          "owner": null,
+          "due_date": null,
+          "dates": [],
+          "source_status": null,
+          "severity": null,
+          "confidence": "explicit_source_statement"
+        },
+        {
+          "category": "schedule_risks",
+          "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-2",
+          "quote": "This delay threatens the integration testing milestone on 27 September 2026.",
+          "information_state": "known",
+          "owner": null,
+          "due_date": null,
+          "dates": [
+            "27 September 2026"
+          ],
+          "source_status": null,
+          "severity": null,
+          "confidence": "explicit_source_statement"
+        },
+        {
+          "category": "delivery_challenges",
+          "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-2",
+          "quote": "This delay threatens the integration testing milestone on 27 September 2026.",
+          "information_state": "known",
+          "owner": null,
+          "due_date": null,
+          "dates": [
+            "27 September 2026"
+          ],
+          "source_status": null,
+          "severity": null,
+          "confidence": "explicit_source_statement"
+        },
+        {
+          "category": "delivery_forecast",
+          "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-2",
+          "quote": "This delay threatens the integration testing milestone on 27 September 2026.",
+          "information_state": "known",
+          "owner": null,
+          "due_date": null,
+          "dates": [
+            "27 September 2026"
+          ],
+          "source_status": null,
+          "severity": null,
+          "confidence": "explicit_source_statement"
+        },
+        {
+          "category": "delivery_forecast",
+          "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-2",
+          "quote": "No revised delivery date is confirmed.",
+          "information_state": "unclear",
+          "owner": null,
+          "due_date": null,
+          "dates": [],
+          "source_status": null,
+          "severity": null,
+          "confidence": "explicit_source_statement"
+        },
+        {
+          "category": "dependency_gaps",
+          "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-3",
+          "quote": "Dependency gap: frontend integration depends on the ticket API contract.",
+          "information_state": "known",
+          "owner": null,
+          "due_date": null,
+          "dates": [],
+          "source_status": null,
+          "severity": null,
+          "confidence": "explicit_source_statement"
+        },
+        {
+          "category": "dependency_gaps",
+          "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-3",
+          "quote": "The contract is still pending review by Priya.",
+          "information_state": "known",
+          "owner": null,
+          "due_date": null,
+          "dates": [],
+          "source_status": null,
+          "severity": null,
+          "confidence": "explicit_source_statement"
+        },
+        {
+          "category": "dependency_gaps",
+          "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-3",
+          "quote": "The missing contract creates a delivery challenge for Arjun.",
+          "information_state": "known",
+          "owner": null,
+          "due_date": null,
+          "dates": [],
+          "source_status": null,
+          "severity": null,
+          "confidence": "explicit_source_statement"
+        },
+        {
+          "category": "delivery_challenges",
+          "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-3",
+          "quote": "The missing contract creates a delivery challenge for Arjun.",
+          "information_state": "known",
+          "owner": null,
+          "due_date": null,
+          "dates": [],
+          "source_status": null,
+          "severity": null,
+          "confidence": "explicit_source_statement"
+        },
+        {
+          "category": "delivery_challenges",
+          "evidence_id": "3bc4df34076e45f78f41520c1f0af18f:chunk-3",
+          "quote": "Integration testing cannot start until access is restored.",
+          "information_state": "known",
+          "owner": null,
+          "due_date": null,
+          "dates": [],
+          "source_status": null,
+          "severity": null,
+          "confidence": "explicit_source_statement"
+        },
+        {
+          "category": "dependency_gaps",
+          "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-3",
+          "quote": "Task: Run integration tests; Owner: Meera; Status: Blocked; Due date: 2026-09-27; Dependency: Staging server access",
+          "information_state": "known",
+          "owner": null,
+          "due_date": null,
+          "dates": [
+            "2026-09-27"
+          ],
+          "source_status": "Blocked",
+          "severity": null,
+          "confidence": "explicit_source_statement"
+        },
+        {
+          "category": "delivery_challenges",
+          "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-3",
+          "quote": "Task: Run integration tests; Owner: Meera; Status: Blocked; Due date: 2026-09-27; Dependency: Staging server access",
+          "information_state": "known",
+          "owner": null,
+          "due_date": null,
+          "dates": [
+            "2026-09-27"
+          ],
+          "source_status": "Blocked",
+          "severity": null,
+          "confidence": "explicit_source_statement"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "c628aa386cde4896b1148f10f0e3200b:chunk-2",
+          "document_id": "c628aa386cde4896b1148f10f0e3200b",
+          "filename": "sprint_update.txt",
+          "document_type": "txt",
+          "chunk_number": 2,
+          "location": "Text section 2",
+          "text": "Schedule risks: API development is three days behind plan because the database schema has not been approved. This delay threatens the integration testing milestone on 27 September 2026. No revised delivery date is confirmed.",
+          "similarity": 0.5361
+        },
+        {
+          "id": "c628aa386cde4896b1148f10f0e3200b:chunk-3",
+          "document_id": "c628aa386cde4896b1148f10f0e3200b",
+          "filename": "sprint_update.txt",
+          "document_type": "txt",
+          "chunk_number": 3,
+          "location": "Text section 3",
+          "text": "Dependency gap: frontend integration depends on the ticket API contract. The contract is still pending review by Priya. The missing contract creates a delivery challenge for Arjun.",
+          "similarity": 0.5284
+        },
+        {
+          "id": "3bc4df34076e45f78f41520c1f0af18f:chunk-3",
+          "document_id": "3bc4df34076e45f78f41520c1f0af18f",
+          "filename": "meeting_notes.docx",
+          "document_type": "docx",
+          "chunk_number": 3,
+          "location": "Paragraph/block 3",
+          "text": "Current project blockers: the staging server is unavailable. Integration testing cannot start until access is restored.",
+          "similarity": 0.2402
+        },
+        {
+          "id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-3",
+          "document_id": "592be80b7a924ca89ba5cc6e34b452d3",
+          "filename": "task_list.csv",
+          "document_type": "csv",
+          "chunk_number": 3,
+          "location": "CSV line 4",
+          "text": "Task: Run integration tests; Owner: Meera; Status: Blocked; Due date: 2026-09-27; Dependency: Staging server access",
+          "similarity": 0.2014
+        }
+      ],
+      "coverage": [
+        {
+          "category": "schedule_risks",
+          "state": "known",
+          "count": 2
+        },
+        {
+          "category": "dependency_gaps",
+          "state": "known",
+          "count": 4
+        },
+        {
+          "category": "delivery_challenges",
+          "state": "known",
+          "count": 4
+        },
+        {
+          "category": "delivery_forecast",
+          "state": "unclear",
+          "count": 2
+        }
+      ],
+      "retrieved_count": 11,
+      "evidence_limited": false,
+      "warnings": [
+        "Missing means not established in this retrieved evidence, not necessarily absent from every document.",
+        "Local extractive mode uses fixed English-language rules; it is not a generative LLM and may miss indirect wording.",
+        "Delivery outlook is limited to explicit source statements. No delivery date or probability is predicted."
+      ]
+    },
+    {
+      "agent": "blockers",
+      "status": "partial",
+      "message": "Findings are quoted from retrieved project evidence. Missing details remain unknown.",
+      "query": "Review the uploaded project documents.",
+      "provider": "Local extractive analysis",
+      "generated_at": "2026-09-25T10:18:57.661551+00:00",
+      "findings": [
+        {
+          "category": "pending_decisions",
+          "evidence_id": "3bc4df34076e45f78f41520c1f0af18f:chunk-4",
+          "quote": "Pending decision: the product owner has not approved the ticket retention period.",
+          "information_state": "known",
+          "owner": null,
+          "due_date": null,
+          "dates": [],
+          "source_status": null,
+          "severity": null,
+          "confidence": "explicit_source_statement"
+        },
+        {
+          "category": "unresolved_issues",
+          "evidence_id": "3bc4df34076e45f78f41520c1f0af18f:chunk-4",
+          "quote": "This remains unresolved.",
+          "information_state": "known",
+          "owner": null,
+          "due_date": null,
+          "dates": [],
+          "source_status": null,
+          "severity": null,
+          "confidence": "explicit_source_statement"
+        },
+        {
+          "category": "unresolved_issues",
+          "evidence_id": "3bc4df34076e45f78f41520c1f0af18f:chunk-3",
+          "quote": "Current project blockers: the staging server is unavailable.",
+          "information_state": "known",
+          "owner": null,
+          "due_date": null,
+          "dates": [],
+          "source_status": null,
+          "severity": null,
+          "confidence": "explicit_source_statement"
+        },
+        {
+          "category": "action_items",
+          "evidence_id": "3bc4df34076e45f78f41520c1f0af18f:chunk-5",
+          "quote": "Action item: Ravi will restore staging server access by 18 September 2026. Status: pending.",
+          "information_state": "known",
+          "owner": "Ravi",
+          "due_date": "18 September 2026",
+          "dates": [
+            "18 September 2026"
+          ],
+          "source_status": "pending",
+          "severity": null,
+          "confidence": "explicit_source_statement"
+        },
+        {
+          "category": "action_items",
+          "evidence_id": "3bc4df34076e45f78f41520c1f0af18f:chunk-6",
+          "quote": "Action item: arrange the retention-policy review.",
+          "information_state": "unclear",
+          "owner": null,
+          "due_date": null,
+          "dates": [],
+          "source_status": null,
+          "severity": null,
+          "confidence": "explicit_source_statement"
+        },
+        {
+          "category": "unresolved_issues",
+          "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-3",
+          "quote": "Task: Run integration tests; Owner: Meera; Status: Blocked; Due date: 2026-09-27; Dependency: Staging server access",
+          "information_state": "known",
+          "owner": null,
+          "due_date": null,
+          "dates": [
+            "2026-09-27"
+          ],
+          "source_status": "Blocked",
+          "severity": null,
+          "confidence": "explicit_source_statement"
+        },
+        {
+          "category": "action_items",
+          "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-3",
+          "quote": "Task: Run integration tests; Owner: Meera; Status: Blocked; Due date: 2026-09-27; Dependency: Staging server access",
+          "information_state": "known",
+          "owner": "Meera",
+          "due_date": "2026-09-27",
+          "dates": [
+            "2026-09-27"
+          ],
+          "source_status": "Blocked",
+          "severity": null,
+          "confidence": "explicit_source_statement"
+        },
+        {
+          "category": "unresolved_issues",
+          "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-3",
+          "quote": "The missing contract creates a delivery challenge for Arjun.",
+          "information_state": "known",
+          "owner": null,
+          "due_date": null,
+          "dates": [],
+          "source_status": null,
+          "severity": null,
+          "confidence": "explicit_source_statement"
+        }
+      ],
+      "evidence": [
+        {
+          "id": "3bc4df34076e45f78f41520c1f0af18f:chunk-4",
+          "document_id": "3bc4df34076e45f78f41520c1f0af18f",
+          "filename": "meeting_notes.docx",
+          "document_type": "docx",
+          "chunk_number": 4,
+          "location": "Paragraph/block 4",
+          "text": "Pending decision: the product owner has not approved the ticket retention period. This remains unresolved.",
+          "similarity": 0.5192
+        },
+        {
+          "id": "3bc4df34076e45f78f41520c1f0af18f:chunk-3",
+          "document_id": "3bc4df34076e45f78f41520c1f0af18f",
+          "filename": "meeting_notes.docx",
+          "document_type": "docx",
+          "chunk_number": 3,
+          "location": "Paragraph/block 3",
+          "text": "Current project blockers: the staging server is unavailable. Integration testing cannot start until access is restored.",
+          "similarity": 0.4508
+        },
+        {
+          "id": "3bc4df34076e45f78f41520c1f0af18f:chunk-5",
+          "document_id": "3bc4df34076e45f78f41520c1f0af18f",
+          "filename": "meeting_notes.docx",
+          "document_type": "docx",
+          "chunk_number": 5,
+          "location": "Paragraph/block 5",
+          "text": "Action item: Ravi will restore staging server access by 18 September 2026. Status: pending.",
+          "similarity": 0.5546
+        },
+        {
+          "id": "3bc4df34076e45f78f41520c1f0af18f:chunk-6",
+          "document_id": "3bc4df34076e45f78f41520c1f0af18f",
+          "filename": "meeting_notes.docx",
+          "document_type": "docx",
+          "chunk_number": 6,
+          "location": "Paragraph/block 6",
+          "text": "Action item: arrange the retention-policy review. Owner and due date were not recorded.",
+          "similarity": 0.2238
+        },
+        {
+          "id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-3",
+          "document_id": "592be80b7a924ca89ba5cc6e34b452d3",
+          "filename": "task_list.csv",
+          "document_type": "csv",
+          "chunk_number": 3,
+          "location": "CSV line 4",
+          "text": "Task: Run integration tests; Owner: Meera; Status: Blocked; Due date: 2026-09-27; Dependency: Staging server access",
+          "similarity": 0.394
+        },
+        {
+          "id": "c628aa386cde4896b1148f10f0e3200b:chunk-3",
+          "document_id": "c628aa386cde4896b1148f10f0e3200b",
+          "filename": "sprint_update.txt",
+          "document_type": "txt",
+          "chunk_number": 3,
+          "location": "Text section 3",
+          "text": "Dependency gap: frontend integration depends on the ticket API contract. The contract is still pending review by Priya. The missing contract creates a delivery challenge for Arjun.",
+          "similarity": 0.1738
+        }
+      ],
+      "coverage": [
+        {
+          "category": "pending_decisions",
+          "state": "known",
+          "count": 1
+        },
+        {
+          "category": "unresolved_issues",
+          "state": "known",
+          "count": 4
+        },
+        {
+          "category": "action_items",
+          "state": "unclear",
+          "count": 3
+        }
+      ],
+      "retrieved_count": 12,
+      "evidence_limited": true,
+      "warnings": [
+        "Missing means not established in this retrieved evidence, not necessarily absent from every document.",
+        "Local extractive mode uses fixed English-language rules; it is not a generative LLM and may miss indirect wording.",
+        "The evidence budget was reached. Narrow the analysis focus for more targeted coverage."
+      ]
+    }
+  ],
+  "documentation": {
+    "status": "partial",
+    "query": "Review the uploaded project documents.",
+    "generated_at": "2026-09-25T10:18:57.742717+00:00",
+    "provider": "Local extractive analysis",
+    "evidence": [
+      {
+        "id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+        "document_id": "1a44d28a350047f8a61439e908ecf014",
+        "filename": "project_proposal.pdf",
+        "document_type": "pdf",
+        "chunk_number": 1,
+        "location": "Page 1",
+        "text": "Atlas Portal - Project Proposal (controlled demo) The project goal is to build a web portal for customer support tickets. The portal will let customers submit tickets and track support responses. Milestones: requirements sign-off on 12 September 2026; API prototype on 20 September 2026; integration testing on 27 September 2026; pilot delivery on 30 September 2026. Deliverables: a React frontend, a ticket API, a database schema, and a testing report. Priya owns backend API development. Arjun owns the frontend. Meera owns testing.",
+        "similarity": 0.4243
+      },
+      {
+        "id": "3bc4df34076e45f78f41520c1f0af18f:chunk-6",
+        "document_id": "3bc4df34076e45f78f41520c1f0af18f",
+        "filename": "meeting_notes.docx",
+        "document_type": "docx",
+        "chunk_number": 6,
+        "location": "Paragraph/block 6",
+        "text": "Action item: arrange the retention-policy review. Owner and due date were not recorded.",
+        "similarity": 0.2238
+      },
+      {
+        "id": "3bc4df34076e45f78f41520c1f0af18f:chunk-3",
+        "document_id": "3bc4df34076e45f78f41520c1f0af18f",
+        "filename": "meeting_notes.docx",
+        "document_type": "docx",
+        "chunk_number": 3,
+        "location": "Paragraph/block 3",
+        "text": "Current project blockers: the staging server is unavailable. Integration testing cannot start until access is restored.",
+        "similarity": 0.2814
+      },
+      {
+        "id": "c628aa386cde4896b1148f10f0e3200b:chunk-2",
+        "document_id": "c628aa386cde4896b1148f10f0e3200b",
+        "filename": "sprint_update.txt",
+        "document_type": "txt",
+        "chunk_number": 2,
+        "location": "Text section 2",
+        "text": "Schedule risks: API development is three days behind plan because the database schema has not been approved. This delay threatens the integration testing milestone on 27 September 2026. No revised delivery date is confirmed.",
+        "similarity": 0.268
+      },
+      {
+        "id": "3bc4df34076e45f78f41520c1f0af18f:chunk-5",
+        "document_id": "3bc4df34076e45f78f41520c1f0af18f",
+        "filename": "meeting_notes.docx",
+        "document_type": "docx",
+        "chunk_number": 5,
+        "location": "Paragraph/block 5",
+        "text": "Action item: Ravi will restore staging server access by 18 September 2026. Status: pending.",
+        "similarity": 0.2667
+      },
+      {
+        "id": "c628aa386cde4896b1148f10f0e3200b:chunk-3",
+        "document_id": "c628aa386cde4896b1148f10f0e3200b",
+        "filename": "sprint_update.txt",
+        "document_type": "txt",
+        "chunk_number": 3,
+        "location": "Text section 3",
+        "text": "Dependency gap: frontend integration depends on the ticket API contract. The contract is still pending review by Priya. The missing contract creates a delivery challenge for Arjun.",
+        "similarity": 0.1738
+      },
+      {
+        "id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-3",
+        "document_id": "592be80b7a924ca89ba5cc6e34b452d3",
+        "filename": "task_list.csv",
+        "document_type": "csv",
+        "chunk_number": 3,
+        "location": "CSV line 4",
+        "text": "Task: Run integration tests; Owner: Meera; Status: Blocked; Due date: 2026-09-27; Dependency: Staging server access",
+        "similarity": 0.2151
+      }
+    ],
+    "retrieved_count": 14,
+    "evidence_limited": true,
+    "warnings": [
+      "Assessment covers bounded retrieved evidence, not an exhaustive audit of every document or real-world project status.",
+      "Unknown fields are null in the API and shown as Not stated. No acceptance criteria, mitigation, or commitments are inferred.",
+      "User stories are structured drafts of explicit requirements, not newly invented requirements. Review partial stories before adoption.",
+      "Local mode uses conservative English extraction rules and may miss indirect wording.",
+      "The retrieval budget was reached. Use a narrower focus to review further evidence."
+    ],
+    "user_stories": [
+      {
+        "id": "story-99807fe0d470",
+        "title": "build a web portal for customer support tickets",
+        "references": [
+          {
+            "evidence_id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+            "quote": "Atlas Portal - Project Proposal (controlled demo) The project goal is to build a web portal for customer support tickets."
+          }
+        ],
+        "role": null,
+        "need": "build a web portal for customer support tickets",
+        "benefit": null,
+        "acceptance_criteria": [],
+        "information_state": "partial"
+      },
+      {
+        "id": "story-2be932c2bd5d",
+        "title": "submit tickets and track support responses",
+        "references": [
+          {
+            "evidence_id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+            "quote": "The portal will let customers submit tickets and track support responses."
+          }
+        ],
+        "role": "customers",
+        "need": "submit tickets and track support responses",
+        "benefit": null,
+        "acceptance_criteria": [],
+        "information_state": "partial"
+      }
+    ],
+    "risks": [
+      {
+        "id": "risk-1b28495ece5b",
+        "title": "Schedule risks: API development is three days behind plan because the database schema has not been approved.",
+        "references": [
+          {
+            "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-2",
+            "quote": "Schedule risks: API development is three days behind plan because the database schema has not been approved."
+          }
+        ],
+        "description": "Schedule risks: API development is three days behind plan because the database schema has not been approved.",
+        "categories": [
+          "schedule_risks"
+        ],
+        "impact": null,
+        "likelihood": null,
+        "status": null,
+        "mitigation": null,
+        "severity": null
+      },
+      {
+        "id": "risk-e7c9a02df545",
+        "title": "This delay threatens the integration testing milestone on 27 September 2026.",
+        "references": [
+          {
+            "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-2",
+            "quote": "This delay threatens the integration testing milestone on 27 September 2026."
+          }
+        ],
+        "description": "This delay threatens the integration testing milestone on 27 September 2026.",
+        "categories": [
+          "delivery_challenges",
+          "delivery_forecast",
+          "schedule_risks"
+        ],
+        "impact": null,
+        "likelihood": null,
+        "status": null,
+        "mitigation": null,
+        "severity": null
+      },
+      {
+        "id": "risk-1be4c046c968",
+        "title": "No revised delivery date is confirmed.",
+        "references": [
+          {
+            "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-2",
+            "quote": "No revised delivery date is confirmed."
+          }
+        ],
+        "description": "No revised delivery date is confirmed.",
+        "categories": [
+          "delivery_forecast"
+        ],
+        "impact": null,
+        "likelihood": null,
+        "status": null,
+        "mitigation": null,
+        "severity": null
+      },
+      {
+        "id": "risk-69d354206c5e",
+        "title": "Dependency gap: frontend integration depends on the ticket API contract.",
+        "references": [
+          {
+            "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-3",
+            "quote": "Dependency gap: frontend integration depends on the ticket API contract."
+          }
+        ],
+        "description": "Dependency gap: frontend integration depends on the ticket API contract.",
+        "categories": [
+          "dependency_gaps"
+        ],
+        "impact": null,
+        "likelihood": null,
+        "status": null,
+        "mitigation": null,
+        "severity": null
+      },
+      {
+        "id": "risk-58d6b751bedf",
+        "title": "The contract is still pending review by Priya.",
+        "references": [
+          {
+            "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-3",
+            "quote": "The contract is still pending review by Priya."
+          }
+        ],
+        "description": "The contract is still pending review by Priya.",
+        "categories": [
+          "dependency_gaps"
+        ],
+        "impact": null,
+        "likelihood": null,
+        "status": null,
+        "mitigation": null,
+        "severity": null
+      },
+      {
+        "id": "risk-4004bed95cd5",
+        "title": "The missing contract creates a delivery challenge for Arjun.",
+        "references": [
+          {
+            "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-3",
+            "quote": "The missing contract creates a delivery challenge for Arjun."
+          }
+        ],
+        "description": "The missing contract creates a delivery challenge for Arjun.",
+        "categories": [
+          "delivery_challenges",
+          "dependency_gaps"
+        ],
+        "impact": null,
+        "likelihood": null,
+        "status": null,
+        "mitigation": null,
+        "severity": null
+      },
+      {
+        "id": "risk-7b7ceaf2049f",
+        "title": "Integration testing cannot start until access is restored.",
+        "references": [
+          {
+            "evidence_id": "3bc4df34076e45f78f41520c1f0af18f:chunk-3",
+            "quote": "Integration testing cannot start until access is restored."
+          }
+        ],
+        "description": "Integration testing cannot start until access is restored.",
+        "categories": [
+          "delivery_challenges"
+        ],
+        "impact": null,
+        "likelihood": null,
+        "status": null,
+        "mitigation": null,
+        "severity": null
+      },
+      {
+        "id": "risk-e5f77aa598f3",
+        "title": "Task: Run integration tests; Owner: Meera; Status: Blocked; Due date: 2026-09-27; Dependency: Staging server access",
+        "references": [
+          {
+            "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-3",
+            "quote": "Task: Run integration tests; Owner: Meera; Status: Blocked; Due date: 2026-09-27; Dependency: Staging server access"
+          }
+        ],
+        "description": "Task: Run integration tests; Owner: Meera; Status: Blocked; Due date: 2026-09-27; Dependency: Staging server access",
+        "categories": [
+          "delivery_challenges",
+          "dependency_gaps"
+        ],
+        "impact": null,
+        "likelihood": null,
+        "status": "Blocked",
+        "mitigation": null,
+        "severity": null
+      }
+    ],
+    "action_items": [
+      {
+        "id": "action-f84d70392d19",
+        "title": "Action item: Ravi will restore staging server access by 18 September 2026. Status: pending.",
+        "references": [
+          {
+            "evidence_id": "3bc4df34076e45f78f41520c1f0af18f:chunk-5",
+            "quote": "Action item: Ravi will restore staging server access by 18 September 2026. Status: pending."
+          }
+        ],
+        "description": "Action item: Ravi will restore staging server access by 18 September 2026. Status: pending.",
+        "owner": "Ravi",
+        "due_date": "18 September 2026",
+        "status": "pending",
+        "dependency": null
+      },
+      {
+        "id": "action-230d124dfa74",
+        "title": "Action item: arrange the retention-policy review.",
+        "references": [
+          {
+            "evidence_id": "3bc4df34076e45f78f41520c1f0af18f:chunk-6",
+            "quote": "Action item: arrange the retention-policy review."
+          }
+        ],
+        "description": "Action item: arrange the retention-policy review.",
+        "owner": null,
+        "due_date": null,
+        "status": null,
+        "dependency": null
+      },
+      {
+        "id": "action-e5f77aa598f3",
+        "title": "Run integration tests",
+        "references": [
+          {
+            "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-3",
+            "quote": "Task: Run integration tests; Owner: Meera; Status: Blocked; Due date: 2026-09-27; Dependency: Staging server access"
+          }
+        ],
+        "description": "Task: Run integration tests; Owner: Meera; Status: Blocked; Due date: 2026-09-27; Dependency: Staging server access",
+        "owner": "Meera",
+        "due_date": "2026-09-27",
+        "status": "Blocked",
+        "dependency": "Staging server access"
+      }
+    ]
+  },
+  "health": {
+    "status": "partial",
+    "query": "Review the uploaded project documents.",
+    "generated_at": "2026-09-25T10:18:57.978567+00:00",
+    "provider": "Local extractive analysis",
+    "evidence": [
+      {
+        "id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-4",
+        "document_id": "592be80b7a924ca89ba5cc6e34b452d3",
+        "filename": "task_list.csv",
+        "document_type": "csv",
+        "chunk_number": 4,
+        "location": "CSV line 5",
+        "text": "Task: Approve requirements; Owner: Sana; Status: Completed; Due date: 2026-09-12; Dependency: Stakeholder review",
+        "similarity": 0.2578
+      },
+      {
+        "id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+        "document_id": "1a44d28a350047f8a61439e908ecf014",
+        "filename": "project_proposal.pdf",
+        "document_type": "pdf",
+        "chunk_number": 1,
+        "location": "Page 1",
+        "text": "Atlas Portal - Project Proposal (controlled demo) The project goal is to build a web portal for customer support tickets. The portal will let customers submit tickets and track support responses. Milestones: requirements sign-off on 12 September 2026; API prototype on 20 September 2026; integration testing on 27 September 2026; pilot delivery on 30 September 2026. Deliverables: a React frontend, a ticket API, a database schema, and a testing report. Priya owns backend API development. Arjun owns the frontend. Meera owns testing.",
+        "similarity": 0.3741
+      },
+      {
+        "id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-1",
+        "document_id": "592be80b7a924ca89ba5cc6e34b452d3",
+        "filename": "task_list.csv",
+        "document_type": "csv",
+        "chunk_number": 1,
+        "location": "CSV line 2",
+        "text": "Task: Build the ticket API; Owner: Priya; Status: In progress; Due date: 2026-09-20; Dependency: Approved database schema",
+        "similarity": 0.1634
+      },
+      {
+        "id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-3",
+        "document_id": "592be80b7a924ca89ba5cc6e34b452d3",
+        "filename": "task_list.csv",
+        "document_type": "csv",
+        "chunk_number": 3,
+        "location": "CSV line 4",
+        "text": "Task: Run integration tests; Owner: Meera; Status: Blocked; Due date: 2026-09-27; Dependency: Staging server access",
+        "similarity": 0.2151
+      },
+      {
+        "id": "c628aa386cde4896b1148f10f0e3200b:chunk-2",
+        "document_id": "c628aa386cde4896b1148f10f0e3200b",
+        "filename": "sprint_update.txt",
+        "document_type": "txt",
+        "chunk_number": 2,
+        "location": "Text section 2",
+        "text": "Schedule risks: API development is three days behind plan because the database schema has not been approved. This delay threatens the integration testing milestone on 27 September 2026. No revised delivery date is confirmed.",
+        "similarity": 0.5361
+      },
+      {
+        "id": "c628aa386cde4896b1148f10f0e3200b:chunk-3",
+        "document_id": "c628aa386cde4896b1148f10f0e3200b",
+        "filename": "sprint_update.txt",
+        "document_type": "txt",
+        "chunk_number": 3,
+        "location": "Text section 3",
+        "text": "Dependency gap: frontend integration depends on the ticket API contract. The contract is still pending review by Priya. The missing contract creates a delivery challenge for Arjun.",
+        "similarity": 0.5284
+      },
+      {
+        "id": "3bc4df34076e45f78f41520c1f0af18f:chunk-3",
+        "document_id": "3bc4df34076e45f78f41520c1f0af18f",
+        "filename": "meeting_notes.docx",
+        "document_type": "docx",
+        "chunk_number": 3,
+        "location": "Paragraph/block 3",
+        "text": "Current project blockers: the staging server is unavailable. Integration testing cannot start until access is restored.",
+        "similarity": 0.2402
+      },
+      {
+        "id": "3bc4df34076e45f78f41520c1f0af18f:chunk-4",
+        "document_id": "3bc4df34076e45f78f41520c1f0af18f",
+        "filename": "meeting_notes.docx",
+        "document_type": "docx",
+        "chunk_number": 4,
+        "location": "Paragraph/block 4",
+        "text": "Pending decision: the product owner has not approved the ticket retention period. This remains unresolved.",
+        "similarity": 0.5192
+      }
+    ],
+    "retrieved_count": 14,
+    "evidence_limited": true,
+    "warnings": [
+      "Assessment covers bounded retrieved evidence, not an exhaustive audit of every document or real-world project status.",
+      "This is a transparent heuristic of retrieved project evidence, not a delivery probability, completion percentage, or independently verified assessment.",
+      "Repeated wording is deduplicated; differently worded statements about the same underlying problem may still be counted separately.",
+      "Dates are reported as written. No present-day lateness, revised deadline, or unstated severity is inferred.",
+      "A retrieval limit was reached; this assessment may omit additional evidence."
+    ],
+    "overall_score": 45,
+    "interpretation": "Review needed",
+    "assessed_dimensions": 3,
+    "dimensions": [
+      {
+        "id": "scope_clarity",
+        "label": "Scope clarity",
+        "state": "assessed",
+        "score": 100,
+        "health_contribution": 100,
+        "higher_is_better": true,
+        "weight": 40,
+        "count": 5,
+        "explanation": "Five scope categories receive 20 points when explicitly established, 10 when unclear, and 0 when not retrieved. No scope evidence makes this dimension unavailable.",
+        "calculation": "20 + 20 + 20 + 20 + 20 = 100/100",
+        "references": [
+          {
+            "evidence_id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+            "quote": "Atlas Portal - Project Proposal (controlled demo) The project goal is to build a web portal for customer support tickets."
+          },
+          {
+            "evidence_id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+            "quote": "Deliverables: a React frontend, a ticket API, a database schema, and a testing report."
+          },
+          {
+            "evidence_id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+            "quote": "Milestones: requirements sign-off on 12 September 2026; API prototype on 20 September 2026; integration testing on 27 September 2026; pilot delivery on 30 September 2026."
+          },
+          {
+            "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-4",
+            "quote": "Task: Approve requirements; Owner: Sana; Status: Completed; Due date: 2026-09-12; Dependency: Stakeholder review"
+          },
+          {
+            "evidence_id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+            "quote": "Milestones: requirements sign-off on 12 September 2026; API prototype on 20 September 2026; integration testing on 27 September 2026; pilot delivery on 30 September 2026."
+          },
+          {
+            "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-1",
+            "quote": "Task: Build the ticket API; Owner: Priya; Status: In progress; Due date: 2026-09-20; Dependency: Approved database schema"
+          },
+          {
+            "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-3",
+            "quote": "Task: Run integration tests; Owner: Meera; Status: Blocked; Due date: 2026-09-27; Dependency: Staging server access"
+          },
+          {
+            "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-4",
+            "quote": "Task: Approve requirements; Owner: Sana; Status: Completed; Due date: 2026-09-12; Dependency: Stakeholder review"
+          },
+          {
+            "evidence_id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+            "quote": "Priya owns backend API development."
+          },
+          {
+            "evidence_id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+            "quote": "Arjun owns the frontend."
+          },
+          {
+            "evidence_id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+            "quote": "Meera owns testing."
+          },
+          {
+            "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-1",
+            "quote": "Task: Build the ticket API; Owner: Priya; Status: In progress; Due date: 2026-09-20; Dependency: Approved database schema"
+          },
+          {
+            "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-3",
+            "quote": "Task: Run integration tests; Owner: Meera; Status: Blocked; Due date: 2026-09-27; Dependency: Staging server access"
+          }
+        ],
+        "scope_signals": [
+          {
+            "category": "goals",
+            "state": "known",
+            "points": 20.0,
+            "references": [
+              {
+                "evidence_id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+                "quote": "Atlas Portal - Project Proposal (controlled demo) The project goal is to build a web portal for customer support tickets."
+              }
+            ]
+          },
+          {
+            "category": "deliverables",
+            "state": "known",
+            "points": 20.0,
+            "references": [
+              {
+                "evidence_id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+                "quote": "Deliverables: a React frontend, a ticket API, a database schema, and a testing report."
+              }
+            ]
+          },
+          {
+            "category": "milestones",
+            "state": "known",
+            "points": 20.0,
+            "references": [
+              {
+                "evidence_id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+                "quote": "Milestones: requirements sign-off on 12 September 2026; API prototype on 20 September 2026; integration testing on 27 September 2026; pilot delivery on 30 September 2026."
+              }
+            ]
+          },
+          {
+            "category": "timelines",
+            "state": "known",
+            "points": 20.0,
+            "references": [
+              {
+                "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-4",
+                "quote": "Task: Approve requirements; Owner: Sana; Status: Completed; Due date: 2026-09-12; Dependency: Stakeholder review"
+              },
+              {
+                "evidence_id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+                "quote": "Milestones: requirements sign-off on 12 September 2026; API prototype on 20 September 2026; integration testing on 27 September 2026; pilot delivery on 30 September 2026."
+              },
+              {
+                "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-1",
+                "quote": "Task: Build the ticket API; Owner: Priya; Status: In progress; Due date: 2026-09-20; Dependency: Approved database schema"
+              },
+              {
+                "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-3",
+                "quote": "Task: Run integration tests; Owner: Meera; Status: Blocked; Due date: 2026-09-27; Dependency: Staging server access"
+              }
+            ]
+          },
+          {
+            "category": "responsibilities",
+            "state": "known",
+            "points": 20.0,
+            "references": [
+              {
+                "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-4",
+                "quote": "Task: Approve requirements; Owner: Sana; Status: Completed; Due date: 2026-09-12; Dependency: Stakeholder review"
+              },
+              {
+                "evidence_id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+                "quote": "Priya owns backend API development."
+              },
+              {
+                "evidence_id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+                "quote": "Arjun owns the frontend."
+              },
+              {
+                "evidence_id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+                "quote": "Meera owns testing."
+              },
+              {
+                "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-1",
+                "quote": "Task: Build the ticket API; Owner: Priya; Status: In progress; Due date: 2026-09-20; Dependency: Approved database schema"
+              },
+              {
+                "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-3",
+                "quote": "Task: Run integration tests; Owner: Meera; Status: Blocked; Due date: 2026-09-27; Dependency: Staging server access"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "timeline_risk",
+        "label": "Timeline risk",
+        "state": "assessed",
+        "score": 100,
+        "health_contribution": 0,
+        "higher_is_better": false,
+        "weight": 35,
+        "count": 5,
+        "explanation": "Each unique schedule-risk or delivery-challenge statement adds risk points: critical 45, high 30, medium 20, low 10, unstated severity 25. Risk is capped at 100; a higher risk score is worse. Zero concerns requires an explicit source statement. Missing evidence never means no concerns. Conflicting zero and concern statements make the dimension unavailable.",
+        "calculation": "min(100, 25 + 25 + 25 + 25 + 25) = 100 risk; health contribution = 100 \u2212 100 = 0",
+        "references": [
+          {
+            "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-2",
+            "quote": "Schedule risks: API development is three days behind plan because the database schema has not been approved."
+          },
+          {
+            "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-2",
+            "quote": "This delay threatens the integration testing milestone on 27 September 2026."
+          },
+          {
+            "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-3",
+            "quote": "The missing contract creates a delivery challenge for Arjun."
+          },
+          {
+            "evidence_id": "3bc4df34076e45f78f41520c1f0af18f:chunk-3",
+            "quote": "Integration testing cannot start until access is restored."
+          },
+          {
+            "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-3",
+            "quote": "Task: Run integration tests; Owner: Meera; Status: Blocked; Due date: 2026-09-27; Dependency: Staging server access"
+          }
+        ],
+        "scope_signals": []
+      },
+      {
+        "id": "blocker_health",
+        "label": "Blocker health",
+        "state": "assessed",
+        "score": 20,
+        "health_contribution": 20,
+        "higher_is_better": true,
+        "weight": 25,
+        "count": 4,
+        "explanation": "Each unique unresolved-issue or blocked-task statement reduces blocker health by 20 points. The count measures retrieved statements, not independently verified incidents. Zero concerns requires an explicit source statement. Missing evidence never means no concerns. Conflicting zero and concern statements make the dimension unavailable.",
+        "calculation": "max(0, 100 \u2212 20 \u00d7 4) = 20/100",
+        "references": [
+          {
+            "evidence_id": "3bc4df34076e45f78f41520c1f0af18f:chunk-4",
+            "quote": "This remains unresolved."
+          },
+          {
+            "evidence_id": "3bc4df34076e45f78f41520c1f0af18f:chunk-3",
+            "quote": "Current project blockers: the staging server is unavailable."
+          },
+          {
+            "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-3",
+            "quote": "Task: Run integration tests; Owner: Meera; Status: Blocked; Due date: 2026-09-27; Dependency: Staging server access"
+          },
+          {
+            "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-3",
+            "quote": "The missing contract creates a delivery challenge for Arjun."
+          }
+        ],
+        "scope_signals": []
+      }
+    ],
+    "methodology_version": "evidence-health-v1",
+    "methodology": "Overall = round half up(0.40 \u00d7 scope clarity + 0.35 \u00d7 (100 \u2212 timeline risk) + 0.25 \u00d7 blocker health). All three dimensions must be assessable; weights are never silently redistributed. Bands: 75\u2013100 fewer documented concerns; 45\u201374 review needed; 0\u201344 needs attention."
+  },
+  "assistant": [
+    {
+      "status": "partial",
+      "query": "Are we on track?",
+      "generated_at": "2026-09-25T10:18:57.991776+00:00",
+      "provider": "Local extractive analysis",
+      "evidence": [
+        {
+          "id": "c628aa386cde4896b1148f10f0e3200b:chunk-2",
+          "document_id": "c628aa386cde4896b1148f10f0e3200b",
+          "filename": "sprint_update.txt",
+          "document_type": "txt",
+          "chunk_number": 2,
+          "location": "Text section 2",
+          "text": "Schedule risks: API development is three days behind plan because the database schema has not been approved. This delay threatens the integration testing milestone on 27 September 2026. No revised delivery date is confirmed.",
+          "similarity": 0.5361
+        },
+        {
+          "id": "c628aa386cde4896b1148f10f0e3200b:chunk-3",
+          "document_id": "c628aa386cde4896b1148f10f0e3200b",
+          "filename": "sprint_update.txt",
+          "document_type": "txt",
+          "chunk_number": 3,
+          "location": "Text section 3",
+          "text": "Dependency gap: frontend integration depends on the ticket API contract. The contract is still pending review by Priya. The missing contract creates a delivery challenge for Arjun.",
+          "similarity": 0.5284
+        },
+        {
+          "id": "3bc4df34076e45f78f41520c1f0af18f:chunk-3",
+          "document_id": "3bc4df34076e45f78f41520c1f0af18f",
+          "filename": "meeting_notes.docx",
+          "document_type": "docx",
+          "chunk_number": 3,
+          "location": "Paragraph/block 3",
+          "text": "Current project blockers: the staging server is unavailable. Integration testing cannot start until access is restored.",
+          "similarity": 0.2402
+        },
+        {
+          "id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-3",
+          "document_id": "592be80b7a924ca89ba5cc6e34b452d3",
+          "filename": "task_list.csv",
+          "document_type": "csv",
+          "chunk_number": 3,
+          "location": "CSV line 4",
+          "text": "Task: Run integration tests; Owner: Meera; Status: Blocked; Due date: 2026-09-27; Dependency: Staging server access",
+          "similarity": 0.2014
+        }
+      ],
+      "retrieved_count": 11,
+      "evidence_limited": false,
+      "warnings": [
+        "Assessment covers bounded retrieved evidence, not an exhaustive audit of every document or real-world project status.",
+        "Conversation history helps interpret questions; only retrieved project documents provide facts.",
+        "This assistant organizes exact source quotations. Local mode uses conservative English question patterns; it does not provide unrestricted generative chat."
+      ],
+      "question": "Are we on track?",
+      "resolved_question": "Are we on track?",
+      "answer": "Here is the stated schedule and delivery outlook. These passages do not establish an independent on-time delivery prediction.",
+      "grounding": "source_quotations",
+      "statements": [
+        {
+          "category": "schedule_risks",
+          "reference": {
+            "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-2",
+            "quote": "Schedule risks: API development is three days behind plan because the database schema has not been approved."
+          },
+          "owner": null,
+          "due_date": null,
+          "source_status": null,
+          "severity": null
+        },
+        {
+          "category": "schedule_risks",
+          "reference": {
+            "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-2",
+            "quote": "This delay threatens the integration testing milestone on 27 September 2026."
+          },
+          "owner": null,
+          "due_date": null,
+          "source_status": null,
+          "severity": null
+        },
+        {
+          "category": "delivery_forecast",
+          "reference": {
+            "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-2",
+            "quote": "No revised delivery date is confirmed."
+          },
+          "owner": null,
+          "due_date": null,
+          "source_status": null,
+          "severity": null
+        },
+        {
+          "category": "dependency_gaps",
+          "reference": {
+            "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-3",
+            "quote": "Dependency gap: frontend integration depends on the ticket API contract."
+          },
+          "owner": null,
+          "due_date": null,
+          "source_status": null,
+          "severity": null
+        },
+        {
+          "category": "dependency_gaps",
+          "reference": {
+            "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-3",
+            "quote": "The contract is still pending review by Priya."
+          },
+          "owner": null,
+          "due_date": null,
+          "source_status": null,
+          "severity": null
+        },
+        {
+          "category": "dependency_gaps",
+          "reference": {
+            "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-3",
+            "quote": "The missing contract creates a delivery challenge for Arjun."
+          },
+          "owner": null,
+          "due_date": null,
+          "source_status": null,
+          "severity": null
+        },
+        {
+          "category": "delivery_challenges",
+          "reference": {
+            "evidence_id": "3bc4df34076e45f78f41520c1f0af18f:chunk-3",
+            "quote": "Integration testing cannot start until access is restored."
+          },
+          "owner": null,
+          "due_date": null,
+          "source_status": null,
+          "severity": null
+        },
+        {
+          "category": "dependency_gaps",
+          "reference": {
+            "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-3",
+            "quote": "Task: Run integration tests; Owner: Meera; Status: Blocked; Due date: 2026-09-27; Dependency: Staging server access"
+          },
+          "owner": null,
+          "due_date": null,
+          "source_status": "Blocked",
+          "severity": null
+        }
+      ],
+      "health": null,
+      "suggested_questions": [
+        "Are we on track?",
+        "What are our biggest risks?",
+        "Which tasks are blocked?",
+        "What are our current deliverables?",
+        "Who has pending action items?",
+        "What is the current project health?"
+      ]
+    },
+    {
+      "status": "partial",
+      "query": "What are our biggest risks?",
+      "generated_at": "2026-09-25T10:18:58.029529+00:00",
+      "provider": "Local extractive analysis",
+      "evidence": [
+        {
+          "id": "c628aa386cde4896b1148f10f0e3200b:chunk-2",
+          "document_id": "c628aa386cde4896b1148f10f0e3200b",
+          "filename": "sprint_update.txt",
+          "document_type": "txt",
+          "chunk_number": 2,
+          "location": "Text section 2",
+          "text": "Schedule risks: API development is three days behind plan because the database schema has not been approved. This delay threatens the integration testing milestone on 27 September 2026. No revised delivery date is confirmed.",
+          "similarity": 0.5361
+        },
+        {
+          "id": "c628aa386cde4896b1148f10f0e3200b:chunk-3",
+          "document_id": "c628aa386cde4896b1148f10f0e3200b",
+          "filename": "sprint_update.txt",
+          "document_type": "txt",
+          "chunk_number": 3,
+          "location": "Text section 3",
+          "text": "Dependency gap: frontend integration depends on the ticket API contract. The contract is still pending review by Priya. The missing contract creates a delivery challenge for Arjun.",
+          "similarity": 0.5284
+        },
+        {
+          "id": "3bc4df34076e45f78f41520c1f0af18f:chunk-3",
+          "document_id": "3bc4df34076e45f78f41520c1f0af18f",
+          "filename": "meeting_notes.docx",
+          "document_type": "docx",
+          "chunk_number": 3,
+          "location": "Paragraph/block 3",
+          "text": "Current project blockers: the staging server is unavailable. Integration testing cannot start until access is restored.",
+          "similarity": 0.2402
+        },
+        {
+          "id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-3",
+          "document_id": "592be80b7a924ca89ba5cc6e34b452d3",
+          "filename": "task_list.csv",
+          "document_type": "csv",
+          "chunk_number": 3,
+          "location": "CSV line 4",
+          "text": "Task: Run integration tests; Owner: Meera; Status: Blocked; Due date: 2026-09-27; Dependency: Staging server access",
+          "similarity": 0.2014
+        }
+      ],
+      "retrieved_count": 11,
+      "evidence_limited": false,
+      "warnings": [
+        "Assessment covers bounded retrieved evidence, not an exhaustive audit of every document or real-world project status.",
+        "Conversation history helps interpret questions; only retrieved project documents provide facts.",
+        "This assistant organizes exact source quotations. Local mode uses conservative English question patterns; it does not provide unrestricted generative chat."
+      ],
+      "question": "What are our biggest risks?",
+      "resolved_question": "What are our biggest risks?",
+      "answer": "These risks and delivery concerns are stated in the retrieved documents. Their relative priority is not established unless the source explicitly states severity.",
+      "grounding": "source_quotations",
+      "statements": [
+        {
+          "category": "schedule_risks",
+          "reference": {
+            "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-2",
+            "quote": "Schedule risks: API development is three days behind plan because the database schema has not been approved."
+          },
+          "owner": null,
+          "due_date": null,
+          "source_status": null,
+          "severity": null
+        },
+        {
+          "category": "schedule_risks",
+          "reference": {
+            "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-2",
+            "quote": "This delay threatens the integration testing milestone on 27 September 2026."
+          },
+          "owner": null,
+          "due_date": null,
+          "source_status": null,
+          "severity": null
+        },
+        {
+          "category": "delivery_forecast",
+          "reference": {
+            "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-2",
+            "quote": "No revised delivery date is confirmed."
+          },
+          "owner": null,
+          "due_date": null,
+          "source_status": null,
+          "severity": null
+        },
+        {
+          "category": "dependency_gaps",
+          "reference": {
+            "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-3",
+            "quote": "Dependency gap: frontend integration depends on the ticket API contract."
+          },
+          "owner": null,
+          "due_date": null,
+          "source_status": null,
+          "severity": null
+        },
+        {
+          "category": "dependency_gaps",
+          "reference": {
+            "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-3",
+            "quote": "The contract is still pending review by Priya."
+          },
+          "owner": null,
+          "due_date": null,
+          "source_status": null,
+          "severity": null
+        },
+        {
+          "category": "dependency_gaps",
+          "reference": {
+            "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-3",
+            "quote": "The missing contract creates a delivery challenge for Arjun."
+          },
+          "owner": null,
+          "due_date": null,
+          "source_status": null,
+          "severity": null
+        },
+        {
+          "category": "delivery_challenges",
+          "reference": {
+            "evidence_id": "3bc4df34076e45f78f41520c1f0af18f:chunk-3",
+            "quote": "Integration testing cannot start until access is restored."
+          },
+          "owner": null,
+          "due_date": null,
+          "source_status": null,
+          "severity": null
+        },
+        {
+          "category": "dependency_gaps",
+          "reference": {
+            "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-3",
+            "quote": "Task: Run integration tests; Owner: Meera; Status: Blocked; Due date: 2026-09-27; Dependency: Staging server access"
+          },
+          "owner": null,
+          "due_date": null,
+          "source_status": "Blocked",
+          "severity": null
+        }
+      ],
+      "health": null,
+      "suggested_questions": [
+        "Are we on track?",
+        "What are our biggest risks?",
+        "Which tasks are blocked?",
+        "What are our current deliverables?",
+        "Who has pending action items?",
+        "What is the current project health?"
+      ]
+    },
+    {
+      "status": "partial",
+      "query": "Which tasks are blocked?",
+      "generated_at": "2026-09-25T10:18:58.088405+00:00",
+      "provider": "Local extractive analysis",
+      "evidence": [
+        {
+          "id": "3bc4df34076e45f78f41520c1f0af18f:chunk-4",
+          "document_id": "3bc4df34076e45f78f41520c1f0af18f",
+          "filename": "meeting_notes.docx",
+          "document_type": "docx",
+          "chunk_number": 4,
+          "location": "Paragraph/block 4",
+          "text": "Pending decision: the product owner has not approved the ticket retention period. This remains unresolved.",
+          "similarity": 0.5192
+        },
+        {
+          "id": "3bc4df34076e45f78f41520c1f0af18f:chunk-3",
+          "document_id": "3bc4df34076e45f78f41520c1f0af18f",
+          "filename": "meeting_notes.docx",
+          "document_type": "docx",
+          "chunk_number": 3,
+          "location": "Paragraph/block 3",
+          "text": "Current project blockers: the staging server is unavailable. Integration testing cannot start until access is restored.",
+          "similarity": 0.4508
+        },
+        {
+          "id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-3",
+          "document_id": "592be80b7a924ca89ba5cc6e34b452d3",
+          "filename": "task_list.csv",
+          "document_type": "csv",
+          "chunk_number": 3,
+          "location": "CSV line 4",
+          "text": "Task: Run integration tests; Owner: Meera; Status: Blocked; Due date: 2026-09-27; Dependency: Staging server access",
+          "similarity": 0.394
+        },
+        {
+          "id": "c628aa386cde4896b1148f10f0e3200b:chunk-3",
+          "document_id": "c628aa386cde4896b1148f10f0e3200b",
+          "filename": "sprint_update.txt",
+          "document_type": "txt",
+          "chunk_number": 3,
+          "location": "Text section 3",
+          "text": "Dependency gap: frontend integration depends on the ticket API contract. The contract is still pending review by Priya. The missing contract creates a delivery challenge for Arjun.",
+          "similarity": 0.1738
+        }
+      ],
+      "retrieved_count": 12,
+      "evidence_limited": true,
+      "warnings": [
+        "Assessment covers bounded retrieved evidence, not an exhaustive audit of every document or real-world project status.",
+        "Conversation history helps interpret questions; only retrieved project documents provide facts.",
+        "This assistant organizes exact source quotations. Local mode uses conservative English question patterns; it does not provide unrestricted generative chat."
+      ],
+      "question": "Which tasks are blocked?",
+      "resolved_question": "Which tasks are blocked?",
+      "answer": "These blockers and unresolved decisions are stated in the retrieved documents.",
+      "grounding": "source_quotations",
+      "statements": [
+        {
+          "category": "pending_decisions",
+          "reference": {
+            "evidence_id": "3bc4df34076e45f78f41520c1f0af18f:chunk-4",
+            "quote": "Pending decision: the product owner has not approved the ticket retention period."
+          },
+          "owner": null,
+          "due_date": null,
+          "source_status": null,
+          "severity": null
+        },
+        {
+          "category": "unresolved_issues",
+          "reference": {
+            "evidence_id": "3bc4df34076e45f78f41520c1f0af18f:chunk-4",
+            "quote": "This remains unresolved."
+          },
+          "owner": null,
+          "due_date": null,
+          "source_status": null,
+          "severity": null
+        },
+        {
+          "category": "unresolved_issues",
+          "reference": {
+            "evidence_id": "3bc4df34076e45f78f41520c1f0af18f:chunk-3",
+            "quote": "Current project blockers: the staging server is unavailable."
+          },
+          "owner": null,
+          "due_date": null,
+          "source_status": null,
+          "severity": null
+        },
+        {
+          "category": "unresolved_issues",
+          "reference": {
+            "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-3",
+            "quote": "Task: Run integration tests; Owner: Meera; Status: Blocked; Due date: 2026-09-27; Dependency: Staging server access"
+          },
+          "owner": null,
+          "due_date": null,
+          "source_status": "Blocked",
+          "severity": null
+        },
+        {
+          "category": "unresolved_issues",
+          "reference": {
+            "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-3",
+            "quote": "The missing contract creates a delivery challenge for Arjun."
+          },
+          "owner": null,
+          "due_date": null,
+          "source_status": null,
+          "severity": null
+        }
+      ],
+      "health": null,
+      "suggested_questions": [
+        "Are we on track?",
+        "What are our biggest risks?",
+        "Which tasks are blocked?",
+        "What are our current deliverables?",
+        "Who has pending action items?",
+        "What is the current project health?"
+      ]
+    },
+    {
+      "status": "ok",
+      "query": "What are our current deliverables?",
+      "generated_at": "2026-09-25T10:18:58.133183+00:00",
+      "provider": "Local extractive analysis",
+      "evidence": [
+        {
+          "id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+          "document_id": "1a44d28a350047f8a61439e908ecf014",
+          "filename": "project_proposal.pdf",
+          "document_type": "pdf",
+          "chunk_number": 1,
+          "location": "Page 1",
+          "text": "Atlas Portal - Project Proposal (controlled demo) The project goal is to build a web portal for customer support tickets. The portal will let customers submit tickets and track support responses. Milestones: requirements sign-off on 12 September 2026; API prototype on 20 September 2026; integration testing on 27 September 2026; pilot delivery on 30 September 2026. Deliverables: a React frontend, a ticket API, a database schema, and a testing report. Priya owns backend API development. Arjun owns the frontend. Meera owns testing.",
+          "similarity": 0.3741
+        }
+      ],
+      "retrieved_count": 11,
+      "evidence_limited": false,
+      "warnings": [
+        "Assessment covers bounded retrieved evidence, not an exhaustive audit of every document or real-world project status.",
+        "Conversation history helps interpret questions; only retrieved project documents provide facts.",
+        "This assistant organizes exact source quotations. Local mode uses conservative English question patterns; it does not provide unrestricted generative chat."
+      ],
+      "question": "What are our current deliverables?",
+      "resolved_question": "What are our current deliverables?",
+      "answer": "The retrieved documents state these deliverables.",
+      "grounding": "source_quotations",
+      "statements": [
+        {
+          "category": "deliverables",
+          "reference": {
+            "evidence_id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+            "quote": "Deliverables: a React frontend, a ticket API, a database schema, and a testing report."
+          },
+          "owner": null,
+          "due_date": null,
+          "source_status": null,
+          "severity": null
+        }
+      ],
+      "health": null,
+      "suggested_questions": [
+        "Are we on track?",
+        "What are our biggest risks?",
+        "Which tasks are blocked?",
+        "What are our current deliverables?",
+        "Who has pending action items?",
+        "What is the current project health?"
+      ]
+    },
+    {
+      "status": "partial",
+      "query": "Who has pending action items?",
+      "generated_at": "2026-09-25T10:18:58.190303+00:00",
+      "provider": "Local extractive analysis",
+      "evidence": [
+        {
+          "id": "3bc4df34076e45f78f41520c1f0af18f:chunk-5",
+          "document_id": "3bc4df34076e45f78f41520c1f0af18f",
+          "filename": "meeting_notes.docx",
+          "document_type": "docx",
+          "chunk_number": 5,
+          "location": "Paragraph/block 5",
+          "text": "Action item: Ravi will restore staging server access by 18 September 2026. Status: pending.",
+          "similarity": 0.5546
+        },
+        {
+          "id": "3bc4df34076e45f78f41520c1f0af18f:chunk-6",
+          "document_id": "3bc4df34076e45f78f41520c1f0af18f",
+          "filename": "meeting_notes.docx",
+          "document_type": "docx",
+          "chunk_number": 6,
+          "location": "Paragraph/block 6",
+          "text": "Action item: arrange the retention-policy review. Owner and due date were not recorded.",
+          "similarity": 0.2238
+        },
+        {
+          "id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-3",
+          "document_id": "592be80b7a924ca89ba5cc6e34b452d3",
+          "filename": "task_list.csv",
+          "document_type": "csv",
+          "chunk_number": 3,
+          "location": "CSV line 4",
+          "text": "Task: Run integration tests; Owner: Meera; Status: Blocked; Due date: 2026-09-27; Dependency: Staging server access",
+          "similarity": 0.394
+        }
+      ],
+      "retrieved_count": 12,
+      "evidence_limited": true,
+      "warnings": [
+        "Assessment covers bounded retrieved evidence, not an exhaustive audit of every document or real-world project status.",
+        "Conversation history helps interpret questions; only retrieved project documents provide facts.",
+        "This assistant organizes exact source quotations. Local mode uses conservative English question patterns; it does not provide unrestricted generative chat."
+      ],
+      "question": "Who has pending action items?",
+      "resolved_question": "Who has pending action items?",
+      "answer": "These action items are supported by the retrieved evidence. Unstated owners and dates remain unknown.",
+      "grounding": "source_quotations",
+      "statements": [
+        {
+          "category": "action_items",
+          "reference": {
+            "evidence_id": "3bc4df34076e45f78f41520c1f0af18f:chunk-5",
+            "quote": "Action item: Ravi will restore staging server access by 18 September 2026. Status: pending."
+          },
+          "owner": "Ravi",
+          "due_date": "18 September 2026",
+          "source_status": "pending",
+          "severity": null
+        },
+        {
+          "category": "action_items",
+          "reference": {
+            "evidence_id": "3bc4df34076e45f78f41520c1f0af18f:chunk-6",
+            "quote": "Action item: arrange the retention-policy review."
+          },
+          "owner": null,
+          "due_date": null,
+          "source_status": null,
+          "severity": null
+        },
+        {
+          "category": "action_items",
+          "reference": {
+            "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-3",
+            "quote": "Task: Run integration tests; Owner: Meera; Status: Blocked; Due date: 2026-09-27; Dependency: Staging server access"
+          },
+          "owner": "Meera",
+          "due_date": "2026-09-27",
+          "source_status": "Blocked",
+          "severity": null
+        }
+      ],
+      "health": null,
+      "suggested_questions": [
+        "Are we on track?",
+        "What are our biggest risks?",
+        "Which tasks are blocked?",
+        "What are our current deliverables?",
+        "Who has pending action items?",
+        "What is the current project health?"
+      ]
+    },
+    {
+      "status": "ok",
+      "query": "What dependencies are causing delays?",
+      "generated_at": "2026-09-25T10:18:58.226472+00:00",
+      "provider": "Local extractive analysis",
+      "evidence": [
+        {
+          "id": "c628aa386cde4896b1148f10f0e3200b:chunk-2",
+          "document_id": "c628aa386cde4896b1148f10f0e3200b",
+          "filename": "sprint_update.txt",
+          "document_type": "txt",
+          "chunk_number": 2,
+          "location": "Text section 2",
+          "text": "Schedule risks: API development is three days behind plan because the database schema has not been approved. This delay threatens the integration testing milestone on 27 September 2026. No revised delivery date is confirmed.",
+          "similarity": 0.5361
+        },
+        {
+          "id": "c628aa386cde4896b1148f10f0e3200b:chunk-3",
+          "document_id": "c628aa386cde4896b1148f10f0e3200b",
+          "filename": "sprint_update.txt",
+          "document_type": "txt",
+          "chunk_number": 3,
+          "location": "Text section 3",
+          "text": "Dependency gap: frontend integration depends on the ticket API contract. The contract is still pending review by Priya. The missing contract creates a delivery challenge for Arjun.",
+          "similarity": 0.5284
+        },
+        {
+          "id": "3bc4df34076e45f78f41520c1f0af18f:chunk-3",
+          "document_id": "3bc4df34076e45f78f41520c1f0af18f",
+          "filename": "meeting_notes.docx",
+          "document_type": "docx",
+          "chunk_number": 3,
+          "location": "Paragraph/block 3",
+          "text": "Current project blockers: the staging server is unavailable. Integration testing cannot start until access is restored.",
+          "similarity": 0.2402
+        },
+        {
+          "id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-3",
+          "document_id": "592be80b7a924ca89ba5cc6e34b452d3",
+          "filename": "task_list.csv",
+          "document_type": "csv",
+          "chunk_number": 3,
+          "location": "CSV line 4",
+          "text": "Task: Run integration tests; Owner: Meera; Status: Blocked; Due date: 2026-09-27; Dependency: Staging server access",
+          "similarity": 0.2014
+        }
+      ],
+      "retrieved_count": 11,
+      "evidence_limited": false,
+      "warnings": [
+        "Assessment covers bounded retrieved evidence, not an exhaustive audit of every document or real-world project status.",
+        "Conversation history helps interpret questions; only retrieved project documents provide facts.",
+        "This assistant organizes exact source quotations. Local mode uses conservative English question patterns; it does not provide unrestricted generative chat."
+      ],
+      "question": "What dependencies are causing delays?",
+      "resolved_question": "What dependencies are causing delays?",
+      "answer": "The retrieved documents identify these dependencies and related delays.",
+      "grounding": "source_quotations",
+      "statements": [
+        {
+          "category": "schedule_risks",
+          "reference": {
+            "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-2",
+            "quote": "Schedule risks: API development is three days behind plan because the database schema has not been approved."
+          },
+          "owner": null,
+          "due_date": null,
+          "source_status": null,
+          "severity": null
+        },
+        {
+          "category": "dependency_gaps",
+          "reference": {
+            "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-3",
+            "quote": "Dependency gap: frontend integration depends on the ticket API contract."
+          },
+          "owner": null,
+          "due_date": null,
+          "source_status": null,
+          "severity": null
+        },
+        {
+          "category": "dependency_gaps",
+          "reference": {
+            "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-3",
+            "quote": "The contract is still pending review by Priya."
+          },
+          "owner": null,
+          "due_date": null,
+          "source_status": null,
+          "severity": null
+        },
+        {
+          "category": "dependency_gaps",
+          "reference": {
+            "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-3",
+            "quote": "The missing contract creates a delivery challenge for Arjun."
+          },
+          "owner": null,
+          "due_date": null,
+          "source_status": null,
+          "severity": null
+        },
+        {
+          "category": "delivery_challenges",
+          "reference": {
+            "evidence_id": "3bc4df34076e45f78f41520c1f0af18f:chunk-3",
+            "quote": "Integration testing cannot start until access is restored."
+          },
+          "owner": null,
+          "due_date": null,
+          "source_status": null,
+          "severity": null
+        },
+        {
+          "category": "dependency_gaps",
+          "reference": {
+            "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-3",
+            "quote": "Task: Run integration tests; Owner: Meera; Status: Blocked; Due date: 2026-09-27; Dependency: Staging server access"
+          },
+          "owner": null,
+          "due_date": null,
+          "source_status": "Blocked",
+          "severity": null
+        }
+      ],
+      "health": null,
+      "suggested_questions": [
+        "Are we on track?",
+        "What are our biggest risks?",
+        "Which tasks are blocked?",
+        "What are our current deliverables?",
+        "Who has pending action items?",
+        "What is the current project health?"
+      ]
+    },
+    {
+      "status": "partial",
+      "query": "What is the current project health?",
+      "generated_at": "2026-09-25T10:18:58.276175+00:00",
+      "provider": "Local extractive analysis",
+      "evidence": [
+        {
+          "id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-4",
+          "document_id": "592be80b7a924ca89ba5cc6e34b452d3",
+          "filename": "task_list.csv",
+          "document_type": "csv",
+          "chunk_number": 4,
+          "location": "CSV line 5",
+          "text": "Task: Approve requirements; Owner: Sana; Status: Completed; Due date: 2026-09-12; Dependency: Stakeholder review",
+          "similarity": 0.2578
+        },
+        {
+          "id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+          "document_id": "1a44d28a350047f8a61439e908ecf014",
+          "filename": "project_proposal.pdf",
+          "document_type": "pdf",
+          "chunk_number": 1,
+          "location": "Page 1",
+          "text": "Atlas Portal - Project Proposal (controlled demo) The project goal is to build a web portal for customer support tickets. The portal will let customers submit tickets and track support responses. Milestones: requirements sign-off on 12 September 2026; API prototype on 20 September 2026; integration testing on 27 September 2026; pilot delivery on 30 September 2026. Deliverables: a React frontend, a ticket API, a database schema, and a testing report. Priya owns backend API development. Arjun owns the frontend. Meera owns testing.",
+          "similarity": 0.3741
+        },
+        {
+          "id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-1",
+          "document_id": "592be80b7a924ca89ba5cc6e34b452d3",
+          "filename": "task_list.csv",
+          "document_type": "csv",
+          "chunk_number": 1,
+          "location": "CSV line 2",
+          "text": "Task: Build the ticket API; Owner: Priya; Status: In progress; Due date: 2026-09-20; Dependency: Approved database schema",
+          "similarity": 0.1634
+        },
+        {
+          "id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-3",
+          "document_id": "592be80b7a924ca89ba5cc6e34b452d3",
+          "filename": "task_list.csv",
+          "document_type": "csv",
+          "chunk_number": 3,
+          "location": "CSV line 4",
+          "text": "Task: Run integration tests; Owner: Meera; Status: Blocked; Due date: 2026-09-27; Dependency: Staging server access",
+          "similarity": 0.2151
+        },
+        {
+          "id": "c628aa386cde4896b1148f10f0e3200b:chunk-2",
+          "document_id": "c628aa386cde4896b1148f10f0e3200b",
+          "filename": "sprint_update.txt",
+          "document_type": "txt",
+          "chunk_number": 2,
+          "location": "Text section 2",
+          "text": "Schedule risks: API development is three days behind plan because the database schema has not been approved. This delay threatens the integration testing milestone on 27 September 2026. No revised delivery date is confirmed.",
+          "similarity": 0.5361
+        },
+        {
+          "id": "c628aa386cde4896b1148f10f0e3200b:chunk-3",
+          "document_id": "c628aa386cde4896b1148f10f0e3200b",
+          "filename": "sprint_update.txt",
+          "document_type": "txt",
+          "chunk_number": 3,
+          "location": "Text section 3",
+          "text": "Dependency gap: frontend integration depends on the ticket API contract. The contract is still pending review by Priya. The missing contract creates a delivery challenge for Arjun.",
+          "similarity": 0.5284
+        },
+        {
+          "id": "3bc4df34076e45f78f41520c1f0af18f:chunk-3",
+          "document_id": "3bc4df34076e45f78f41520c1f0af18f",
+          "filename": "meeting_notes.docx",
+          "document_type": "docx",
+          "chunk_number": 3,
+          "location": "Paragraph/block 3",
+          "text": "Current project blockers: the staging server is unavailable. Integration testing cannot start until access is restored.",
+          "similarity": 0.2402
+        },
+        {
+          "id": "3bc4df34076e45f78f41520c1f0af18f:chunk-4",
+          "document_id": "3bc4df34076e45f78f41520c1f0af18f",
+          "filename": "meeting_notes.docx",
+          "document_type": "docx",
+          "chunk_number": 4,
+          "location": "Paragraph/block 4",
+          "text": "Pending decision: the product owner has not approved the ticket retention period. This remains unresolved.",
+          "similarity": 0.5192
+        }
+      ],
+      "retrieved_count": 14,
+      "evidence_limited": true,
+      "warnings": [
+        "Assessment covers bounded retrieved evidence, not an exhaustive audit of every document or real-world project status.",
+        "Conversation history helps interpret questions; only retrieved project documents provide facts."
+      ],
+      "question": "What is the current project health?",
+      "resolved_question": "What is the current project health?",
+      "answer": "The evidence-based health assessment is 45/100: review needed. It is a documented heuristic, not a delivery probability.",
+      "grounding": "derived_health_assessment",
+      "statements": [],
+      "health": {
+        "status": "partial",
+        "query": "Review the uploaded project documents.",
+        "generated_at": "2026-09-25T10:18:58.399791+00:00",
+        "provider": "Local extractive analysis",
+        "evidence": [
+          {
+            "id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-4",
+            "document_id": "592be80b7a924ca89ba5cc6e34b452d3",
+            "filename": "task_list.csv",
+            "document_type": "csv",
+            "chunk_number": 4,
+            "location": "CSV line 5",
+            "text": "Task: Approve requirements; Owner: Sana; Status: Completed; Due date: 2026-09-12; Dependency: Stakeholder review",
+            "similarity": 0.2578
+          },
+          {
+            "id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+            "document_id": "1a44d28a350047f8a61439e908ecf014",
+            "filename": "project_proposal.pdf",
+            "document_type": "pdf",
+            "chunk_number": 1,
+            "location": "Page 1",
+            "text": "Atlas Portal - Project Proposal (controlled demo) The project goal is to build a web portal for customer support tickets. The portal will let customers submit tickets and track support responses. Milestones: requirements sign-off on 12 September 2026; API prototype on 20 September 2026; integration testing on 27 September 2026; pilot delivery on 30 September 2026. Deliverables: a React frontend, a ticket API, a database schema, and a testing report. Priya owns backend API development. Arjun owns the frontend. Meera owns testing.",
+            "similarity": 0.3741
+          },
+          {
+            "id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-1",
+            "document_id": "592be80b7a924ca89ba5cc6e34b452d3",
+            "filename": "task_list.csv",
+            "document_type": "csv",
+            "chunk_number": 1,
+            "location": "CSV line 2",
+            "text": "Task: Build the ticket API; Owner: Priya; Status: In progress; Due date: 2026-09-20; Dependency: Approved database schema",
+            "similarity": 0.1634
+          },
+          {
+            "id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-3",
+            "document_id": "592be80b7a924ca89ba5cc6e34b452d3",
+            "filename": "task_list.csv",
+            "document_type": "csv",
+            "chunk_number": 3,
+            "location": "CSV line 4",
+            "text": "Task: Run integration tests; Owner: Meera; Status: Blocked; Due date: 2026-09-27; Dependency: Staging server access",
+            "similarity": 0.2151
+          },
+          {
+            "id": "c628aa386cde4896b1148f10f0e3200b:chunk-2",
+            "document_id": "c628aa386cde4896b1148f10f0e3200b",
+            "filename": "sprint_update.txt",
+            "document_type": "txt",
+            "chunk_number": 2,
+            "location": "Text section 2",
+            "text": "Schedule risks: API development is three days behind plan because the database schema has not been approved. This delay threatens the integration testing milestone on 27 September 2026. No revised delivery date is confirmed.",
+            "similarity": 0.5361
+          },
+          {
+            "id": "c628aa386cde4896b1148f10f0e3200b:chunk-3",
+            "document_id": "c628aa386cde4896b1148f10f0e3200b",
+            "filename": "sprint_update.txt",
+            "document_type": "txt",
+            "chunk_number": 3,
+            "location": "Text section 3",
+            "text": "Dependency gap: frontend integration depends on the ticket API contract. The contract is still pending review by Priya. The missing contract creates a delivery challenge for Arjun.",
+            "similarity": 0.5284
+          },
+          {
+            "id": "3bc4df34076e45f78f41520c1f0af18f:chunk-3",
+            "document_id": "3bc4df34076e45f78f41520c1f0af18f",
+            "filename": "meeting_notes.docx",
+            "document_type": "docx",
+            "chunk_number": 3,
+            "location": "Paragraph/block 3",
+            "text": "Current project blockers: the staging server is unavailable. Integration testing cannot start until access is restored.",
+            "similarity": 0.2402
+          },
+          {
+            "id": "3bc4df34076e45f78f41520c1f0af18f:chunk-4",
+            "document_id": "3bc4df34076e45f78f41520c1f0af18f",
+            "filename": "meeting_notes.docx",
+            "document_type": "docx",
+            "chunk_number": 4,
+            "location": "Paragraph/block 4",
+            "text": "Pending decision: the product owner has not approved the ticket retention period. This remains unresolved.",
+            "similarity": 0.5192
+          }
+        ],
+        "retrieved_count": 14,
+        "evidence_limited": true,
+        "warnings": [
+          "Assessment covers bounded retrieved evidence, not an exhaustive audit of every document or real-world project status.",
+          "This is a transparent heuristic of retrieved project evidence, not a delivery probability, completion percentage, or independently verified assessment.",
+          "Repeated wording is deduplicated; differently worded statements about the same underlying problem may still be counted separately.",
+          "Dates are reported as written. No present-day lateness, revised deadline, or unstated severity is inferred.",
+          "A retrieval limit was reached; this assessment may omit additional evidence."
+        ],
+        "overall_score": 45,
+        "interpretation": "Review needed",
+        "assessed_dimensions": 3,
+        "dimensions": [
+          {
+            "id": "scope_clarity",
+            "label": "Scope clarity",
+            "state": "assessed",
+            "score": 100,
+            "health_contribution": 100,
+            "higher_is_better": true,
+            "weight": 40,
+            "count": 5,
+            "explanation": "Five scope categories receive 20 points when explicitly established, 10 when unclear, and 0 when not retrieved. No scope evidence makes this dimension unavailable.",
+            "calculation": "20 + 20 + 20 + 20 + 20 = 100/100",
+            "references": [
+              {
+                "evidence_id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+                "quote": "Atlas Portal - Project Proposal (controlled demo) The project goal is to build a web portal for customer support tickets."
+              },
+              {
+                "evidence_id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+                "quote": "Deliverables: a React frontend, a ticket API, a database schema, and a testing report."
+              },
+              {
+                "evidence_id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+                "quote": "Milestones: requirements sign-off on 12 September 2026; API prototype on 20 September 2026; integration testing on 27 September 2026; pilot delivery on 30 September 2026."
+              },
+              {
+                "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-4",
+                "quote": "Task: Approve requirements; Owner: Sana; Status: Completed; Due date: 2026-09-12; Dependency: Stakeholder review"
+              },
+              {
+                "evidence_id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+                "quote": "Milestones: requirements sign-off on 12 September 2026; API prototype on 20 September 2026; integration testing on 27 September 2026; pilot delivery on 30 September 2026."
+              },
+              {
+                "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-1",
+                "quote": "Task: Build the ticket API; Owner: Priya; Status: In progress; Due date: 2026-09-20; Dependency: Approved database schema"
+              },
+              {
+                "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-3",
+                "quote": "Task: Run integration tests; Owner: Meera; Status: Blocked; Due date: 2026-09-27; Dependency: Staging server access"
+              },
+              {
+                "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-4",
+                "quote": "Task: Approve requirements; Owner: Sana; Status: Completed; Due date: 2026-09-12; Dependency: Stakeholder review"
+              },
+              {
+                "evidence_id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+                "quote": "Priya owns backend API development."
+              },
+              {
+                "evidence_id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+                "quote": "Arjun owns the frontend."
+              },
+              {
+                "evidence_id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+                "quote": "Meera owns testing."
+              },
+              {
+                "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-1",
+                "quote": "Task: Build the ticket API; Owner: Priya; Status: In progress; Due date: 2026-09-20; Dependency: Approved database schema"
+              },
+              {
+                "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-3",
+                "quote": "Task: Run integration tests; Owner: Meera; Status: Blocked; Due date: 2026-09-27; Dependency: Staging server access"
+              }
+            ],
+            "scope_signals": [
+              {
+                "category": "goals",
+                "state": "known",
+                "points": 20.0,
+                "references": [
+                  {
+                    "evidence_id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+                    "quote": "Atlas Portal - Project Proposal (controlled demo) The project goal is to build a web portal for customer support tickets."
+                  }
+                ]
+              },
+              {
+                "category": "deliverables",
+                "state": "known",
+                "points": 20.0,
+                "references": [
+                  {
+                    "evidence_id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+                    "quote": "Deliverables: a React frontend, a ticket API, a database schema, and a testing report."
+                  }
+                ]
+              },
+              {
+                "category": "milestones",
+                "state": "known",
+                "points": 20.0,
+                "references": [
+                  {
+                    "evidence_id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+                    "quote": "Milestones: requirements sign-off on 12 September 2026; API prototype on 20 September 2026; integration testing on 27 September 2026; pilot delivery on 30 September 2026."
+                  }
+                ]
+              },
+              {
+                "category": "timelines",
+                "state": "known",
+                "points": 20.0,
+                "references": [
+                  {
+                    "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-4",
+                    "quote": "Task: Approve requirements; Owner: Sana; Status: Completed; Due date: 2026-09-12; Dependency: Stakeholder review"
+                  },
+                  {
+                    "evidence_id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+                    "quote": "Milestones: requirements sign-off on 12 September 2026; API prototype on 20 September 2026; integration testing on 27 September 2026; pilot delivery on 30 September 2026."
+                  },
+                  {
+                    "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-1",
+                    "quote": "Task: Build the ticket API; Owner: Priya; Status: In progress; Due date: 2026-09-20; Dependency: Approved database schema"
+                  },
+                  {
+                    "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-3",
+                    "quote": "Task: Run integration tests; Owner: Meera; Status: Blocked; Due date: 2026-09-27; Dependency: Staging server access"
+                  }
+                ]
+              },
+              {
+                "category": "responsibilities",
+                "state": "known",
+                "points": 20.0,
+                "references": [
+                  {
+                    "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-4",
+                    "quote": "Task: Approve requirements; Owner: Sana; Status: Completed; Due date: 2026-09-12; Dependency: Stakeholder review"
+                  },
+                  {
+                    "evidence_id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+                    "quote": "Priya owns backend API development."
+                  },
+                  {
+                    "evidence_id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+                    "quote": "Arjun owns the frontend."
+                  },
+                  {
+                    "evidence_id": "1a44d28a350047f8a61439e908ecf014:chunk-1",
+                    "quote": "Meera owns testing."
+                  },
+                  {
+                    "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-1",
+                    "quote": "Task: Build the ticket API; Owner: Priya; Status: In progress; Due date: 2026-09-20; Dependency: Approved database schema"
+                  },
+                  {
+                    "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-3",
+                    "quote": "Task: Run integration tests; Owner: Meera; Status: Blocked; Due date: 2026-09-27; Dependency: Staging server access"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "timeline_risk",
+            "label": "Timeline risk",
+            "state": "assessed",
+            "score": 100,
+            "health_contribution": 0,
+            "higher_is_better": false,
+            "weight": 35,
+            "count": 5,
+            "explanation": "Each unique schedule-risk or delivery-challenge statement adds risk points: critical 45, high 30, medium 20, low 10, unstated severity 25. Risk is capped at 100; a higher risk score is worse. Zero concerns requires an explicit source statement. Missing evidence never means no concerns. Conflicting zero and concern statements make the dimension unavailable.",
+            "calculation": "min(100, 25 + 25 + 25 + 25 + 25) = 100 risk; health contribution = 100 \u2212 100 = 0",
+            "references": [
+              {
+                "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-2",
+                "quote": "Schedule risks: API development is three days behind plan because the database schema has not been approved."
+              },
+              {
+                "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-2",
+                "quote": "This delay threatens the integration testing milestone on 27 September 2026."
+              },
+              {
+                "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-3",
+                "quote": "The missing contract creates a delivery challenge for Arjun."
+              },
+              {
+                "evidence_id": "3bc4df34076e45f78f41520c1f0af18f:chunk-3",
+                "quote": "Integration testing cannot start until access is restored."
+              },
+              {
+                "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-3",
+                "quote": "Task: Run integration tests; Owner: Meera; Status: Blocked; Due date: 2026-09-27; Dependency: Staging server access"
+              }
+            ],
+            "scope_signals": []
+          },
+          {
+            "id": "blocker_health",
+            "label": "Blocker health",
+            "state": "assessed",
+            "score": 20,
+            "health_contribution": 20,
+            "higher_is_better": true,
+            "weight": 25,
+            "count": 4,
+            "explanation": "Each unique unresolved-issue or blocked-task statement reduces blocker health by 20 points. The count measures retrieved statements, not independently verified incidents. Zero concerns requires an explicit source statement. Missing evidence never means no concerns. Conflicting zero and concern statements make the dimension unavailable.",
+            "calculation": "max(0, 100 \u2212 20 \u00d7 4) = 20/100",
+            "references": [
+              {
+                "evidence_id": "3bc4df34076e45f78f41520c1f0af18f:chunk-4",
+                "quote": "This remains unresolved."
+              },
+              {
+                "evidence_id": "3bc4df34076e45f78f41520c1f0af18f:chunk-3",
+                "quote": "Current project blockers: the staging server is unavailable."
+              },
+              {
+                "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-3",
+                "quote": "Task: Run integration tests; Owner: Meera; Status: Blocked; Due date: 2026-09-27; Dependency: Staging server access"
+              },
+              {
+                "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-3",
+                "quote": "The missing contract creates a delivery challenge for Arjun."
+              }
+            ],
+            "scope_signals": []
+          }
+        ],
+        "methodology_version": "evidence-health-v1",
+        "methodology": "Overall = round half up(0.40 \u00d7 scope clarity + 0.35 \u00d7 (100 \u2212 timeline risk) + 0.25 \u00d7 blocker health). All three dimensions must be assessable; weights are never silently redistributed. Bands: 75\u2013100 fewer documented concerns; 45\u201374 review needed; 0\u201344 needs attention."
+      },
+      "suggested_questions": [
+        "Are we on track?",
+        "What are our biggest risks?",
+        "Which tasks are blocked?",
+        "What are our current deliverables?",
+        "Who has pending action items?",
+        "What is the current project health?"
+      ]
+    },
+    {
+      "status": "partial",
+      "query": "What needs attention?",
+      "generated_at": "2026-09-25T10:18:58.405714+00:00",
+      "provider": "Local extractive analysis",
+      "evidence": [
+        {
+          "id": "c628aa386cde4896b1148f10f0e3200b:chunk-2",
+          "document_id": "c628aa386cde4896b1148f10f0e3200b",
+          "filename": "sprint_update.txt",
+          "document_type": "txt",
+          "chunk_number": 2,
+          "location": "Text section 2",
+          "text": "Schedule risks: API development is three days behind plan because the database schema has not been approved. This delay threatens the integration testing milestone on 27 September 2026. No revised delivery date is confirmed.",
+          "similarity": 0.5361
+        },
+        {
+          "id": "c628aa386cde4896b1148f10f0e3200b:chunk-3",
+          "document_id": "c628aa386cde4896b1148f10f0e3200b",
+          "filename": "sprint_update.txt",
+          "document_type": "txt",
+          "chunk_number": 3,
+          "location": "Text section 3",
+          "text": "Dependency gap: frontend integration depends on the ticket API contract. The contract is still pending review by Priya. The missing contract creates a delivery challenge for Arjun.",
+          "similarity": 0.5284
+        },
+        {
+          "id": "3bc4df34076e45f78f41520c1f0af18f:chunk-3",
+          "document_id": "3bc4df34076e45f78f41520c1f0af18f",
+          "filename": "meeting_notes.docx",
+          "document_type": "docx",
+          "chunk_number": 3,
+          "location": "Paragraph/block 3",
+          "text": "Current project blockers: the staging server is unavailable. Integration testing cannot start until access is restored.",
+          "similarity": 0.2402
+        },
+        {
+          "id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-3",
+          "document_id": "592be80b7a924ca89ba5cc6e34b452d3",
+          "filename": "task_list.csv",
+          "document_type": "csv",
+          "chunk_number": 3,
+          "location": "CSV line 4",
+          "text": "Task: Run integration tests; Owner: Meera; Status: Blocked; Due date: 2026-09-27; Dependency: Staging server access",
+          "similarity": 0.2014
+        },
+        {
+          "id": "3bc4df34076e45f78f41520c1f0af18f:chunk-4",
+          "document_id": "3bc4df34076e45f78f41520c1f0af18f",
+          "filename": "meeting_notes.docx",
+          "document_type": "docx",
+          "chunk_number": 4,
+          "location": "Paragraph/block 4",
+          "text": "Pending decision: the product owner has not approved the ticket retention period. This remains unresolved.",
+          "similarity": 0.5192
+        },
+        {
+          "id": "3bc4df34076e45f78f41520c1f0af18f:chunk-5",
+          "document_id": "3bc4df34076e45f78f41520c1f0af18f",
+          "filename": "meeting_notes.docx",
+          "document_type": "docx",
+          "chunk_number": 5,
+          "location": "Paragraph/block 5",
+          "text": "Action item: Ravi will restore staging server access by 18 September 2026. Status: pending.",
+          "similarity": 0.5546
+        },
+        {
+          "id": "3bc4df34076e45f78f41520c1f0af18f:chunk-6",
+          "document_id": "3bc4df34076e45f78f41520c1f0af18f",
+          "filename": "meeting_notes.docx",
+          "document_type": "docx",
+          "chunk_number": 6,
+          "location": "Paragraph/block 6",
+          "text": "Action item: arrange the retention-policy review. Owner and due date were not recorded.",
+          "similarity": 0.2238
+        }
+      ],
+      "retrieved_count": 12,
+      "evidence_limited": true,
+      "warnings": [
+        "Assessment covers bounded retrieved evidence, not an exhaustive audit of every document or real-world project status.",
+        "Conversation history helps interpret questions; only retrieved project documents provide facts.",
+        "This assistant organizes exact source quotations. Local mode uses conservative English question patterns; it does not provide unrestricted generative chat."
+      ],
+      "question": "What needs attention?",
+      "resolved_question": "What needs attention?",
+      "answer": "These documented concerns and pending actions need review. This list is not an inferred priority ranking.",
+      "grounding": "source_quotations",
+      "statements": [
+        {
+          "category": "schedule_risks",
+          "reference": {
+            "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-2",
+            "quote": "Schedule risks: API development is three days behind plan because the database schema has not been approved."
+          },
+          "owner": null,
+          "due_date": null,
+          "source_status": null,
+          "severity": null
+        },
+        {
+          "category": "schedule_risks",
+          "reference": {
+            "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-2",
+            "quote": "This delay threatens the integration testing milestone on 27 September 2026."
+          },
+          "owner": null,
+          "due_date": null,
+          "source_status": null,
+          "severity": null
+        },
+        {
+          "category": "dependency_gaps",
+          "reference": {
+            "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-3",
+            "quote": "Dependency gap: frontend integration depends on the ticket API contract."
+          },
+          "owner": null,
+          "due_date": null,
+          "source_status": null,
+          "severity": null
+        },
+        {
+          "category": "dependency_gaps",
+          "reference": {
+            "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-3",
+            "quote": "The contract is still pending review by Priya."
+          },
+          "owner": null,
+          "due_date": null,
+          "source_status": null,
+          "severity": null
+        },
+        {
+          "category": "dependency_gaps",
+          "reference": {
+            "evidence_id": "c628aa386cde4896b1148f10f0e3200b:chunk-3",
+            "quote": "The missing contract creates a delivery challenge for Arjun."
+          },
+          "owner": null,
+          "due_date": null,
+          "source_status": null,
+          "severity": null
+        },
+        {
+          "category": "delivery_challenges",
+          "reference": {
+            "evidence_id": "3bc4df34076e45f78f41520c1f0af18f:chunk-3",
+            "quote": "Integration testing cannot start until access is restored."
+          },
+          "owner": null,
+          "due_date": null,
+          "source_status": null,
+          "severity": null
+        },
+        {
+          "category": "dependency_gaps",
+          "reference": {
+            "evidence_id": "592be80b7a924ca89ba5cc6e34b452d3:chunk-3",
+            "quote": "Task: Run integration tests; Owner: Meera; Status: Blocked; Due date: 2026-09-27; Dependency: Staging server access"
+          },
+          "owner": null,
+          "due_date": null,
+          "source_status": "Blocked",
+          "severity": null
+        },
+        {
+          "category": "pending_decisions",
+          "reference": {
+            "evidence_id": "3bc4df34076e45f78f41520c1f0af18f:chunk-4",
+            "quote": "Pending decision: the product owner has not approved the ticket retention period."
+          },
+          "owner": null,
+          "due_date": null,
+          "source_status": null,
+          "severity": null
+        },
+        {
+          "category": "unresolved_issues",
+          "reference": {
+            "evidence_id": "3bc4df34076e45f78f41520c1f0af18f:chunk-4",
+            "quote": "This remains unresolved."
+          },
+          "owner": null,
+          "due_date": null,
+          "source_status": null,
+          "severity": null
+        },
+        {
+          "category": "unresolved_issues",
+          "reference": {
+            "evidence_id": "3bc4df34076e45f78f41520c1f0af18f:chunk-3",
+            "quote": "Current project blockers: the staging server is unavailable."
+          },
+          "owner": null,
+          "due_date": null,
+          "source_status": null,
+          "severity": null
+        },
+        {
+          "category": "action_items",
+          "reference": {
+            "evidence_id": "3bc4df34076e45f78f41520c1f0af18f:chunk-5",
+            "quote": "Action item: Ravi will restore staging server access by 18 September 2026. Status: pending."
+          },
+          "owner": "Ravi",
+          "due_date": "18 September 2026",
+          "source_status": "pending",
+          "severity": null
+        },
+        {
+          "category": "action_items",
+          "reference": {
+            "evidence_id": "3bc4df34076e45f78f41520c1f0af18f:chunk-6",
+            "quote": "Action item: arrange the retention-policy review."
+          },
+          "owner": null,
+          "due_date": null,
+          "source_status": null,
+          "severity": null
+        }
+      ],
+      "health": null,
+      "suggested_questions": [
+        "Are we on track?",
+        "What are our biggest risks?",
+        "Which tasks are blocked?",
+        "What are our current deliverables?",
+        "Who has pending action items?",
+        "What is the current project health?"
+      ]
+    },
+    {
+      "status": "insufficient_information",
+      "query": "What is the approved project budget?",
+      "generated_at": "2026-09-25T10:18:58.468299+00:00",
+      "provider": "Local extractive analysis",
+      "evidence": [],
+      "retrieved_count": 0,
+      "evidence_limited": false,
+      "warnings": [
+        "Assessment covers bounded retrieved evidence, not an exhaustive audit of every document or real-world project status.",
+        "Conversation history helps interpret questions; only retrieved project documents provide facts."
+      ],
+      "question": "What is the approved project budget?",
+      "resolved_question": "What is the approved project budget?",
+      "answer": "The available project documents do not provide enough information to answer this question from the retrieved evidence. Try a specific question about scope, risks, blockers, actions, timelines, or project health.",
+      "grounding": "insufficient_evidence",
+      "statements": [],
+      "health": null,
+      "suggested_questions": [
+        "Are we on track?",
+        "What are our biggest risks?",
+        "Which tasks are blocked?",
+        "What are our current deliverables?",
+        "Who has pending action items?",
+        "What is the current project health?"
+      ]
+    },
+    {
+      "status": "insufficient_information",
+      "query": "How do I bake a chocolate cake?",
+      "generated_at": "2026-09-25T10:18:58.471120+00:00",
+      "provider": "Local extractive analysis",
+      "evidence": [],
+      "retrieved_count": 0,
+      "evidence_limited": false,
+      "warnings": [
+        "Assessment covers bounded retrieved evidence, not an exhaustive audit of every document or real-world project status.",
+        "Conversation history helps interpret questions; only retrieved project documents provide facts."
+      ],
+      "question": "How do I bake a chocolate cake?",
+      "resolved_question": "How do I bake a chocolate cake?",
+      "answer": "The available project documents do not provide enough information to answer this question from the retrieved evidence. Try a specific question about scope, risks, blockers, actions, timelines, or project health.",
+      "grounding": "insufficient_evidence",
+      "statements": [],
+      "health": null,
+      "suggested_questions": [
+        "Are we on track?",
+        "What are our biggest risks?",
+        "Which tasks are blocked?",
+        "What are our current deliverables?",
+        "Who has pending action items?",
+        "What is the current project health?"
+      ]
+    }
+  ]
+}
